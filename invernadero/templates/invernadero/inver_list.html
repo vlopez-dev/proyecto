@@ -1,0 +1,15 @@
+{% extends 'invernadero/base.html' %}
+
+
+
+{% block content %}
+{% for i in invernadero %}
+
+    <ul>
+        <li>{{ i.nombre }}</li>
+    </ul>
+  
+
+{% endfor %}
+  
+{% endblock content %}
