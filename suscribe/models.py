@@ -1,0 +1,7 @@
+from django.db import models
+
+# Create your models here.
+class Suscribe(models.Model):
+    id_suscribe = models.AutoField(primary_key=True)
+    ruta = models.CharField(max_length=50)
+    tipo = models.CharField(max_length=10)

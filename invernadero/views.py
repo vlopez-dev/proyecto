@@ -9,13 +9,6 @@ import threading
 
 
 
-def home(request):
-    invernaderos = Invernadero.objects.all()
-    # invernaderos = invernadero.objects.all()
-    # context = {'invernadero':invernaderos}
-    return render(request,'invernadero/list.html')
-
-
 
 
 def invernadero_agregar(request):
@@ -28,10 +21,9 @@ def invernadero_agregar(request):
         form =InvernaderoForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('/controladoras/agregar')
+        return redirect('/invernadero/home.html')
     
-    
-    
+
     
     
 

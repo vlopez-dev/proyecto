@@ -3,9 +3,6 @@ from .models import Cliente
 class ClienteForm(forms.ModelForm):
 
     class Meta:
-        model = Invernadero
+        model = Cliente
         fields = '__all__'
         
-        labels = {
-            'Name':'Nombre',
-        }
