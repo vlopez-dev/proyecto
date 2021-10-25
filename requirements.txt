@@ -1,0 +1,15 @@
+#Version django
+Django>=3.2.8
+
+#django-crispy-forms
+
+django-crispy-forms>=1.13.0
+
+#Wheel
+wheel>=0.37.0
+
+#MysqlClient
+mysqlclient>=2.0.3
+
+#Libreria MQTT
+paho-mqtt>=1.6.1

@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from .models import Cliente
 from .forms import ClienteForm
+import paho.mqtt.client as mqttClient
+import threading
+import time
 
 # Create your views here.
 
@@ -19,4 +22,15 @@ def cliente_agregar(request):
         return redirect('/cliente/home.html')
     
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
