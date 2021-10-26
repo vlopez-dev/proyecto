@@ -66,10 +66,14 @@ def on_message(client, userdata, message):
     ob = Suscribe.objects.all()
     for i in ob:
         ruta=i.ruta
+        idsus=i.id_suscribe
+        print(idsus)
         print(ruta)
     ob=Lectura.objects.create()
+    ob.suscribe_id=idsus
+
     ob.lectura_sensor=mensaje 
-    ob.ruta_id=ruta#Agregue clave foranea para conectar la lectura con la ruta
+    #ob.ruta_id=ruta         #Agregue clave foranea para conectar la lectura con la ruta
 
     ob.save()
     print(ob)
