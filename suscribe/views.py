@@ -65,18 +65,19 @@ def on_message(client, userdata, message):
     mensaje = str(message.payload.decode("utf-8"))
     ob = Suscribe.objects.all()
     for i in ob:
-        ruta=i.ruta
-        idsus=i.id_suscribe
-        print(idsus)
-        print(ruta)
-    ob=Lectura.objects.create()
-    ob.suscribe_id=idsus
-
-    ob.lectura_sensor=mensaje 
-    #ob.ruta_id=ruta         #Agregue clave foranea para conectar la lectura con la ruta
-
+        id_suscribe=i.id_suscribe
+        print(id_suscribe)
+    
+    
+    
+    
+    
+    
+    
+    ob= Lectura.objects.create(suscribe_id=id_suscribe,lectura_sensor=mensaje)
+    print("creo objecto para guardar lectura")
+    # ob.lectura_sensor= mensaje
     ob.save()
-    print(ob)
     # Suscribe.objects.create(mensaje)    
     time.sleep(1)
 
@@ -85,8 +86,7 @@ def on_message(client, userdata, message):
 
 
 
-
-Connected = False   #global variable for the state of the connection
+Connected = False   #Variable golabal de conexion
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
@@ -106,7 +106,7 @@ def on_connect(client, userdata, flags, rc):
 def conexion_broker():
     Connected = False   #global variable for the state of the connection
 print("Contado al broker")
-broker_address="192.168.1.100"
+broker_address="inversoft.ddns.net"
 # objeto = Conexion.objects.last()
 # broker=objeto.broker_conexion
 # print(broker)
@@ -139,7 +139,11 @@ def subscribing():
         ob = Suscribe.objects.all() #Busco todos los objetos en la tabla suscribe y los recorro uno suscribiendome al sensor
         for i in ob:                        
             ruta=i.ruta
-            client.subscribe(ruta) 
+            if ruta =="":
+                pass
+            
+            else:
+                client.subscribe(ruta) 
     #client.subscribe("esp/dht/temperature")  #Linea de suscricion original
 sub=threading.Thread(target=subscribing)
 sub.start()

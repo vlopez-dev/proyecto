@@ -16,9 +16,7 @@ class Suscribe(models.Model):
 
 class Lectura(models.Model):
     suscribe = models.ForeignKey(Suscribe, on_delete=models.CASCADE)
-
-    id_lectura= models.AutoField(primary_key=True)
     lectura_sensor= models.CharField(max_length=8,blank=True)
     lectura_fecha= models.DateTimeField(auto_now_add=True)
-    
+
     
