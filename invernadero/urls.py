@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("agregar/",views.invernadero_agregar,name='agregar'),
+    path("",views.invernadero_agregar,name='agregar'),
 
 
     

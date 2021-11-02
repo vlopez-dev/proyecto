@@ -10,6 +10,16 @@ class Suscribe(models.Model):
  
  
  
+    
+    
+
+    def add(self):
+        self.save
+
+
+    def __str__(self):
+        return self.id_suscribe
+
  
  
  
@@ -17,6 +27,7 @@ class Suscribe(models.Model):
 
 class Lectura(models.Model):
     suscribe = models.ForeignKey(Suscribe, on_delete=models.CASCADE)
+    
     lectura_sensor= models.CharField(max_length=8,blank=True)
     lectura_fecha= models.DateTimeField(auto_now_add=True)
 

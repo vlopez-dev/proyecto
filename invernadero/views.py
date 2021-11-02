@@ -21,7 +21,7 @@ def invernadero_agregar(request):
         form =InvernaderoForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('/invernadero/home.html')
+        return redirect('/cliente/agregar/')
     
 
     

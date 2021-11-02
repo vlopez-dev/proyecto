@@ -23,32 +23,25 @@ def suscripcion_agregar(request):
     else:
         form = SuscribeForm(request.POST)
         if form.is_valid():
-            # ruta=form.cleaned_data.get("ruta","id_suscribe")
-            # print(ruta)
-            # subscribing(ruta="esp/dht/temperature",id_suscribe=1)
-
+            
             form.save()
 
         return redirect('/suscribe/home.html')
 
 
 def on_message(client, userdata, message):
-    # print("Received message '" + str(message.payload) + "' on topic '"
-    #     + message.topic + "' with QoS " + str(message.qos))
-
-    print("Mensaje recibido =", str(message.payload.decode("utf-8")))
+    #print("Received message '" + str(message.payload) + "' on topic '"
+      #   + message.topic + "' with QoS " + str(message.qos))
+    #print("Mensaje recibido =", str(message.payload.decode("utf-8")))
     mensaje = str(message.payload.decode("utf-8"))
+    #print("Este es el qos" + str(message.qos))
+    
+    print(message.topic)
+    
     suscribe_id = str(message.qos)
     print(mensaje, suscribe_id)
-    # ob = Suscribe.objects.all()
-    # cont = 0
-    # if len(ob) > 0:
-    #         for i in ob:
-    #             id_suscribe = i.id_suscribe
-    #             cont += 1
-    #             print("Ruta en id_suscribe", id_suscribe)
-    ob = Lectura.objects.create(
-        suscribe_id=suscribe_id, lectura_sensor=mensaje)
+    print(message.topic)
+    ob = Lectura.objects.create( suscribe_id=suscribe_id, lectura_sensor=mensaje)
     ob.save()
 
     time.sleep(1)
@@ -93,24 +86,22 @@ client.loop_start()  # start the loop
 print("ejecute el loop de conexion")
 
 
+
+
+
+
+
+
+
 def subscribing():
 
     while Connected != True:  # Wait for connection
         time.sleep(1)
         ob = Suscribe.objects.all()
-        rutas_totales = []
-        # rutas=([("esp/dht/temperature",0),("esp/dht/humidity",1)])
-        rutas = []
         for i in ob:
-            ruta=i.ruta
-            id_suscribe=i.id_suscribe
-            rutas = "("+"\"" + ruta +"\"" + "," + f'{id_suscribe}' + ")"
-            rutas_totales.append(rutas)
-        ruta_tupla=tuple(rutas_totales)
-        print(ruta_tupla)
-        # client.subscribe(ruta_tupla)
-
-        client.subscribe([ruta_tupla,1])  #Linea de suscricion original
+                print(i.id_suscribe)
+                client.subscribe(i.ruta,i.id_suscribe)  #Linea de suscricion original
+       
 sub = threading.Thread(target=subscribing)
 sub.start()
 time.sleep(1)

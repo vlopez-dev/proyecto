@@ -19,7 +19,7 @@ def cliente_agregar(request):
         form = ClienteForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('/cliente/home.html')
+        return redirect('/suscribe/agregar/')
     
 
     
