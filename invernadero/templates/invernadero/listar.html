@@ -1,0 +1,18 @@
+{% extends 'invernadero/base.html' %}
+{% load crispy_forms_tags %}
+  
+{% block content %}
+
+
+    <h1>Lista de Invernaderos</h1>
+
+
+  {% for i in invernadero %}
+    <ul>
+        <li>{{ i.nombre }}</li>
+    </ul>
+  {% endfor %}
+  
+
+
+    {% endblock content %}

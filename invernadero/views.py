@@ -11,6 +11,18 @@ import threading
 
 
 
+
+
+
+def invernadero_home(request):
+
+    return render(request,'invernadero/home.html')
+
+
+
+
+
+
 def invernadero_agregar(request):
     if request.method=="GET":
         form =InvernaderoForm()
@@ -31,4 +43,4 @@ def invernadero_agregar(request):
 def listar_invernadero(request):
     invernaderos = Invernadero.objects.all()
 
-    return render(request,'invernadero/inver_list.html',{'invernadero':invernaderos})
+    return render(request,'invernadero/listar.html',{'invernadero':invernaderos})

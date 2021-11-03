@@ -1,3 +1,6 @@
+from django.utils import timezone
+import datetime
+from django.utils.timezone import make_aware
 
 from urllib.request import Request
 from django.shortcuts import render, redirect
@@ -30,18 +33,17 @@ def suscripcion_agregar(request):
 
 
 def on_message(client, userdata, message):
-    #print("Received message '" + str(message.payload) + "' on topic '"
-      #   + message.topic + "' with QoS " + str(message.qos))
+    print("Received message '" + str(message.payload) + "' on topic '"
+         + message.topic + "' with QoS " + str(message.qos))
     #print("Mensaje recibido =", str(message.payload.decode("utf-8")))
     mensaje = str(message.payload.decode("utf-8"))
     #print("Este es el qos" + str(message.qos))
     
-    print(message.topic)
     
     suscribe_id = str(message.qos)
     print(mensaje, suscribe_id)
     print(message.topic)
-    ob = Lectura.objects.create( suscribe_id=suscribe_id, lectura_sensor=mensaje)
+    ob = Lectura.objects.create( ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
 
     time.sleep(1)
@@ -99,9 +101,38 @@ def subscribing():
         time.sleep(1)
         ob = Suscribe.objects.all()
         for i in ob:
-                print(i.id_suscribe)
-                client.subscribe(i.ruta,i.id_suscribe)  #Linea de suscricion original
+                client.subscribe(i.ruta)  #Linea de suscricion original
        
 sub = threading.Thread(target=subscribing)
 sub.start()
 time.sleep(1)
+
+
+
+
+
+
+
+
+
+
+    
+
+
+def listar_suscripciones(request):
+    suscribes = Suscribe.objects.all()
+
+    return render(request,'suscribe/listar.html',{'suscribe':suscribes})
+
+    
+    
+def reporte(request):
+    lecturas=Lectura.objects.filter(lectura_fecha='2021-11-02 19:52:36.765223')
+    print(lecturas)
+    return render(request,'suscribe/reporte.html',{'lectura':lecturas})
+
+
+def mostrar_temepratura(request):
+    lectura=Lectura.last()
+    
+    return render(request,'suscribe/home.html',{'lectura':lectura})

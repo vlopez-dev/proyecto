@@ -1,0 +1,18 @@
+{% extends 'cliente/base.html' %}
+{% load crispy_forms_tags %}
+  
+{% block content %}
+
+
+    <h1>Lista de clientes</h1>
+
+
+  {% for c in cliente %}
+    <ul>
+        <li>{{ c.broker_conexion }}</li>
+    </ul>
+  {% endfor %}
+  
+
+
+    {% endblock content %}

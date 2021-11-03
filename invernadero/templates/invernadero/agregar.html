@@ -1,10 +1,28 @@
 {% extends 'invernadero/base.html' %}
 {% load crispy_forms_tags %}
 
+
+
 {% block content %}
-<form action="" method="POST" autocomplete="off">
-    {% csrf_token %}
-    {{form|crispy}}
+
+
+
+
+
+
+
+<form action="" method="POST" autocomplete="off" class="justify-content-center">
+    <div class="form-group">
+        {% csrf_token %}
+        {{form|crispy}}
+    </div>
+   
+   
     <button type="submit" class="btn btn-success">Guardar</button>
 </form>
+
+
+
+
+
 {% endblock content %}

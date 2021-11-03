@@ -1,0 +1,11 @@
+{% extends 'suscribe/base.html' %}
+
+
+<h1>Reporte</h1>
+
+
+{% for l in lectura %}
+<ul>
+    <li>{{ l.lectura_fecha }}</li>
+</ul>
+{% endfor %}

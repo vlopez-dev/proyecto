@@ -1,0 +1,19 @@
+{% extends 'suscribe/base.html' %}
+
+
+
+{% block content %}
+
+
+    <h1>Lista de suscribe</h1>
+
+
+  {% for s in suscribe %}
+    <ul>
+        <li>{{ s.ruta }}</li>
+    </ul>
+  {% endfor %}
+  
+
+
+    {% endblock content %}
