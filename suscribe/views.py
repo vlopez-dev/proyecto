@@ -29,7 +29,7 @@ def suscripcion_agregar(request):
             
             form.save()
 
-        return redirect('/suscribe/home.html')
+        return redirect('/invernadero/home/')
 
 
 def on_message(client, userdata, message):
@@ -116,23 +116,25 @@ time.sleep(1)
 
 
 
-    
-
 
 def listar_suscripciones(request):
     suscribes = Suscribe.objects.all()
 
     return render(request,'suscribe/listar.html',{'suscribe':suscribes})
 
-    
-    
+
+
+
+
 def reporte(request):
     lecturas=Lectura.objects.filter(lectura_fecha='2021-11-02 19:52:36.765223')
     print(lecturas)
     return render(request,'suscribe/reporte.html',{'lectura':lecturas})
 
 
+
+
+
 def mostrar_temepratura(request):
     lectura=Lectura.last()
-    
     return render(request,'suscribe/home.html',{'lectura':lectura})

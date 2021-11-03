@@ -94,3 +94,51 @@ body {
   .border-top { border-top: 1px solid #e5e5e5; }
   .border-bottom { border-bottom: 1px solid #e5e5e5; }
   
+
+
+  /* --------------------------------huevo------------------------------ */
+
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  body {
+    background-color: #d7d7d7;
+  }
+  
+  #widget {
+    width: 368px;
+    height: 253px;
+    background: rgb(91, 228, 198);
+    background: linear-gradient(
+      90deg,
+      rgba(91, 228, 198, 1) 0%,
+      rgba(62, 199, 214, 1) 35%,
+      rgba(0, 212, 255, 1) 100%
+    );
+  }
+  
+  #widget h1 {
+    font-family: "Raleway", sans-serif;
+    font-size: 80px;
+    color: white;
+  }
+  
+  #widget h3 {
+    padding: 0px;
+    font-family: "Raleway", sans-serif;
+    color: white;
+  }
+  
+  #datoswg {
+    margin-left: 50px;
+    margin-top: 20px;
+  }
+  
+  #widget img {
+    height: 100px;
+    width: 100px;
+    margin-left: 152px;
+  }
+  
