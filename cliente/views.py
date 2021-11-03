@@ -32,12 +32,3 @@ def listar_clientes(request):
     clientes = Cliente.objects.all()
 
     return render(request,'cliente/listar.html',{'cliente':clientes})
-
-    
-    
-    
-    
-    
-    
-    
-    

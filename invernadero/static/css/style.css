@@ -61,7 +61,9 @@ body {
   /*
    * Navbar
    */
-  
+   .bg-dark{
+     background: #4B778D !important;
+   }
   .navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;
@@ -142,3 +144,7 @@ body {
     margin-left: 152px;
   }
   
+
+
+
+
