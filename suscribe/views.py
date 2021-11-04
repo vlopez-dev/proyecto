@@ -1,3 +1,5 @@
+from urllib import request
+from django.http.response import JsonResponse
 from django.utils import timezone
 import datetime
 from django.utils.timezone import make_aware
@@ -10,6 +12,7 @@ import time
 import threading
 from cliente.models import Cliente
 import paho.mqtt.client as mqttClient
+import json
 
 
 
@@ -46,8 +49,9 @@ def on_message(client, userdata, message):
     mensaje = float(message.payload.decode("utf-8"))
     #print("Este es el qos" + str(message.qos))
     print(message.topic)
-    if mensaje <30:
-        enviar_mail()
+    varificar_umbral(mensaje)
+    # if mensaje >25:
+    #     enviar_mail()
     # obverificartemp = Lectura.objects.latest('lectura_sensor')
 # Sirve cambiar el mensaje de string a integer para hacer comparaciones apenas pase por el bucle
 
@@ -136,6 +140,26 @@ time.sleep(1)
 
 # --------------------------------------------------------------------------------
 
+                # Vericar valor actividad
+                
+def varificar_umbral(lectura):
+    ob = Suscribe.objects.all()
+    for i in ob:
+        umbral = i.valor_acti
+       
+        if lectura > umbral:
+            # "21"       "20"
+            enviar_mail()
+            print(" Activando mail y acciones")
+            
+        else:
+            print("No se toman acciones el umbral es correcto")
+        
+# Verificado el funcionamiento del umbral, falta agregar la ruta del actuador y filtrar la ruta del sensor asociado
+
+
+
+
 
 
 
@@ -145,8 +169,6 @@ time.sleep(1)
 
 
 # --------------------------------------------------------------------------------
-
-
 def listar_suscripciones(request):
     suscribes = Suscribe.objects.all()
     return render(request,'suscribe/listar.html',{'suscribe':suscribes})
@@ -188,5 +210,5 @@ def mostrar_temepratura(request):
 
 
 def enviar_mail():
+    print("mail enviado")
 
-    # Falta agregar el envio de mail

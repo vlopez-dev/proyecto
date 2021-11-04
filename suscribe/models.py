@@ -5,7 +5,7 @@ class Suscribe(models.Model):
     # id_suscribe = models.AutoField(primary_key=True)
     ruta = models.CharField(max_length=50,primary_key=True)
     tipo = models.CharField(max_length=10)
-    
+    valor_acti=models.FloatField()
  
  
  

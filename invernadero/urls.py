@@ -6,6 +6,7 @@ urlpatterns = [
     path("listar/",views.listar_invernadero,name='listar'),
 
     path("",views.invernadero_home,name='home'),
+    path(" ",views.obtener_lectura,name='home'),
 
 
     
