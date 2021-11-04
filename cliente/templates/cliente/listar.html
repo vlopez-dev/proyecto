@@ -4,15 +4,17 @@
 {% block content %}
 
 
+   
     <h1>Lista de clientes</h1>
 
+      {% for c in cliente %}
+    
 
-  {% for c in cliente %}
-    <ul>
-        <li>{{ c.broker_conexion }}</li>
-    </ul>
+              <h5>{{ c.broker_conexion }}</h5>
+
+
+    
   {% endfor %}
-  
 
 
-    {% endblock content %}
+{% endblock content %}

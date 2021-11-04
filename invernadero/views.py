@@ -52,9 +52,8 @@ def listar_invernadero(request):
 
 
 def obtener_lectura(request):
-    ob = Lectura.objects.last() 
-    lectura=ob.lectura_sensor
-    print("variable para la view", str(lectura))
-    return render(request, 'invernadero/home.html',{'lectura_sensor':lectura} )
+    lecturas = Lectura.objects.last() 
+    print("variable para la view", str(lecturas))
+    return render(request, 'invernadero/home.html',{'lectura':lecturas} )
 
 # Falta que muestre el valor en html

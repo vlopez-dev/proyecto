@@ -185,7 +185,9 @@ def listar_suscripciones(request):
 
 
 def reporte(request):
-    lecturas=Lectura.objects.filter(lectura_fecha='2021-11-02 19:52:36.765223')
+    lecturas=Lectura.objects.filter(lectura_fecha =["2021-01-01", "2021-01-31"])
+
+    # lecturas=Lectura.objects.filter(lectura_fecha ='2021-01-01','lectura_fecha'='2021-12-31')
     print(lecturas)
     return render(request,'suscribe/reporte.html',{'lectura':lecturas})
 
@@ -200,9 +202,9 @@ def reporte(request):
 
 
 
-def mostrar_temepratura(request):
-    lectura=Lectura.last()
-    return render(request,'suscribe/home.html',{'lectura':lectura})
+# def mostrar_temepratura(request):
+#     lectura=Lectura.last()
+#     return render(request,'suscribe/home.html',{'lectura':lectura})
 # --------------------------------------------------------------------------------
 
 # ENVIO DE MAILS
