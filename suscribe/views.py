@@ -49,7 +49,7 @@ def on_message(client, userdata, message):
     mensaje = float(message.payload.decode("utf-8"))
     #print("Este es el qos" + str(message.qos))
     print(message.topic)
-    varificar_umbral(mensaje)
+    #varificar_umbral(mensaje)
     # if mensaje >25:
     #     enviar_mail()
     # obverificartemp = Lectura.objects.latest('lectura_sensor')
@@ -199,10 +199,6 @@ def reporte(request):
 # --------------------------------------------------------------------------------
 
 
-
-def mostrar_temepratura(request):
-    lectura=Lectura.last()
-    return render(request,'suscribe/home.html',{'lectura':lectura})
 # --------------------------------------------------------------------------------
 
 # ENVIO DE MAILS
