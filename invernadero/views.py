@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render,redirect
 from django.db import models
 from .models import Invernadero
@@ -6,9 +8,8 @@ import paho.mqtt.client as mqttClient
 import time
 import threading
 from suscribe.models import Lectura, Suscribe
-
 # Create your views here.
-
+from django.http import JsonResponse
 
 
 
@@ -48,12 +49,17 @@ def listar_invernadero(request):
     return render(request,'invernadero/listar.html',{'invernadero':invernaderos})
 
 
+    
+    
+def obtener_datos(request):
+    #Se invoca al metodo del modelo sense hat
 
+    #Se obtiene ultimo valor ingresado en BD
+    valores = Lectura.objects.last()   
 
+    #Se crea objeto JSON
+    data = {
+        'temp': valores.lectura_sensor,
+        }
 
-def obtener_lectura(request):
-    lecturas = Lectura.objects.last() 
-    print("variable para la view", str(lecturas))
-    return render(request, 'invernadero/home.html',{'lectura':lecturas} )
-
-# Falta que muestre el valor en html
+    return JsonResponse(data)

@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf.urls import include, url
+
 from . import views
 
 urlpatterns = [
@@ -6,7 +8,7 @@ urlpatterns = [
     path("listar/",views.listar_invernadero,name='listar'),
 
     path("",views.invernadero_home,name='home'),
-    path(" ",views.obtener_lectura,name='home'),
+    url(r'^$', views.obtener_datos, name = "obtener_datos"),
 
 
     
