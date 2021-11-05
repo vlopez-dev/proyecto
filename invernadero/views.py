@@ -2,6 +2,7 @@ import json
 
 from django.shortcuts import render,redirect
 from django.db import models
+
 from .models import Invernadero
 from .forms import InvernaderoForm
 import paho.mqtt.client as mqttClient
@@ -29,7 +30,6 @@ def invernadero_home(request):
 def invernadero_agregar(request):
     if request.method=="GET":
         form =InvernaderoForm()
-    
         return render(request,'invernadero/agregar.html',{'form':form})
 
     else:
@@ -37,10 +37,10 @@ def invernadero_agregar(request):
         if form.is_valid():
             form.save()
         return redirect('/cliente/agregar/')
-    
 
-    
-    
+
+
+
 
 
 def listar_invernadero(request):
@@ -49,17 +49,20 @@ def listar_invernadero(request):
     return render(request,'invernadero/listar.html',{'invernadero':invernaderos})
 
 
-    
-    
+
+
 def obtener_datos(request):
-    #Se invoca al metodo del modelo sense hat
-
-    #Se obtiene ultimo valor ingresado en BD
     valores = Lectura.objects.last()   
-
-    #Se crea objeto JSON
+    # Filtro el ultimo objeto lectura y lo guardo para crearon un json
     data = {
-        'temp': valores.lectura_sensor,
+        'temperatura': valores.lectura_sensor,
+        'ruta'       : valores.ruta_id
         }
-
+    print(data)
     return JsonResponse(data)
+
+
+def obtener_rutas(request):
+    suscribes = Suscribe.objects.all()
+    
+    return render(request,'invernadero/home.html',{'suscribe':suscribes})

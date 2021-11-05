@@ -214,16 +214,3 @@ def enviar_mail():
     
     
     
-    
-def obtener_datos(request):
-    #Se invoca al metodo del modelo sense hat
-
-    #Se obtiene ultimo valor ingresado en BD
-    valores = Lectura.objects.last()   
-
-    #Se crea objeto JSON
-    data = {
-        'temp': valores.lectura_sensor,
-        }
-
-    return JsonResponse(data)

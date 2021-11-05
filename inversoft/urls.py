@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path
 
 from django.urls import path,include
+from suscribe import views as suscribe_views
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
