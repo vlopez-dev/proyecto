@@ -25,7 +25,7 @@ import smtplib
 
 
 
-# ----------------------------------------------------------------------------
+# ---------------------------Metodo del form agregar-------------------------------------------------
 def suscripcion_agregar(request):
     if request.method == "GET":
         form = SuscribeForm()
@@ -44,26 +44,23 @@ def suscripcion_agregar(request):
 
 
 
-# --------------------------------------------------------------------------------
+# ------------------------Metodo que recibe el mensaje desde el nodemcu--------------------------------------------------------
 
 def on_message(client, userdata, message):
     print("Received message '" + str(message.payload) + "' on topic '"
          + message.topic + "' with QoS " + str(message.qos))
-    #print("Mensaje recibido =", str(message.payload.decode("utf-8")))
+                                                                                     #print("Mensaje recibido =", str(message.payload.decode("utf-8")))
     mensaje = float(message.payload.decode("utf-8"))
-    #print("Este es el qos" + str(message.qos))
+                                                                                          #print("Este es el qos" + str(message.qos))
     print(message.topic)
     varificar_umbral(mensaje)
-    # if mensaje <20:
-    #     enviar_mail()
-    #     on_publish
-    # obverificartemp = Lectura.objects.latest('lectura_sensor')
-# Sirve cambiar el mensaje de string a integer para hacer comparaciones apenas pase por el bucle
-
-
     ob = Lectura.objects.create( ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
-    time.sleep(1)
+    time.sleep(1)                                                                                    # if mensaje <20:
+                                                                                        #     enviar_mail()
+                                                                                        #     on_publish
+                                                                                        # obverificartemp = Lectura.objects.latest('lectura_sensor')
+                                                                                        # Sirve cambiar el mensaje de string a integer para hacer comparaciones apenas pase por el bucle
 
 # --------------------------------------------------------------------------------
 
@@ -95,7 +92,7 @@ def on_connect(client, userdata, flags, rc):
 
 
 
-# --------------------------------------------------------------------------------
+# ---------------------------------Conexion al broker-----------------------------------------------
 
 
 def conexion_broker():
@@ -117,17 +114,17 @@ client.connect(broker_address, port=port)
 client.loop_start()  # start the loop
 print("ejecute el loop de conexion")
 
-
-
-# --------------------------------------------------------------------------------
-
-
-
-
-
-
+# Falta verificar cuando la conexion es vacia
 
 # --------------------------------------------------------------------------------
+
+
+
+
+
+
+
+# -----------------------------Metodo suscripcion---------------------------------------------------
 
 
 def subscribing():
@@ -143,21 +140,24 @@ time.sleep(1)
 
 
 
-# --------------------------------------------------------------------------------------
+# ----------------------------------Metodo pubicador----------------------------------------------------
 
 
   
 def on_publish(client,userdata,result,actuador):             #create function for callback
     print("data published \n")
     pass
+    
 # client1= mqttClient("control1")                           #create client object
     client.on_publish = on_publish                          #assign function to callback
 # client1.connect(broker,port)
 # #establish connection
     print("Haciendo publicacion")
-    ret= client.publish("esp/test","#off")   
+    # ret= client.publish("esp/test","#off")   
+    ret= client.publish(actuador,"#on")   
 
 
+# Falta dar la opcion de on /off
 
 # --------------------------------------------------------------------------------------
 
@@ -168,7 +168,7 @@ def on_publish(client,userdata,result,actuador):             #create function fo
 
 
 
-# --------------------------------------------------------------------------------
+# ------------------------------Verificacion de valores de activacion--------------------------------------------------
 
                 # Vericar valor actividad
                 
@@ -178,11 +178,11 @@ def varificar_umbral(lectura):
         ruta = i.ruta
         actuador = i.actuador
         umbral = i.valor_activo
-       
+
         if lectura > umbral:
-            # "18"       "17"
-            enviar_mail()
-            on_publish()
+            # "18"       "16"
+            # enviar_mail()
+            on_publish(actuador)
             print(" Activando mail y acciones")
             
         else:
@@ -201,7 +201,7 @@ def varificar_umbral(lectura):
 
 
 
-# --------------------------------------------------------------------------------
+# ---------------------------------Reporte suscripciones-----------------------------------------------
 def listar_suscripciones(request):
     suscribes = Suscribe.objects.all()
     return render(request,'suscribe/listar.html',{'suscribe':suscribes})
@@ -213,7 +213,18 @@ def listar_suscripciones(request):
 # --------------------------------------------------------------------------------
 
 
-# --------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+# -----------------------Reporte por fechas---------------------------------------------------------
 
 
 
@@ -227,6 +238,23 @@ def listar_suscripciones(request):
 
 
 # --------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
