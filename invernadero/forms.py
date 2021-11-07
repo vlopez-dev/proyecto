@@ -9,3 +9,11 @@ class InvernaderoForm(forms.ModelForm):
         labels = {
             'Name':'Nombre',
         }
+        
+        
+        
+    def __init__(self, *args, **kwargs):
+        super(InvernaderoForm, self).__init__(*args, **kwargs)
+        # self.fields['position'].empty_label = "Select"
+        self.fields['nombre'].required = True
+        # self.fields['id_invernadero'].required = False

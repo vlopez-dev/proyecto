@@ -3,7 +3,50 @@
   
 {% block content %}
 
+<table class="table table-borderless">
+  <thead class="border-bottom font-weight-bold">
+      <tr>
+          <td>Nombre</td>
+          
+          <td>
+              <a href="{% url 'inv_agregar' %}" class="btn btn-outline-success">
+                  <i class="fas fa-plus"></i> Add New
+              </a>
+          </td>
+      </tr>
+  </thead>
+  <tbody>
+      {% for i in listar_invernadero  %}
+          <tr>
+            <td>{{i.id_invernadero}}</td>
 
+              <td>{{i.nombre}}</td>
+             
+              <td>
+                <td>
+                  <a href="{% url 'invernadero_update' i.id_invernadero %}" class="btn text-secondary px-0">
+                      <i class="far fa-edit fa-lg"></i>
+                  </a>
+            
+                  <form action="{% url 'invernadero_delete' i.id_invernadero %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn">
+                          <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                      </button>
+                  </form>
+              </td>
+          </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<!-- 
     <h1>Lista de Invernaderos</h1>
 
   {% for i in invernadero %}
@@ -11,7 +54,7 @@
 
 
   {% endfor %}
-  
+   -->
 
 
 

@@ -98,10 +98,10 @@ def on_connect(client, userdata, flags, rc):
 def conexion_broker():
     Connected = False  # global variable for the state of the connection
 print("Contado al broker")
-# broker_address = "inversoft.ddns.net"
-objeto = Cliente.objects.all()
-for i in objeto:
-    broker_address= i.broker_conexion
+broker_address = "inversoft.ddns.net"
+# objeto = Cliente.objects.all()
+# for i in objeto:
+#     broker_address= i.broker_conexion
 # direccion AP broker "10.3.141.1"
 port = 1883  # Broker port
 user = "proyecto"  # Connection username
@@ -144,7 +144,7 @@ time.sleep(1)
 
 
   
-def on_publish(client,userdata,result,actuador):             #create function for callback
+def on_publish(client,userdata,result):             #create function for callback
     print("data published \n")
     pass
     
@@ -153,8 +153,8 @@ def on_publish(client,userdata,result,actuador):             #create function fo
 # client1.connect(broker,port)
 # #establish connection
     print("Haciendo publicacion")
-    # ret= client.publish("esp/test","#off")   
-    ret= client.publish(actuador,"#on")   
+    ret= client.publish("esp/test","#off")   
+    # ret= client.publish(,"#on")   
 
 
 # Falta dar la opcion de on /off
@@ -182,7 +182,7 @@ def varificar_umbral(lectura):
         if lectura > umbral:
             # "18"       "16"
             # enviar_mail()
-            on_publish(actuador)
+            # on_publish()
             print(" Activando mail y acciones")
             
         else:

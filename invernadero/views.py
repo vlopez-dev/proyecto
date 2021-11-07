@@ -27,26 +27,59 @@ def invernadero_home(request):
 
 
 
-def invernadero_agregar(request):
-    if request.method=="GET":
-        form =InvernaderoForm()
-        return render(request,'invernadero/agregar.html',{'form':form})
+# def invernadero_agregar(request):
+#     if request.method=="GET":
+#         form =InvernaderoForm()
+#         return render(request,'invernadero/agregar.html',{'form':form})
 
+#     else:
+#         form =InvernaderoForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#         return redirect('/cliente/agregar/')
+
+
+
+
+
+
+def invernadero_agregar(request,id_invernadero=0):
+    if request.method == "GET":
+        if id_invernadero == 0 :
+            form = InvernaderoForm()
+        else:
+            invernadero = Invernadero.objects.get(pk=id_invernadero)
+            #invernadero = Invernadero.objects.filter(pk=id_invernadero).first()
+
+            form = InvernaderoForm(instance=invernadero)
+        return render(request, 'invernadero/agregar.html', {'form': form})
     else:
-        form =InvernaderoForm(request.POST)
+        if id_invernadero == 0:
+            form = InvernaderoForm(request.POST)
+        else:
+            invernadero = Invernadero.objects.get(pk=id_invernadero)
+            form = InvernaderoForm(request.POST,instance= invernadero)
         if form.is_valid():
             form.save()
-        return redirect('/cliente/agregar/')
+        return redirect('/listar/')
 
 
 
 
+
+
+
+# def listar_invernadero(request):
+#     invernaderos = Invernadero.objects.all()
+
+#     return render(request,'invernadero/listar.html',{'invernadero':invernaderos})
 
 
 def listar_invernadero(request):
-    invernaderos = Invernadero.objects.all()
+    context = {'listar_invernadero': Invernadero.objects.all()}
+    return render(request, "invernadero/listar.html", context)
 
-    return render(request,'invernadero/listar.html',{'invernadero':invernaderos})
+
 
 
 
@@ -66,3 +99,15 @@ def obtener_datos(request):
 def obtener_rutas(request):
     suscribes = Suscribe.objects.all()
     return render(request,'invernadero/home.html',{'suscribe':suscribes})
+
+
+
+
+
+
+
+def invernadero_delete(request,id_invernadero):
+    
+    invernadero = Invernadero.objects.get(pk=id_invernadero)
+    invernadero.delete()
+    return redirect('/listar')
