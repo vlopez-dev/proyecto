@@ -16,6 +16,10 @@ import json
 
 
 
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
+
     
 
 
@@ -49,9 +53,10 @@ def on_message(client, userdata, message):
     mensaje = float(message.payload.decode("utf-8"))
     #print("Este es el qos" + str(message.qos))
     print(message.topic)
-    # varificar_umbral(mensaje)
-    # if mensaje >25:
+    varificar_umbral(mensaje)
+    # if mensaje <20:
     #     enviar_mail()
+    #     on_publish
     # obverificartemp = Lectura.objects.latest('lectura_sensor')
 # Sirve cambiar el mensaje de string a integer para hacer comparaciones apenas pase por el bucle
 
@@ -96,10 +101,10 @@ def on_connect(client, userdata, flags, rc):
 def conexion_broker():
     Connected = False  # global variable for the state of the connection
 print("Contado al broker")
-broker_address = "inversoft.ddns.net"
-# objeto = Cliente.objects.all()
-# for i in objeto:
-#     broker_address= i.broker_conexion
+# broker_address = "inversoft.ddns.net"
+objeto = Cliente.objects.all()
+for i in objeto:
+    broker_address= i.broker_conexion
 # direccion AP broker "10.3.141.1"
 port = 1883  # Broker port
 user = "proyecto"  # Connection username
@@ -138,6 +143,31 @@ time.sleep(1)
 
 
 
+# --------------------------------------------------------------------------------------
+
+
+  
+def on_publish(client,userdata,result,actuador):             #create function for callback
+    print("data published \n")
+    pass
+# client1= mqttClient("control1")                           #create client object
+    client.on_publish = on_publish                          #assign function to callback
+# client1.connect(broker,port)
+# #establish connection
+    print("Haciendo publicacion")
+    ret= client.publish("esp/test","#off")   
+
+
+
+# --------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 # --------------------------------------------------------------------------------
 
                 # Vericar valor actividad
@@ -145,11 +175,14 @@ time.sleep(1)
 def varificar_umbral(lectura):
     ob = Suscribe.objects.all()
     for i in ob:
-        umbral = i.valor_acti
+        ruta = i.ruta
+        actuador = i.actuador
+        umbral = i.valor_activo
        
         if lectura > umbral:
-            # "21"       "20"
+            # "18"       "17"
             enviar_mail()
+            on_publish()
             print(" Activando mail y acciones")
             
         else:
@@ -205,25 +238,40 @@ def listar_suscripciones(request):
 
 
 def enviar_mail():
-     
+    
+    msg = MIMEMultipart()
+ 
+    #Mensaje
+    message = "Test invernadero"
+    
+    
+    #Parametros para el envio de mensajes
+    password = "gdi092021"
+    msg['From'] = "gdinverna092021@gmail.com"
+    msg['To'] = "victorl_222@hotmail.com"
+    msg['Subject'] = "Test"
+    
+    msg.attach(MIMEText(message, 'plain'))
+
+    #Creo el servidor
+    server = smtplib.SMTP('smtp.gmail.com: 587')
+    
+    server.starttls()
+    
+    #Login con las credenciales
+    server.login(msg['From'], password)
+    
+    #Envio el mail por medio del servidor
+    server.sendmail(msg['From'], msg['To'], msg.as_string())
+
+    #Salgo
+    server.quit()
+    # Imprimo un mensaje de enviado
+    print ("Mensaje enviado a : %s:" % (msg['To']))
+        
     print("mail enviado")
     
     
     
-    
-    
-    
-    """ 
-    
-def obtener_datos(request):
-    #Se invoca al metodo del modelo sense hat
-
-    #Se obtiene ultimo valor ingresado en BD
-    valores = Lectura.objects.last()   
-
-    #Se crea objeto JSON
-    data = {
-        'temp': valores.lectura_sensor,
-        }
-    print(data)
-    return JsonResponse(data) """
+    # Se deberia crear otra app que solo envie los mails y asi dar la posibilidad de
+    # configurar el mail

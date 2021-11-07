@@ -12,6 +12,8 @@ function consultardatos() {
             
            $("#temperatura").html(data.temperatura);
            $("#ruta").html(data.ruta);
+           $("#actuador").html(data.actuador);
+
 
             console.log(data)
        }

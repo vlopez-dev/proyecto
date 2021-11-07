@@ -1,4 +1,5 @@
 import paho.mqtt.client as mqttClient
+
 # import threading
 
 import time
@@ -49,9 +50,17 @@ client.loop_start()        #start the loop
 while Connected != True:    #Wait for connection
     time.sleep(1)
     
-client.subscribe("esp/dht/temperature")
+client.subscribe("esp/test")
 
   
+def on_publish(client,userdata,result):             #create function for callback
+    print("data published \n")
+    pass
+# client1= mqttClient("control1")                           #create client object
+client.on_publish = on_publish                          #assign function to callback
+# client1.connect(broker,port)                                 #establish connection
+ret= client.publish("esp/test","#on")                   #publish
+
 try:
     while True:
         time.sleep(1)
@@ -60,3 +69,5 @@ except KeyboardInterrupt:
     print ("exiting")
     client.disconnect()
     client.loop_stop()
+
+
