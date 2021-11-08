@@ -22,7 +22,7 @@ import smtplib
 
     
 
-
+# ----------------------------------Metodo para agregar suscriptor--------------------------------------------------------------
 
 
 def suscripcion_agregar(request,ruta=""):
@@ -45,8 +45,14 @@ def suscripcion_agregar(request,ruta=""):
             form.save()
         return redirect('/suscribe/listar/')
 
+# -------------------------------------------------------------------------------------------------------
 
 
+
+
+
+
+# ---------------------------------Metodo listar para la vista----------------------------------------------------------------------
 
 def listar_suscribe(request):
     context = {'listar_suscribe': Suscribe.objects.all()}
@@ -55,10 +61,14 @@ def listar_suscribe(request):
 
 
 
+# -------------------------------------------------------------------------------------------------------------------------------------
 
 
 
 
+
+
+# -----------------------------------------Metodo para eliminar una suscripcion -----------------------------------------------------------------------------------------------
 
 
 def suscribe_delete(request,ruta):
@@ -68,35 +78,13 @@ def suscribe_delete(request,ruta):
     return redirect('/suscribe/listar/')
 
 
+# --------------------------------------------------------------------------------------------------------------------------------------
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-# ---------------------------Metodo del form agregar-------------------------------------------------
-# def suscripcion_agregar(request):
-#     if request.method == "GET":
-#         form = SuscribeForm()
-#         return render(request, 'suscribe/agregar.html', {'form': form})
-#     else:
-#         form = SuscribeForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#         return redirect('/invernadero/home/')
-
-# -------------------------------------------------------------------------------
 
 
 
@@ -114,9 +102,9 @@ def on_message(client, userdata, message):
                                                                                           #print("Este es el qos" + str(message.qos))
     print(message.topic)
     varificar_umbral(mensaje)
-    ob = Lectura.objects.create( ruta_id=message.topic, lectura_sensor=mensaje)
+    ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
-    time.sleep(1)                                                                                    # if mensaje <20:
+    time.sleep(100)                                                                                    # if mensaje <20:
                                                                                         #     enviar_mail()
                                                                                         #     on_publish
                                                                                         # obverificartemp = Lectura.objects.latest('lectura_sensor')
@@ -134,7 +122,7 @@ Connected = False  # Variable golabal de conexion
 
 
 
-
+# --------------------------------------Metodo para verificar la conexion al broker-----------------------------------------------
 
 
 def on_connect(client, userdata, flags, rc):
@@ -149,6 +137,11 @@ def on_connect(client, userdata, flags, rc):
 
 
 # --------------------------------------------------------------------------------
+
+
+
+
+
 
 
 
@@ -184,6 +177,14 @@ print("ejecute el loop de conexion")
 
 
 
+
+
+
+
+
+
+
+
 # -----------------------------Metodo suscripcion---------------------------------------------------
 
 
@@ -192,10 +193,26 @@ def subscribing():
         time.sleep(1)
         ob = Suscribe.objects.all()
         for i in ob:
+                
                 client.subscribe(i.ruta)  #Linea de suscricion original
 sub = threading.Thread(target=subscribing)
 sub.start()
 time.sleep(1)
+
+
+# ---------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -228,10 +245,27 @@ def on_publish(client,userdata,result):             #create function for callbac
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ------------------------------Verificacion de valores de activacion--------------------------------------------------
 
                 # Vericar valor actividad
-                
+
 def varificar_umbral(lectura):
     ob = Suscribe.objects.all()
     for i in ob:
@@ -244,10 +278,9 @@ def varificar_umbral(lectura):
             # enviar_mail()
             # on_publish()
             print(" Activando mail y acciones")
-            
         else:
             print("No se toman acciones el umbral es correcto")
-        
+
 # Verificado el funcionamiento del umbral, falta agregar la ruta del actuador y filtrar la ruta del sensor asociado
 
 
@@ -326,29 +359,27 @@ def listar_suscripciones(request):
 
 
 def enviar_mail():
-    
+
     msg = MIMEMultipart()
- 
+
     #Mensaje
     message = "Test invernadero"
-    
-    
     #Parametros para el envio de mensajes
     password = "gdi092021"
     msg['From'] = "gdinverna092021@gmail.com"
     msg['To'] = "victorl_222@hotmail.com"
     msg['Subject'] = "Test"
-    
+
     msg.attach(MIMEText(message, 'plain'))
 
     #Creo el servidor
     server = smtplib.SMTP('smtp.gmail.com: 587')
-    
+
     server.starttls()
-    
+
     #Login con las credenciales
     server.login(msg['From'], password)
-    
+
     #Envio el mail por medio del servidor
     server.sendmail(msg['From'], msg['To'], msg.as_string())
 
@@ -356,10 +387,8 @@ def enviar_mail():
     server.quit()
     # Imprimo un mensaje de enviado
     print ("Mensaje enviado a : %s:" % (msg['To']))
-        
+
     print("mail enviado")
-    
-    
-    
+
     # Se deberia crear otra app que solo envie los mails y asi dar la posibilidad de
     # configurar el mail
