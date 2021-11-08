@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'suscribe',
     'cliente',
     'invernadero',
+    'django_extensions',
+
 
 ]
 
