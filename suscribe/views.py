@@ -25,16 +25,76 @@ import smtplib
 
 
 
-# ---------------------------Metodo del form agregar-------------------------------------------------
-def suscripcion_agregar(request):
+def suscripcion_agregar(request,ruta=""):
     if request.method == "GET":
-        form = SuscribeForm()
+        if ruta == "" :
+            form = SuscribeForm()
+        else:
+            suscribe = Suscribe.objects.get(pk=ruta)
+            #invernadero = Invernadero.objects.filter(pk=id_invernadero).first()
+
+            form = SuscribeForm(instance=suscribe)
         return render(request, 'suscribe/agregar.html', {'form': form})
     else:
-        form = SuscribeForm(request.POST)
+        if ruta == "":
+            form = SuscribeForm(request.POST)
+        else:
+            suscribe = Suscribe.objects.get(pk=ruta)
+            form = SuscribeForm(request.POST,instance= suscribe)
         if form.is_valid():
             form.save()
-        return redirect('/invernadero/home/')
+        return redirect('/suscribe/listar/')
+
+
+
+
+def listar_suscribe(request):
+    context = {'listar_suscribe': Suscribe.objects.all()}
+    return render(request, "suscribe/listar.html", context)
+
+
+
+
+
+
+
+
+
+
+def suscribe_delete(request,ruta):
+    
+    suscribe = Suscribe.objects.get(pk=ruta)
+    suscribe.delete()
+    return redirect('/suscribe/listar/')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ---------------------------Metodo del form agregar-------------------------------------------------
+# def suscripcion_agregar(request):
+#     if request.method == "GET":
+#         form = SuscribeForm()
+#         return render(request, 'suscribe/agregar.html', {'form': form})
+#     else:
+#         form = SuscribeForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#         return redirect('/invernadero/home/')
 
 # -------------------------------------------------------------------------------
 

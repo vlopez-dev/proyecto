@@ -9,17 +9,47 @@ import time
 
 
 
-def cliente_agregar(request):
-    if request.method=="GET":
-        form = ClienteForm()
+# def cliente_agregar(request):
+#     if request.method=="GET":
+#         form = ClienteForm()
     
-        return render(request,'cliente/agregar.html',{'form':form})
+#         return render(request,'cliente/agregar.html',{'form':form})
 
+#     else:
+#         form = ClienteForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#         return redirect('/suscribe/agregar/')
+    
+    
+    
+    
+    
+
+def cliente_agregar(request,id_cliente=0):
+    if request.method == "GET":
+        if id_cliente == 0 :
+            form = ClienteForm()
+        else:
+            cliente = Cliente.objects.get(pk=id_cliente)
+
+            form = ClienteForm(instance=cliente)
+        return render(request, 'cliente/agregar.html', {'form': form})
     else:
-        form = ClienteForm(request.POST)
+        if id_cliente == 0:
+            form = ClienteForm(request.POST)
+        else:
+            cliente = Cliente.objects.get(pk=id_cliente)
+            form = ClienteForm(request.POST,instance= cliente)
         if form.is_valid():
             form.save()
-        return redirect('/suscribe/agregar/')
+        return redirect('/cliente/listar/')
+
+
+    
+    
+    
+    
     
 
     
@@ -28,7 +58,21 @@ def cliente_agregar(request):
     
 
 
-def listar_clientes(request):
-    clientes = Cliente.objects.all()
+# def listar_clientes(request):
+#     clientes = Cliente.objects.all()
 
-    return render(request,'cliente/listar.html',{'cliente':clientes})
+#     return render(request,'cliente/listar.html',{'cliente':clientes})
+def listar_cliente(request):
+    context = {'listar_cliente': Cliente.objects.all()}
+    return render(request, "cliente/listar.html", context)
+
+
+
+
+
+
+def cliente_delete(request,id_cliente):
+    
+    cliente = Cliente.objects.get(pk=id_cliente)
+    cliente.delete()
+    return redirect('/cliente/listar/')

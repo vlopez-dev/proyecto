@@ -1,21 +1,26 @@
-{% extends 'cliente/base.html' %}
+{% extends 'cliente/base.html' %} 
 {% load crispy_forms_tags %}
+  {{form.mobile|as_crispy_field}}
 
-{% block content %}
-
-< <h1 class="display-4">Registro de cliente</h1>
+ {% block content %}
+        
+        <h1 class="display-4">Registro de cliente</h1>
         <p class="lead font-italic"></p>
         <hr class="my-4" />
-            <form action="" method="POST" autocomplete="off" class="justify-content-center">
-                {% csrf_token %}
-                {{form|crispy}}
-                <button type="submit" class="btn btn-success">Guardar</button>
-            </form>
+        
+        <form action=""method="POST"autocomplete="off"class="justify-content-center">
+        <div class="form-group">{% csrf_token %} {{form|crispy}}</div>
 
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <div class="col-md-4">
+          <a
+            href="{% url 'listar_cliente' %}"
+            class="btn btn-secondary btn-block btn-lg"
+          >
+            <i class="fas fa-stream"></i> Lista
+          </a>
         </div>
-    </div>
-</div>
-
+      </form>
 
 
 

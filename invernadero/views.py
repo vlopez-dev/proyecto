@@ -27,18 +27,6 @@ def invernadero_home(request):
 
 
 
-# def invernadero_agregar(request):
-#     if request.method=="GET":
-#         form =InvernaderoForm()
-#         return render(request,'invernadero/agregar.html',{'form':form})
-
-#     else:
-#         form =InvernaderoForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#         return redirect('/cliente/agregar/')
-
-
 
 
 

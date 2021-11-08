@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Suscribe(models.Model):
     # id_suscribe = models.AutoField(primary_key=True)
-    ruta = models.CharField(max_length=50,primary_key=True)
+    ruta = models.CharField(max_length=50)
     tipo = models.CharField(max_length=15)
     valor_activo=models.FloatField()
     actuador= models.CharField(max_length=50,null=True)
@@ -18,7 +18,7 @@ class Suscribe(models.Model):
 
 
     def __str__(self):
-        return self.id_suscribe
+        return self.ruta
 
  
  

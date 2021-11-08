@@ -3,18 +3,59 @@
   
 {% block content %}
 
+<table class="table table-borderless">
+  <thead class="border-bottom font-weight-bold">
+      <tr>
+          <td>broker_conexion</td>
+          
+          <td>
+              <a href="{% url 'cli_agregar' %}" class="btn btn-outline-success">
+                  <i class="fas fa-plus"></i> Add New
+              </a>
+          </td>
+      </tr>
+  </thead>
+  <tbody>
+      {% for i in listar_cliente  %}
+          <tr>
+            <td>{{i.id_cliente}}</td>
 
-   
-    <h1>Lista de clientes</h1>
+              <td>{{i.broker_conexion}}</td>
+             
+              <td>
+                <td>
+                  <a href="{% url 'cliente_update' i.id_cliente %}" class="btn text-secondary px-0">
+                      <i class="far fa-edit fa-lg"></i>
+                  </a>
+            
+                  <form action="{% url 'cliente_delete' i.id_cliente %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn">
+                          <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                      </button>
+                  </form>
+              </td>
+          </tr>
+      {% endfor %}
+  </tbody>
+</table>
 
-      {% for c in cliente %}
-    
-
-              <h5>{{ c.broker_conexion }}</h5>
 
 
-    
-  {% endfor %}
+
 
 
 {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
