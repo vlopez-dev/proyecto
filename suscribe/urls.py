@@ -4,13 +4,8 @@ from django.conf.urls import include, url
 
 urlpatterns = [
     path("agregar/",views.suscripcion_agregar,name='sus_agregar'),
-    
-    path("listar/",views.listar_suscripciones,name='listar_suscribe'),
-    # path("lecturas/",views.,name='lecturas'),
+    path("listar/",views.listar_suscribe,name='listar_suscribe'),
+    path('delete/<path:ruta>/',views.suscribe_delete,name='suscribe_delete'),
+    path('<path:ruta>/', views.suscripcion_agregar,name='suscribe_update'), # get and post req. for update operation
 
-
-    # url(r'^$', views.obtener_datos, name = "home"),
-
-
-    
 ]

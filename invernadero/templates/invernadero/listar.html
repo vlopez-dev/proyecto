@@ -1,13 +1,12 @@
 {% extends 'invernadero/base.html' %}
 {% load crispy_forms_tags %}
-  
+
 {% block content %}
 
 <table class="table table-borderless">
   <thead class="border-bottom font-weight-bold">
       <tr>
           <td>Nombre</td>
-          
           <td>
               <a href="{% url 'inv_agregar' %}" class="btn btn-outline-success">
                   <i class="fas fa-plus"></i> Add New
@@ -42,19 +41,6 @@
 
 
 
-
-
-
-
-<!-- 
-    <h1>Lista de Invernaderos</h1>
-
-  {% for i in invernadero %}
-        <h5>{{ i.nombre }}</h5>
-
-
-  {% endfor %}
-   -->
 
 
 
