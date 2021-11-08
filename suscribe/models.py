@@ -7,7 +7,7 @@ class Suscribe(models.Model):
     tipo = models.CharField(max_length=15)
     valor_activo=models.FloatField()
     actuador= models.CharField(max_length=50,null=True)
-    
+    valor_actuador= models.BooleanField()
 
     def add(self):
         self.save
