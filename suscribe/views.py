@@ -7,6 +7,7 @@ from urllib.request import Request
 from django.shortcuts import render, redirect
 import suscribe
 from suscribe.models import Lectura, Suscribe
+from django.contrib import messages
 
 from .forms import SuscribeForm
 import time
@@ -14,7 +15,6 @@ import threading
 from cliente.models import Cliente
 import paho.mqtt.client as mqttClient
 import json
-
 
 
 from email.mime.multipart import MIMEMultipart
@@ -44,6 +44,8 @@ def suscripcion_agregar(request,ruta=""):
             form = SuscribeForm(request.POST,instance= suscribe)
         if form.is_valid():
             form.save()
+        messages.add_message(request, messages.INFO, 'Agregado correctamente!.')
+
         return redirect('/suscribe/listar/')
 
 # -------------------------------------------------------------------------------------------------------
@@ -76,6 +78,8 @@ def suscribe_delete(request,ruta):
     
     suscribe = Suscribe.objects.get(pk=ruta)
     suscribe.delete()
+    messages.add_message(request, messages.INFO, 'Eliminado correctamente!.')
+
     return redirect('/suscribe/listar/')
 
 
@@ -208,7 +212,6 @@ time.sleep(1)
 
 # ------------------------------Verificacion de valores de activacion--------------------------------------------------
 
-                # Vericar valor actividad
 
 def varificar_umbral(lectura,topic):
     ob = Suscribe.objects.all()
@@ -227,7 +230,6 @@ def varificar_umbral(lectura,topic):
         ret= client.publish(actuador,valoronoff)
         print(ret)
         #enviar_mail()
-
         print(" Activando mail y acciones")
         pass
 

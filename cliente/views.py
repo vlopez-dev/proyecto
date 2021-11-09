@@ -4,6 +4,7 @@ from .forms import ClienteForm
 import paho.mqtt.client as mqttClient
 import threading
 import time
+from django.contrib import messages
 
 # Create your views here.
 
@@ -43,6 +44,8 @@ def cliente_agregar(request,id_cliente=0):
             form = ClienteForm(request.POST,instance= cliente)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.INFO, 'Agregado correctamente!.')
+            
         return redirect('/cliente/listar/')
 
 
@@ -75,4 +78,6 @@ def cliente_delete(request,id_cliente):
     
     cliente = Cliente.objects.get(pk=id_cliente)
     cliente.delete()
+    messages.add_message(request, messages.INFO, 'Eliminado correctamente!.')
+
     return redirect('/cliente/listar/')

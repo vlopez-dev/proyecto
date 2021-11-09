@@ -32,6 +32,7 @@ def invernadero_home(request):
 
 
 
+
 def invernadero_agregar(request,id_invernadero=0):
     if request.method == "GET":
         if id_invernadero == 0 :
@@ -40,8 +41,7 @@ def invernadero_agregar(request,id_invernadero=0):
             invernadero = Invernadero.objects.get(pk=id_invernadero)
             #invernadero = Invernadero.objects.filter(pk=id_invernadero).first()
 
-            # messages.info(request, 'Modificado con exito')
-
+            form = InvernaderoForm(instance=invernadero)
         return render(request, 'invernadero/agregar.html', {'form': form})
     else:
         if id_invernadero == 0:
@@ -51,9 +51,10 @@ def invernadero_agregar(request,id_invernadero=0):
             form = InvernaderoForm(request.POST,instance= invernadero)
         if form.is_valid():
             form.save()
-            messages.info(request, 'Sitio agregado con exito')
+            messages.add_message(request, messages.INFO, 'Agregado correctamente!.')
 
-        return redirect('/agregar/')
+        return redirect('/listar/')
+
 
 
 
@@ -98,7 +99,7 @@ def invernadero_delete(request,id_invernadero):
     
     invernadero = Invernadero.objects.get(pk=id_invernadero)
     invernadero.delete()
-    messages.info(request, 'Eliminado con exito')
+    messages.add_message(request, messages.INFO, 'Eliminado correctamente!.')
 
     return redirect('/listar')
 
