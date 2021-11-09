@@ -99,3 +99,14 @@ def invernadero_delete(request,id_invernadero):
     invernadero = Invernadero.objects.get(pk=id_invernadero)
     invernadero.delete()
     return redirect('/listar')
+
+
+
+
+
+def reporte_mes(request):
+    
+    context = {'reporte_mes': Lectura.objects.filter(lectura_fecha='2021-01-01 00:00')}
+    return render(request, "invernadero/reporte_mes.html", context)
+
+

@@ -1,0 +1,11 @@
+{% extends 'invernadero/base.html' %}
+
+
+
+<h2>Reporte mensual</h2>
+
+{% for i in reporte_mes  %}
+
+    <td>{{i.lectura_fecha}}</td>
+
+{% endfor %}

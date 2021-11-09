@@ -212,13 +212,20 @@ time.sleep(1)
 def varificar_umbral(lectura,topic):
     ob = Suscribe.objects.all()
     for i in ob:
+        valoronoff=i.valor_actuador
+        if valoronoff == 1:
+        
+                valoronoff="#on"
+        else:
+        
+                valoronoff="#off"
         ruta = i.ruta
         actuador = i.actuador
         umbral = i.valor_activo
     if topic==ruta and lectura > umbral and actuador != None:
                     # "19"       "20"
         client.on_publish                     #assign function to callback
-        ret= client.publish(actuador,"#off")
+        ret= client.publish(actuador,valoronoff)
         print(ret)
         #enviar_mail()
 
@@ -397,3 +404,9 @@ def enviar_mail():
 
     # Se deberia crear otra app que solo envie los mails y asi dar la posibilidad de
     # configurar el mail
+    
+    
+    
+    
+    
+    
