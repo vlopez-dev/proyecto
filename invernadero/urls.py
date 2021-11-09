@@ -10,9 +10,10 @@ urlpatterns = [
     
     path("valores/",views.obtener_datos,name='valores'),
     
+
+    
     path('delete/<int:id_invernadero>/',views.invernadero_delete,name='invernadero_delete'),
     path('<int:id_invernadero>/', views.invernadero_agregar,name='invernadero_update'), # get and post req. for update operation
-    path("reporte_mes/",views.reporte_mes,name='reporte_mes'),
 
     
     path("",views.invernadero_home,name='home'),

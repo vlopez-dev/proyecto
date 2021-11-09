@@ -6,6 +6,8 @@
 <table class="table table-borderless">
   <thead class="border-bottom font-weight-bold">
       <tr>
+        <td>id</td>
+
           <td>Nombre</td>
           <td>
               <a href="{% url 'inv_agregar' %}" class="btn btn-outline-success">
@@ -40,7 +42,13 @@
 </table>
 
 
-
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 
 

@@ -7,6 +7,7 @@ from urllib.request import Request
 from django.shortcuts import render, redirect
 import suscribe
 from suscribe.models import Lectura, Suscribe
+
 from .forms import SuscribeForm
 import time
 import threading
@@ -214,17 +215,15 @@ def varificar_umbral(lectura,topic):
     for i in ob:
         valoronoff=i.valor_actuador
         if valoronoff == 1:
-        
                 valoronoff="#on"
         else:
-        
                 valoronoff="#off"
         ruta = i.ruta
         actuador = i.actuador
         umbral = i.valor_activo
     if topic==ruta and lectura > umbral and actuador != None:
                     # "19"       "20"
-        client.on_publish                     #assign function to callback
+        client.on_publish
         ret= client.publish(actuador,valoronoff)
         print(ret)
         #enviar_mail()
@@ -235,72 +234,10 @@ def varificar_umbral(lectura,topic):
     else:
         print("No se toman acciones el umbral es correcto")
 
-# Verificado el funcionamiento del umbral, falta agregar la ruta del actuador y filtrar la ruta del sensor asociado
 
 
 
-
-
-
-
-
-
-
-
-
-# ----------------------------------Metodo pubicador----------------------------------------------------
-
-
-  
-# def on_publish(client,actuador,userdata):             #create function for callback
-#     print("data published \n")
-#     print("Este es el valor de actuador dentro de publish "+ str(actuador))
-#     pass
-    
-# # client1= mqttClient("control1")                           #create client object
-#     client.on_publish = on_publish                          #assign function to callback
-# # client1.connect(broker,port)
-# # #establish connection
-#     print("Haciendo publicacion")
-#     # ret= client.publish("esp/test","#off")
-#     ret= client.publish(actuador,"#off")
-#     pass
-
-# Falta dar la opcion de on /off
-
-# --------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# -----------------------------------------------------------------------
 
 
 
@@ -329,6 +266,7 @@ def listar_suscripciones(request):
 
 
 
+
 # -----------------------Reporte por fechas---------------------------------------------------------
 
 
@@ -343,23 +281,6 @@ def listar_suscripciones(request):
 
 
 # --------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -404,9 +325,4 @@ def enviar_mail():
 
     # Se deberia crear otra app que solo envie los mails y asi dar la posibilidad de
     # configurar el mail
-    
-    
-    
-    
-    
-    
+# ----------------------------------------------------------------------------------

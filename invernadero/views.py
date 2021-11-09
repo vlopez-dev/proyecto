@@ -2,6 +2,7 @@ import json
 
 from django.shortcuts import render,redirect
 from django.db import models
+from django.contrib import messages
 
 from .models import Invernadero
 from .forms import InvernaderoForm
@@ -39,7 +40,8 @@ def invernadero_agregar(request,id_invernadero=0):
             invernadero = Invernadero.objects.get(pk=id_invernadero)
             #invernadero = Invernadero.objects.filter(pk=id_invernadero).first()
 
-            form = InvernaderoForm(instance=invernadero)
+            # messages.info(request, 'Modificado con exito')
+
         return render(request, 'invernadero/agregar.html', {'form': form})
     else:
         if id_invernadero == 0:
@@ -49,18 +51,11 @@ def invernadero_agregar(request,id_invernadero=0):
             form = InvernaderoForm(request.POST,instance= invernadero)
         if form.is_valid():
             form.save()
-        return redirect('/listar/')
+            messages.info(request, 'Sitio agregado con exito')
+
+        return redirect('/agregar/')
 
 
-
-
-
-
-
-# def listar_invernadero(request):
-#     invernaderos = Invernadero.objects.all()
-
-#     return render(request,'invernadero/listar.html',{'invernadero':invernaderos})
 
 
 def listar_invernadero(request):
@@ -78,10 +73,15 @@ def obtener_datos(request):
     data = {
         'temperatura': valores.lectura_sensor,
         'ruta'       : valores.ruta_id,
-        
         }
     print(data)
     return JsonResponse(data)
+
+
+
+
+
+
 
 
 def obtener_rutas(request):
@@ -98,15 +98,18 @@ def invernadero_delete(request,id_invernadero):
     
     invernadero = Invernadero.objects.get(pk=id_invernadero)
     invernadero.delete()
+    messages.info(request, 'Eliminado con exito')
+
     return redirect('/listar')
 
 
 
 
 
-def reporte_mes(request):
+# def reporte_mes(request):
     
-    context = {'reporte_mes': Lectura.objects.filter(lectura_fecha='2021-01-01 00:00')}
-    return render(request, "invernadero/reporte_mes.html", context)
+#     context = {'reporte_mes': Lectura.objects.filter(lectura_fecha='2021-01-01 00:00')}
+#     return render(request, "invernadero/reporte_mes.html", context)
+
 
 
