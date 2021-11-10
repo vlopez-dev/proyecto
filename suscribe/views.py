@@ -217,16 +217,17 @@ def varificar_umbral(lectura,topic):
     ob = Suscribe.objects.all()
     for i in ob:
         valoronoff=i.valor_actuador
-        if valoronoff == 1:
-                valoronoff="#on"
-        else:
-                valoronoff="#off"
-        ruta = i.ruta
-        actuador = i.actuador
-        umbral = i.valor_activo
+    if valoronoff == 1:
+            valoronoff="#on"
+    else:
+            valoronoff="#off"
+    ruta = i.ruta
+    actuador = i.actuador
+    umbral = i.valor_activo
     if topic==ruta and lectura > umbral and actuador != None:
                     # "19"       "20"
         client.on_publish
+        print("Valor del actuador antes de enviar acciones" + actuador +str(valoronoff))
         ret= client.publish(actuador,valoronoff)
         print(ret)
         #enviar_mail()
