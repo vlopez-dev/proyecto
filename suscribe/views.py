@@ -202,7 +202,7 @@ def subscribing():
                 client.subscribe(i.ruta)  #Linea de suscricion original
 sub = threading.Thread(target=subscribing)
 sub.start()
-time.sleep(1)
+time.sleep(10)
 
 
 # ---------------------------------------------------------------------------------------------------
