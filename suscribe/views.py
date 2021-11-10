@@ -109,7 +109,7 @@ def on_message(client, userdata, message):
     varificar_umbral(mensaje,topic)
     ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
-    time.sleep(1)                                                                                    # if mensaje <20:
+    time.sleep(10)                                                                                    # if mensaje <20:
                                                                                         #     enviar_mail()
                                                                                         #     on_publish
                                                                                         # obverificartemp = Lectura.objects.latest('lectura_sensor')

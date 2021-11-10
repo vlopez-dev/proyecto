@@ -18,10 +18,12 @@ from django.http import JsonResponse
 
 
 
-
+# Retorno todos los suscribptores para crear las card
 def invernadero_home(request):
+ context = {'home': Suscribe.objects.all()}
+ return render(request, "invernadero/home.html", context)
 
-    return render(request,'invernadero/home.html')
+    # return render(request,'invernadero/home.html')
 
 
 
