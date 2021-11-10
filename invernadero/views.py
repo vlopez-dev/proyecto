@@ -72,6 +72,7 @@ def listar_invernadero(request):
 
 def obtener_datos(request):
     valores = Lectura.objects.last()
+  
     # Filtro el ultimo objeto lectura y lo guardo para crearon un json
     data = {
         'temperatura': valores.lectura_sensor,
@@ -88,8 +89,10 @@ def obtener_datos(request):
 
 
 def obtener_rutas(request):
+    # time.sleep(15)
     suscribes = Suscribe.objects.all()
     return render(request,'invernadero/home.html',{'suscribe':suscribes})
+
 
 
 

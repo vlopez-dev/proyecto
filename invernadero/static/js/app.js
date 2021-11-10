@@ -9,6 +9,7 @@ function consultardatos() {
        contentType: 'application/json; charset=utf-8',
       destroy: true,
       success: function (data) {
+        
             
            $("#temperatura").html(data.temperatura);
            $("#ruta").html(data.ruta);
@@ -24,7 +25,7 @@ $(document).ready(function () {
   consultardatos();
 
 
-setInterval(consultardatos, 8000);
+setInterval(consultardatos, 4000);
 });
 
 

@@ -138,12 +138,12 @@ body {
     margin-top: 20px;
   }
   
-  #widget img {
+  /* #widget img {
     height: 100px;
     width: 100px;
     margin-left: 152px;
   }
-  
+   */
 
 
 
@@ -151,3 +151,8 @@ body {
   .btn{
     margin: 10px !important;
   }
+
+
+
+
+

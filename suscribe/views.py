@@ -8,7 +8,6 @@ from django.shortcuts import render, redirect
 import suscribe
 from suscribe.models import Lectura, Suscribe
 from django.contrib import messages
-
 from .forms import SuscribeForm
 import time
 import threading
@@ -104,18 +103,24 @@ def on_message(client, userdata, message):
          + message.topic + "' with QoS " + str(message.qos))
     topic=message.topic                                                                                         #print("Mensaje recibido =", str(message.payload.decode("utf-8")))
     mensaje = float(message.payload.decode("utf-8"))
-                                                                                          #print("Este es el qos" + str(message.qos))
+    time.sleep(3)                                                                                                #print("Este es el qos" + str(message.qos))
     print(message.topic)
     varificar_umbral(mensaje,topic)
     ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
-    time.sleep(10)                                                                                    # if mensaje <20:
-                                                                                        #     enviar_mail()
                                                                                         #     on_publish
                                                                                         # obverificartemp = Lectura.objects.latest('lectura_sensor')
                                                                                         # Sirve cambiar el mensaje de string a integer para hacer comparaciones apenas pase por el bucle
 
 # --------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 
 
 
@@ -202,7 +207,7 @@ def subscribing():
                 client.subscribe(i.ruta)  #Linea de suscricion original
 sub = threading.Thread(target=subscribing)
 sub.start()
-time.sleep(10)
+# time.sleep(1)
 
 
 # ---------------------------------------------------------------------------------------------------
