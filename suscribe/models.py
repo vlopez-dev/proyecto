@@ -22,4 +22,6 @@ class Lectura(models.Model):
     ruta = models.ForeignKey(Suscribe, on_delete=models.CASCADE)
     lectura_sensor= models.FloatField()
     lectura_fecha= models.DateTimeField(auto_now_add=True)
+    
+
 

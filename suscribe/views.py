@@ -14,6 +14,8 @@ import threading
 from cliente.models import Cliente
 import paho.mqtt.client as mqttClient
 import json
+from notifypy import Notify
+
 
 
 from email.mime.multipart import MIMEMultipart
@@ -108,6 +110,7 @@ def on_message(client, userdata, message):
     varificar_umbral(mensaje,topic)
     ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
+    
                                                                                         #     on_publish
                                                                                         # obverificartemp = Lectura.objects.latest('lectura_sensor')
                                                                                         # Sirve cambiar el mensaje de string a integer para hacer comparaciones apenas pase por el bucle
@@ -181,9 +184,6 @@ print("ejecute el loop de conexion")
 
 # --------------------------------------------------------------------------------
 
-def envio_alertas_pantalla(request):
-    messages.add_message()
-
 
 
 
@@ -239,11 +239,20 @@ def varificar_umbral(lectura,topic):
         print(ret)
         #enviar_mail()
         print(" Activando mail y acciones")
+        notification = Notify()
+        notification.title = "Cool Title"
+        notification.message = "Activando envio de mail y acciones."
+        notification.send()
+
         pass
 
     else:
-        print("No se toman acciones el umbral es correcto")
 
+        print("No se toman acciones el umbral es correcto")
+        notification = Notify()
+        notification.title = "Verificación de umbral"
+        notification.message = "No se toman acciones, el umbral es correcto."
+        notification.send()
 
 
 
@@ -281,12 +290,9 @@ def listar_suscripciones(request):
 
 
 
-# def reporte(request):
-#     lecturas=Lectura.objects.filter(lectura_fecha =["2021-01-01", "2021-01-31"])
-
-#     # lecturas=Lectura.objects.filter(lectura_fecha ='2021-01-01','lectura_fecha'='2021-12-31')
-#     print(lecturas)
-#     return render(request,'suscribe/reporte.html',{'lectura':lecturas})
+def reportes(request):
+    
+    return render(request,'suscribe/reportes.html')
 
 
 

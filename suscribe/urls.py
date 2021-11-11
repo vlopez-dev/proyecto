@@ -5,6 +5,8 @@ from django.conf.urls import include, url
 urlpatterns = [
     path("agregar/",views.suscripcion_agregar,name='sus_agregar'),
     path("listar/",views.listar_suscribe,name='listar_suscribe'),
+    path("reportes/",views.reportes,name='reportes'),
+
 
 
     path('delete/<path:ruta>/',views.suscribe_delete,name='suscribe_delete'),

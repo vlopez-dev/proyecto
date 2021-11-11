@@ -19,17 +19,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-
-
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"> -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
   </head>
-
-
 
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
@@ -72,9 +67,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'reportes' %}">
+                <a class="nav-link" href="">
                   <span data-feather="bar-chart-2"></span>
-                  Reportes
+                  Reportes mes
                 </a>
               </li>
               <li class="nav-item">
@@ -122,9 +117,9 @@
           </div> -->
         </nav>
 
-  <div class="container">
-      <div class="col-md-10 offset-md-1 mt-5 text-center">
-          <div class="jumbotron">
+      <div class="container">
+        <div class="col-md-10 offset-md-1 mt-5 text-center">
+        <div class="jumbotron">
           {% block content %}
 
            
@@ -132,11 +127,11 @@
 
       {% endblock content %}
 
-          </div>
-        </div>
+    </div>
   </div>
-</div>
-
+  </div>
+    </div>
+         
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

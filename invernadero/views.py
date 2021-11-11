@@ -12,6 +12,7 @@ import threading
 from suscribe.models import Lectura, Suscribe
 # Create your views here.
 from django.http import JsonResponse
+from notifypy import Notify
 
 
 
@@ -54,6 +55,7 @@ def invernadero_agregar(request,id_invernadero=0):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.INFO, 'Agregado correctamente!.')
+            
 
         return redirect('/listar/')
 
@@ -79,6 +81,9 @@ def obtener_datos(request):
         'ruta'       : valores.ruta_id,
         }
     print(data)
+    
+   
+
     return JsonResponse(data)
 
 
