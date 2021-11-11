@@ -251,7 +251,7 @@ def varificar_umbral(lectura,topic):
         print("No se toman acciones el umbral es correcto")
         notification = Notify()
         notification.title = "Verificación de umbral"
-        notification.message = "No se toman acciones, el umbral es correcto."
+        notification.message = "No se toman acciones el umbral es correcto."
         notification.send()
 
 
@@ -309,33 +309,33 @@ def reportes(request):
 
 def enviar_mail():
 
-    # msg = MIMEMultipart()
+    msg = MIMEMultipart()
 
-    # #Mensaje
-    # message = "Test invernadero"
-    # #Parametros para el envio de mensajes
-    # password = "gdi092021"
-    # msg['From'] = "gdinverna092021@gmail.com"
-    # msg['To'] = "victorl_222@hotmail.com"
-    # msg['Subject'] = "Test"
+    #Mensaje
+    message = "Test invernadero"
+    #Parametros para el envio de mensajes
+    password = "gdi092021"
+    msg['From'] = "gdinverna092021@gmail.com"
+    msg['To'] = "victorl_222@hotmail.com"
+    msg['Subject'] = "Test"
 
-    # msg.attach(MIMEText(message, 'plain'))
+    msg.attach(MIMEText(message, 'plain'))
 
-    # #Creo el servidor
-    # server = smtplib.SMTP('smtp.gmail.com: 587')
+    #Creo el servidor
+    server = smtplib.SMTP('smtp.gmail.com: 587')
 
-    # server.starttls()
+    server.starttls()
 
-    # #Login con las credenciales
-    # server.login(msg['From'], password)
+    #Login con las credenciales
+    server.login(msg['From'], password)
 
-    # #Envio el mail por medio del servidor
-    # server.sendmail(msg['From'], msg['To'], msg.as_string())
+    #Envio el mail por medio del servidor
+    server.sendmail(msg['From'], msg['To'], msg.as_string())
 
-    # #Salgo
-    # server.quit()
-    # # Imprimo un mensaje de enviado
-    # print ("Mensaje enviado a : %s:" % (msg['To']))
+    #Salgo
+    server.quit()
+    # Imprimo un mensaje de enviado
+    print ("Mensaje enviado a : %s:" % (msg['To']))
 
     print("mail enviado")
 
