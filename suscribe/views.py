@@ -181,6 +181,8 @@ print("ejecute el loop de conexion")
 
 # --------------------------------------------------------------------------------
 
+def envio_alertas_pantalla(request):
+    messages.add_message()
 
 
 
