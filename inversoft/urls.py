@@ -19,7 +19,6 @@ from django.urls import path
 from django.urls import path,include
 from suscribe import views as suscribe_views
 
-import notifications.urls
 
 
 
@@ -29,7 +28,6 @@ urlpatterns = [
     path('cliente/', include("cliente.urls")),
     path('suscribe/', include("suscribe.urls")),
     path('configuraciones/', include("configuraciones.urls")),
-    path('', include(notifications.urls, namespace='notifications')),
 
 
 
