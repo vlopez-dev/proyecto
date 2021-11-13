@@ -6,6 +6,11 @@ class ClienteForm(forms.ModelForm):
         model = Cliente
         fields = '__all__'
         
+        labels = {
+            'id_invernadero':'Ubicación',
+            'broker_conexion':'Direccion url o ip de conexion',
+
+        }
         
         
 def __init__(self, *args, **kwargs):
