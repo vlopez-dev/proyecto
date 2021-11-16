@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'invernadero',
     'configuraciones',
     'django_extensions',
-    'bootstrap_datepicker',
+    'bootstrap_datepicker_plus',
+
 
 
 
