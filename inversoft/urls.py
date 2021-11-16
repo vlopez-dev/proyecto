@@ -22,12 +22,15 @@ from suscribe import views as suscribe_views
 
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("invernadero.urls")),
     path('cliente/', include("cliente.urls")),
     path('suscribe/', include("suscribe.urls")),
     path('configuraciones/', include("configuraciones.urls")),
+
+
 
 
 

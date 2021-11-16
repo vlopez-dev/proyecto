@@ -8,13 +8,14 @@ from django.shortcuts import render, redirect
 import suscribe
 from suscribe.models import Lectura, Suscribe
 from django.contrib import messages
-from .forms import SuscribeForm
+from .forms import SuscribeForm,LecturasForm
 import time
 import threading
 from cliente.models import Cliente
 import paho.mqtt.client as mqttClient
 import json
 from notifypy import Notify
+from django.core.paginator import Paginator
 
 
 
@@ -275,15 +276,38 @@ def listar_suscripciones(request):
 
 
 
+def filtro_fechas(request):
+     if request.method=="GET":
+        form =LecturasForm()
+        
+        return render(request,'suscribe/filtro_fechas.html',{'form':form})
 
+     else: 
+         
+         form= LecturasForm(request.POST)
+         if form.is_valid():
+            dia_desde = form.cleaned_data['dia_desde']
+            print(dia_desde)
+            
+            dia_hasta = form.cleaned_data['dia_hasta']
+            print(dia_hasta)
+            lecturas=Lectura.objects.filter(lectura_fecha__range=[dia_desde, dia_hasta])
+            paginator = Paginator(lecturas, 25) # Show 25 contacts per page.
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
 
+            if lecturas.exists():
+                print("Existe")
+                print(lecturas)
+            else:
+                print("no existe")
+                print(lecturas)
 
+            
+            return render(request, 'suscribe/reporte.html',{'lecturas': page_obj})
+            # Si se filtra solo un dia no muestra resultados verificar. En un principio filtrar de un dia a otro la query viene completa
 
-
-
-
-
-
+  
 
 
 # -----------------------Reporte por fechas---------------------------------------------------------
@@ -297,9 +321,6 @@ def reportes(request):
 
 
 # --------------------------------------------------------------------------------
-
-
-
 
 # --------------------------------------------------------------------------------
 
@@ -342,3 +363,5 @@ def enviar_mail():
     # Se deberia crear otra app que solo envie los mails y asi dar la posibilidad de
     # configurar el mail
 # ----------------------------------------------------------------------------------
+
+
