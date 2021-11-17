@@ -15,9 +15,8 @@ from cliente.models import Cliente
 import paho.mqtt.client as mqttClient
 import json
 from notifypy import Notify
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 from bootstrap_datepicker_plus import DateTimePickerInput
-
 
 
 from email.mime.multipart import MIMEMultipart
@@ -293,19 +292,32 @@ def filtro_fechas(request):
             dia_hasta = form.cleaned_data['dia_hasta']
             print(dia_hasta)
             lecturas=Lectura.objects.filter(lectura_fecha__range=[dia_desde, dia_hasta])
-            paginator = Paginator(lecturas, 25) # Show 25 contacts per page.
-            page_number = request.GET.get('page')
-            page_obj = paginator.get_page(page_number)
+            page = request.GET.get('page', 1)
+            paginator=Paginator(lecturas,10)
+            try:
+                lecturas = paginator.page(page)
+            except PageNotAnInteger:
+                lecturas=paginator.page(1)
+            except EmptyPage:
+                lecturas = paginator.page(paginator.num_pages)
+            
+            
+            # Tiene algun problema en la poaginacion, verificar
+            
+            
+            # paginator = Paginator(lecturas, 25) 
+            # page_number = request.GET.get('page')
+            # page_obj = paginator.get_page(page_number)
 
-            if lecturas.exists():
-                print("Existe")
-                print(lecturas)
-            else:
-                print("no existe")
-                print(lecturas)
+            # if lecturas.exists():
+            #     print("Existe")
+            #     print(lecturas)
+            # else:
+            #     print("no existe")
+            #     print(lecturas)
 
             
-            return render(request, 'suscribe/reporte.html',{'lecturas': page_obj})
+            return render(request, 'suscribe/reporte.html',{'lecturas': lecturas})
             # Si se filtra solo un dia no muestra resultados verificar. En un principio filtrar de un dia a otro la query viene completa
 
   

@@ -64,3 +64,5 @@ setInterval(consultardatos, 4000);
 
 
 
+// dash js
+

@@ -3,6 +3,8 @@
 
 
 
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -28,12 +30,18 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
+
+    <!-- jquery-ui -->
+    <link href="{% static 'js/jquery-ui-1.13.0.custom/jquery-ui.min.css' %}" rel="stylesheet">
+    <link href="{% static 'js/jquery-ui-1.13.0.custom/jquery-ui.structure.min.css' %}" rel="stylesheet">
+    <link href="{% static 'js/jquery-ui-1.13.0.custom/jquery-ui.theme.min.css' %}" rel="stylesheet">
+
   </head>
 
 
 
   <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <nav class="nav-color navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 ">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Inversoft</a>
       <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
       <ul class="navbar-nav px-3">
@@ -46,7 +54,7 @@
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
+          <div class="nav-vertical sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link active" href="{% url 'home' %}">
@@ -125,7 +133,7 @@
 
   <div class="container">
       <div class="col-md-10 offset-md-1 mt-5 text-center">
-          <div class="jumbotron">
+          <div class="jumbotron card">
           {% block content %}
 
            
@@ -137,7 +145,10 @@
         </div>
   </div>
 </div>
+<script src="{% static 'js/jquery-ui-1.13.0.custom/jquery-ui.js' %}"></script>
 
+
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js" integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
