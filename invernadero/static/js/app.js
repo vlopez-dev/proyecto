@@ -47,6 +47,7 @@ function consultardatos() {
            $("#temperatura").html(data.temperatura);
            $("#ruta").html(data.ruta);
            $("#actuador").html(data.actuador);
+           $("#humedad").html(data.humedad);
 
 
             console.log(data)

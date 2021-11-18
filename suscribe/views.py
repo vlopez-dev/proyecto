@@ -104,17 +104,15 @@ def suscribe_delete(request,ruta):
 def on_message(client, userdata, message):
     print("Received message '" + str(message.payload) + "' on topic '"
          + message.topic + "' with QoS " + str(message.qos))
-    topic=message.topic                                                                                         #print("Mensaje recibido =", str(message.payload.decode("utf-8")))
+    topic=message.topic                                                                                         
     mensaje = float(message.payload.decode("utf-8"))
-    time.sleep(3)                                                                                                #print("Este es el qos" + str(message.qos))
+    time.sleep(3)                                                                                               
     print(message.topic)
     varificar_umbral(mensaje,topic)
     ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
     
-                                                                                        #     on_publish
-                                                                                        # obverificartemp = Lectura.objects.latest('lectura_sensor')
-                                                                                        # Sirve cambiar el mensaje de string a integer para hacer comparaciones apenas pase por el bucle
+                                                                                      
 
 # --------------------------------------------------------------------------------
 
@@ -163,12 +161,15 @@ def on_connect(client, userdata, flags, rc):
 
 
 def conexion_broker():
-    Connected = False  # global variable for the state of the connection
+    Connected = True  
 print("Contado al broker")
-broker_address = "inversoft.ddns.net"
-# objeto = Cliente.objects.all()
-# for i in objeto:
-#     broker_address= i.broker_conexion
+# broker_address = "inversoft.ddns.net"
+broker_address=""
+   
+    
+objeto = Cliente.objects.all()
+for i in objeto:
+    broker_address= i.broker_conexion
 # direccion AP broker "10.3.141.1"
 port = 1883  # Broker port
 user = "proyecto"  # Connection username
@@ -177,11 +178,14 @@ client = mqttClient.Client("Python")
 client.username_pw_set(user, password=password) 
 client.on_connect = on_connect  
 client.on_message = on_message  
-client.connect(broker_address, port=port) 
-client.loop_start()  # start the loop
-print("ejecute el loop de conexion")
+if broker_address=="":
+   pass
+else:
+    client.connect(broker_address, port=port) 
+    client.loop_start()  # start the loop
+    print("ejecute el loop de conexion")
 
-# Falta verificar cuando la conexion es vacia
+    # Falta verificar cuando la conexion es vacia
 
 # --------------------------------------------------------------------------------
 

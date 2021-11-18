@@ -75,7 +75,7 @@ def listar_invernadero(request):
 def obtener_datos(request):
     valores = Lectura.objects.last()
     # valores=Lectura.objects.filter(ruta_id='esp/dht/temperature').last()
-
+    
     # Filtro el ultimo objeto lectura y lo guardo para crearon un json
     data = {
             'temperatura': valores.lectura_sensor,
