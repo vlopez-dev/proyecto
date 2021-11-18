@@ -47,11 +47,24 @@ function consultardatos() {
            $("#actuador").html(data.actuador);
 
 
-            console.log(data)
+
+            console.log(serializer.data)
        }
 
    });
 }
+
+
+
+
+
+
+
+
+
+
+
+
 // $(document).ready(function () {
 //   consultardatos();
 
