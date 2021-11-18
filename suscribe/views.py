@@ -112,7 +112,6 @@ def on_message(client, userdata, message):
 
     ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
-    time.sleep(100)
 
 
 # --------------------------------------------------------------------------------
