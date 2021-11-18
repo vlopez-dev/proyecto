@@ -8,14 +8,14 @@
  *
  * http://api.jqueryui.com/category/theming/
  *
- * To view and modify this theme, visit http://jqueryui.com/themeroller/?scope=&folderName=blitzer&cornerRadiusShadow=8px&offsetLeftShadow=-8px&offsetTopShadow=-8px&thicknessShadow=8px&opacityShadow=10&bgImgOpacityShadow=0&bgTextureShadow=flat&bgColorShadow=333333&opacityOverlay=40&bgImgOpacityOverlay=65&bgTextureOverlay=dots_small&bgColorOverlay=a6a6a6&iconColorError=cc0000&fcError=2e2e2e&borderColorError=cc0000&bgImgOpacityError=75&bgTextureError=diagonals_thick&bgColorError=f3d8d8&iconColorHighlight=004276&fcHighlight=444444&borderColorHighlight=fcd3a1&bgImgOpacityHighlight=55&bgTextureHighlight=glass&bgColorHighlight=fbf8ee&iconColorActive=cc0000&fcActive=cc0000&borderColorActive=eeeeee&bgImgOpacityActive=65&bgTextureActive=flat&bgColorActive=ffffff&iconColorHover=cc0000&fcHover=111111&borderColorHover=cdd5da&bgImgOpacityHover=100&bgTextureHover=highlight_hard&bgColorHover=f6f6f6&iconColorDefault=cc0000&fcDefault=004276&borderColorDefault=d8dcdf&bgImgOpacityDefault=100&bgTextureDefault=highlight_hard&bgColorDefault=eeeeee&iconColorContent=cc0000&fcContent=333333&borderColorContent=eeeeee&bgImgOpacityContent=75&bgTextureContent=flat&bgColorContent=ffffff&iconColorHeader=ffffff&fcHeader=ffffff&borderColorHeader=e3a1a1&bgImgOpacityHeader=15&bgTextureHeader=highlight_soft&bgColorHeader=cc0000&cornerRadius=6px&fsDefault=1.1em&fwDefault=bold&ffDefault=Arial%2Csans-serif
+ * To view and modify this theme, visit http://jqueryui.com/themeroller/?scope=&folderName=eggplant&cornerRadiusShadow=0px&offsetLeftShadow=-4px&offsetTopShadow=-4px&thicknessShadow=4px&opacityShadow=60&bgImgOpacityShadow=0&bgTextureShadow=flat&bgColorShadow=aaaaaa&opacityOverlay=80&bgImgOpacityOverlay=0&bgTextureOverlay=flat&bgColorOverlay=eeeeee&iconColorError=ebccce&fcError=ffffff&borderColorError=994d53&bgImgOpacityError=55&bgTextureError=flat&bgColorError=994d53&iconColorHighlight=8d78a5&fcHighlight=333333&borderColorHighlight=ffdb1f&bgImgOpacityHighlight=55&bgTextureHighlight=flat&bgColorHighlight=fafafa&iconColorActive=454545&fcActive=ffffff&borderColorActive=7e7783&bgImgOpacityActive=45&bgTextureActive=highlight_soft&bgColorActive=5f5964&iconColorHover=734d99&fcHover=734d99&borderColorHover=d1c5d8&bgImgOpacityHover=100&bgTextureHover=highlight_soft&bgColorHover=eae6ea&iconColorDefault=8d78a5&fcDefault=665874&borderColorDefault=dcd9de&bgImgOpacityDefault=100&bgTextureDefault=highlight_soft&bgColorDefault=dcd9de&iconColorContent=ffffff&fcContent=ffffff&borderColorContent=7e7783&bgImgOpacityContent=30&bgTextureContent=gloss_wave&bgColorContent=3d3644&iconColorHeader=a8a3ae&fcHeader=ffffff&borderColorHeader=231d2b&bgImgOpacityHeader=25&bgTextureHeader=highlight_soft&bgColorHeader=30273a&cornerRadius=6px&fsDefault=1.1em&fwDefault=bold&ffDefault=Lucida%20Grande%2CLucida%20Sans%2CArial%2Csans-serif
  */
 
 
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Arial,sans-serif;
+	font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
 	font-size: 1.1em;
 }
 .ui-widget .ui-widget {
@@ -25,23 +25,23 @@
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-	font-family: Arial,sans-serif;
+	font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
 	font-size: 1em;
 }
 .ui-widget.ui-widget-content {
-	border: 1px solid #d8dcdf;
+	border: 1px solid #dcd9de;
 }
 .ui-widget-content {
-	border: 1px solid #eeeeee;
-	background: #ffffff;
-	color: #333333;
+	border: 1px solid #7e7783;
+	background: #3d3644 url("images/ui-bg_gloss-wave_30_3d3644_500x100.png") 50% top repeat-x;
+	color: #ffffff;
 }
 .ui-widget-content a {
-	color: #333333;
+	color: #ffffff;
 }
 .ui-widget-header {
-	border: 1px solid #e3a1a1;
-	background: #cc0000 url("images/ui-bg_highlight-soft_15_cc0000_1x100.png") 50% 50% repeat-x;
+	border: 1px solid #231d2b;
+	background: #30273a url("images/ui-bg_highlight-soft_25_30273a_1x100.png") 50% 50% repeat-x;
 	color: #ffffff;
 	font-weight: bold;
 }
@@ -60,10 +60,10 @@
 works properly when clicked or hovered */
 html .ui-button.ui-state-disabled:hover,
 html .ui-button.ui-state-disabled:active {
-	border: 1px solid #d8dcdf;
-	background: #eeeeee url("images/ui-bg_highlight-hard_100_eeeeee_1x100.png") 50% 50% repeat-x;
+	border: 1px solid #dcd9de;
+	background: #dcd9de url("images/ui-bg_highlight-soft_100_dcd9de_1x100.png") 50% 50% repeat-x;
 	font-weight: bold;
-	color: #004276;
+	color: #665874;
 }
 .ui-state-default a,
 .ui-state-default a:link,
@@ -72,7 +72,7 @@ a.ui-button,
 a:link.ui-button,
 a:visited.ui-button,
 .ui-button {
-	color: #004276;
+	color: #665874;
 	text-decoration: none;
 }
 .ui-state-hover,
@@ -83,10 +83,10 @@ a:visited.ui-button,
 .ui-widget-header .ui-state-focus,
 .ui-button:hover,
 .ui-button:focus {
-	border: 1px solid #cdd5da;
-	background: #f6f6f6 url("images/ui-bg_highlight-hard_100_f6f6f6_1x100.png") 50% 50% repeat-x;
+	border: 1px solid #d1c5d8;
+	background: #eae6ea url("images/ui-bg_highlight-soft_100_eae6ea_1x100.png") 50% 50% repeat-x;
 	font-weight: bold;
-	color: #111111;
+	color: #734d99;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -98,7 +98,7 @@ a:visited.ui-button,
 .ui-state-focus a:visited,
 a.ui-button:hover,
 a.ui-button:focus {
-	color: #111111;
+	color: #734d99;
 	text-decoration: none;
 }
 
@@ -111,20 +111,20 @@ a.ui-button:focus {
 a.ui-button:active,
 .ui-button:active,
 .ui-button.ui-state-active:hover {
-	border: 1px solid #eeeeee;
-	background: #ffffff;
+	border: 1px solid #7e7783;
+	background: #5f5964 url("images/ui-bg_highlight-soft_45_5f5964_1x100.png") 50% 50% repeat-x;
 	font-weight: bold;
-	color: #cc0000;
+	color: #ffffff;
 }
 .ui-icon-background,
 .ui-state-active .ui-icon-background {
-	border: #eeeeee;
-	background-color: #cc0000;
+	border: #7e7783;
+	background-color: #ffffff;
 }
 .ui-state-active a,
 .ui-state-active a:link,
 .ui-state-active a:visited {
-	color: #cc0000;
+	color: #ffffff;
 	text-decoration: none;
 }
 
@@ -133,35 +133,35 @@ a.ui-button:active,
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
-	border: 1px solid #fcd3a1;
-	background: #fbf8ee url("images/ui-bg_glass_55_fbf8ee_1x400.png") 50% 50% repeat-x;
-	color: #444444;
+	border: 1px solid #ffdb1f;
+	background: #fafafa;
+	color: #333333;
 }
 .ui-state-checked {
-	border: 1px solid #fcd3a1;
-	background: #fbf8ee;
+	border: 1px solid #ffdb1f;
+	background: #fafafa;
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
 .ui-widget-header .ui-state-highlight a {
-	color: #444444;
+	color: #333333;
 }
 .ui-state-error,
 .ui-widget-content .ui-state-error,
 .ui-widget-header .ui-state-error {
-	border: 1px solid #cc0000;
-	background: #f3d8d8 url("images/ui-bg_diagonals-thick_75_f3d8d8_40x40.png") 50% 50% repeat;
-	color: #2e2e2e;
+	border: 1px solid #994d53;
+	background: #994d53;
+	color: #ffffff;
 }
 .ui-state-error a,
 .ui-widget-content .ui-state-error a,
 .ui-widget-header .ui-state-error a {
-	color: #2e2e2e;
+	color: #ffffff;
 }
 .ui-state-error-text,
 .ui-widget-content .ui-state-error-text,
 .ui-widget-header .ui-state-error-text {
-	color: #2e2e2e;
+	color: #ffffff;
 }
 .ui-priority-primary,
 .ui-widget-content .ui-priority-primary,
@@ -196,31 +196,31 @@ a.ui-button:active,
 }
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url("images/ui-icons_cc0000_256x240.png");
+	background-image: url("images/ui-icons_ffffff_256x240.png");
 }
 .ui-widget-header .ui-icon {
-	background-image: url("images/ui-icons_ffffff_256x240.png");
+	background-image: url("images/ui-icons_a8a3ae_256x240.png");
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon,
 .ui-button:hover .ui-icon,
 .ui-button:focus .ui-icon {
-	background-image: url("images/ui-icons_cc0000_256x240.png");
+	background-image: url("images/ui-icons_734d99_256x240.png");
 }
 .ui-state-active .ui-icon,
 .ui-button:active .ui-icon {
-	background-image: url("images/ui-icons_cc0000_256x240.png");
+	background-image: url("images/ui-icons_454545_256x240.png");
 }
 .ui-state-highlight .ui-icon,
 .ui-button .ui-state-highlight.ui-icon {
-	background-image: url("images/ui-icons_004276_256x240.png");
+	background-image: url("images/ui-icons_8d78a5_256x240.png");
 }
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
-	background-image: url("images/ui-icons_cc0000_256x240.png");
+	background-image: url("images/ui-icons_ebccce_256x240.png");
 }
 .ui-button .ui-icon {
-	background-image: url("images/ui-icons_cc0000_256x240.png");
+	background-image: url("images/ui-icons_8d78a5_256x240.png");
 }
 
 /* positioning */
@@ -436,11 +436,11 @@ a.ui-button:active,
 
 /* Overlays */
 .ui-widget-overlay {
-	background: #a6a6a6 url("images/ui-bg_dots-small_65_a6a6a6_2x2.png") 50% 50% repeat;
-	opacity: .4;
-	-ms-filter: Alpha(Opacity=40); /* support: IE8 */
+	background: #eeeeee;
+	opacity: .8;
+	-ms-filter: Alpha(Opacity=80); /* support: IE8 */
 }
 .ui-widget-shadow {
-	-webkit-box-shadow: -8px -8px 8px #333333;
-	box-shadow: -8px -8px 8px #333333;
+	-webkit-box-shadow: -4px -4px 4px #aaaaaa;
+	box-shadow: -4px -4px 4px #aaaaaa;
 }

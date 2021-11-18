@@ -16,7 +16,7 @@ import paho.mqtt.client as mqttClient
 import json
 from notifypy import Notify
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
-from bootstrap_datepicker_plus import DateTimePickerInput
+
 
 
 from email.mime.multipart import MIMEMultipart
@@ -104,15 +104,14 @@ def suscribe_delete(request,ruta):
 def on_message(client, userdata, message):
     print("Received message '" + str(message.payload) + "' on topic '"
          + message.topic + "' with QoS " + str(message.qos))
-    topic=message.topic                                                                                         
+    topic=message.topic
     mensaje = float(message.payload.decode("utf-8"))
-    time.sleep(3)                                                                                               
+    time.sleep(3)
     print(message.topic)
     varificar_umbral(mensaje,topic)
     ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
-    
-                                                                                      
+
 
 # --------------------------------------------------------------------------------
 
@@ -165,20 +164,20 @@ def conexion_broker():
 print("Contado al broker")
 # broker_address = "inversoft.ddns.net"
 broker_address=""
-   
-    
+
+
 objeto = Cliente.objects.all()
+
 for i in objeto:
     broker_address= i.broker_conexion
-# direccion AP broker "10.3.141.1"
 port = 1883  # Broker port
 user = "proyecto"  # Connection username
 password = "proyecto"  # Connection password
 client = mqttClient.Client("Python")
 client.username_pw_set(user, password=password) 
-client.on_connect = on_connect  
-client.on_message = on_message  
-if broker_address=="":
+client.on_connect = on_connect
+client.on_message = on_message
+if broker_address=="" or None:
    pass
 else:
     client.connect(broker_address, port=port) 
@@ -210,7 +209,6 @@ def subscribing():
         time.sleep(1)
         ob = Suscribe.objects.all()
         for i in ob:
-                
                 client.subscribe(i.ruta)  #Linea de suscricion original
 sub = threading.Thread(target=subscribing)
 sub.start()
@@ -283,19 +281,17 @@ def listar_suscripciones(request):
 def filtro_fechas(request):
      if request.method=="GET":
         form =LecturasForm()
-        
         return render(request,'suscribe/filtro_fechas.html',{'form':form})
-
-     else: 
-         
+     else:
          form= LecturasForm(request.POST)
          if form.is_valid():
             dia_desde = form.cleaned_data['dia_desde']
             print(dia_desde)
-            
             dia_hasta = form.cleaned_data['dia_hasta']
             print(dia_hasta)
-            lecturas=Lectura.objects.filter(lectura_fecha__range=[dia_desde, dia_hasta])
+            nuevofinal = dia_hasta + datetime.timedelta(days=1)
+
+            lecturas=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal])
             page = request.GET.get('page', 1)
             paginator=Paginator(lecturas,10)
             try:
@@ -304,11 +300,8 @@ def filtro_fechas(request):
                 lecturas=paginator.page(1)
             except EmptyPage:
                 lecturas = paginator.page(paginator.num_pages)
-            
-            
             # Tiene algun problema en la poaginacion, verificar
-            
-            
+
             # paginator = Paginator(lecturas, 25) 
             # page_number = request.GET.get('page')
             # page_obj = paginator.get_page(page_number)
@@ -320,11 +313,10 @@ def filtro_fechas(request):
             #     print("no existe")
             #     print(lecturas)
 
-            
+
             return render(request, 'suscribe/reporte.html',{'lecturas': lecturas})
             # Si se filtra solo un dia no muestra resultados verificar. En un principio filtrar de un dia a otro la query viene completa
 
-  
 
 
 # -----------------------Reporte por fechas---------------------------------------------------------
@@ -332,7 +324,7 @@ def filtro_fechas(request):
 
 
 def reportes(request):
-    
+
     return render(request,'suscribe/reportes.html')
 
 
