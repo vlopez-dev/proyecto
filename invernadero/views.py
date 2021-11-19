@@ -74,8 +74,9 @@ def listar_invernadero(request):
 
 
 def obtener_datos_temp(request):
-    valores = Lectura.objects.last()
-    # valores=Lectura.objects.filter(ruta_id='/dht/tempertatura').last()
+    # valores = Lectura.objects.last()
+    valores=Lectura.objects.filter(ruta_id='/dht/temperatura').last()
+    print(valores)
     # valores=Lectura.objects.filter(ruta_id='esp/dht/humidity').last()
     
     
@@ -92,10 +93,10 @@ def obtener_datos_temp(request):
 
 
 def obtener_datos_hum(request):
-    valores = Lectura.objects.last()
+    # valores = Lectura.objects.last()
 
     # valores=Lectura.objects.filter(ruta_id='esp/dht/temperature').last()
-    # valores=Lectura.objects.filter(ruta_id='/dht/humedad').last()
+    valores=Lectura.objects.filter(ruta_id='/dht/humedad').last()
     
     
 

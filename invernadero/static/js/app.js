@@ -68,7 +68,7 @@ function consultardatoshum() {
     success: function (data,data2) {
         
          $("#humedad").html(data.humedad);
-         $("#ruta").html(data.ruta);
+         $("#rutahum").html(data.ruta);
          $("#actuador").html(data.actuador);
 
 
