@@ -42,11 +42,12 @@ function consultardatostemp() {
         dataType: 'json',
        contentType: 'application/json; charset=utf-8',
       destroy: true,
-      success: function (data,data2) {
+      success: function (data) {
           
            $("#temperatura").html(data.temperatura);
            $("#ruta").html(data.ruta);
            $("#actuador").html(data.actuador);
+           $("#humedad").html(data.humedad);
 
 
 
@@ -65,7 +66,7 @@ function consultardatoshum() {
       dataType: 'json',
      contentType: 'application/json; charset=utf-8',
     destroy: true,
-    success: function (data,data2) {
+    success: function (data) {
         
          $("#humedad").html(data.humedad);
          $("#rutahum").html(data.ruta);

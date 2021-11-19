@@ -18,7 +18,9 @@ urlpatterns = [
 
     
     path("",views.invernadero_home,name='home'),
-    path("",views.obtener_rutas,name='rutas'),
+    path("rutas/",views.obtener_rutas,name='home'),
+    # path("",views.obtener_rutas,name='home'),
+
 
     # url(r'^$', views.obtener_datos, name = "listar"),
     

@@ -56,9 +56,15 @@ def invernadero_agregar(request,id_invernadero=0):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.INFO, 'Agregado correctamente!.')
-            
 
         return redirect('/listar/')
+
+
+
+
+
+
+
 
 
 
@@ -76,39 +82,38 @@ def listar_invernadero(request):
 def obtener_datos_temp(request):
     # valores = Lectura.objects.last()
     valores=Lectura.objects.filter(ruta_id='/dht/temperatura').last()
-    print(valores)
+    # print(valores)
     # valores=Lectura.objects.filter(ruta_id='esp/dht/humidity').last()
-    
-    
-
     data = {
-            
             'temperatura': valores.lectura_sensor,
             'ruta'       : valores.ruta_id,
             }
-    
-           
-    print(data)
+    # print(data)
     return JsonResponse(data)
+
+
+
+
+
+
+
 
 
 def obtener_datos_hum(request):
     # valores = Lectura.objects.last()
-
     # valores=Lectura.objects.filter(ruta_id='esp/dht/temperature').last()
     valores=Lectura.objects.filter(ruta_id='/dht/humedad').last()
-    
-    
-
     data = {
-            
             'humedad': valores.lectura_sensor,
             'ruta'       : valores.ruta_id,
             }
-    
-           
-    print(data)
+    # print(data)
     return JsonResponse(data)
+
+
+
+
+
 
 
 
@@ -118,6 +123,11 @@ def obtener_datos_hum(request):
 def obtener_rutas(request):
     # time.sleep(15)
     suscribes = Suscribe.objects.all()
+    if suscribes.exists():
+        print("tiene datos")
+    else:
+        print("vacio")
+    
     return render(request,'invernadero/home.html',{'suscribe':suscribes})
 
 
@@ -128,7 +138,6 @@ def obtener_rutas(request):
 
 
 def invernadero_delete(request,id_invernadero):
-    
     invernadero = Invernadero.objects.get(pk=id_invernadero)
     invernadero.delete()
     messages.add_message(request, messages.INFO, 'Eliminado correctamente!.')
