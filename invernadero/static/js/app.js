@@ -42,13 +42,14 @@ function consultardatos() {
        contentType: 'application/json; charset=utf-8',
       destroy: true,
       success: function (data) {
+          
            $("#temperatura").html(data.temperatura);
            $("#ruta").html(data.ruta);
            $("#actuador").html(data.actuador);
+      
+      
 
-
-
-            console.log(serializer.data)
+            console.log(data)
        }
 
    });

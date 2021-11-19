@@ -1,5 +1,4 @@
 import json
-from django.core.serializers import serialize
 from django.forms.models import model_to_dict
 
 from django.shortcuts import render,redirect
@@ -76,7 +75,9 @@ def listar_invernadero(request):
 
 def obtener_datos(request):
     valores = Lectura.objects.last()
-    valores=Lectura.objects.filter(ruta_id='esp/dht/temperature').last()
+    # valores=Lectura.objects.filter(ruta_id='esp/dht/temperature').last()
+    # valores=Lectura.objects.filter(ruta_id='esp/dht/humidity').last()
+
 
     # Filtro el ultimo objeto lectura y lo guardo para crearon un json
 
@@ -84,12 +85,10 @@ def obtener_datos(request):
             'temperatura': valores.lectura_sensor,
             'ruta'       : valores.ruta_id,
             }
+    
+           
     print(data)
     return JsonResponse(data)
-
-
-
-
 
 
 
