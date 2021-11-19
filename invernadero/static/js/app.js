@@ -43,8 +43,11 @@ function consultardatostemp() {
        contentType: 'application/json; charset=utf-8',
       destroy: true,
       success: function (data) {
-          
-           $("#temperatura").html(data.temperatura);
+           temp=data.temperatura.toString()
+           simbolo="°c"
+           tempfinal=temp+simbolo
+           console.log(tempfinal)
+           $("#temperatura").html(tempfinal);
            $("#ruta").html(data.ruta);
            $("#actuador").html(data.actuador);
            $("#humedad").html(data.humedad);
@@ -67,8 +70,11 @@ function consultardatoshum() {
      contentType: 'application/json; charset=utf-8',
     destroy: true,
     success: function (data) {
+         hum=data.humedad.toString()
+         simbolo="%"
+         humfinal=hum+simbolo
         
-         $("#humedad").html(data.humedad);
+         $("#humedad").html(humfinal);
          $("#rutahum").html(data.ruta);
          $("#actuador").html(data.actuador);
 
