@@ -41,9 +41,8 @@ INSTALLED_APPS = [
     'suscribe',
     'cliente',
     'invernadero',
-    'configuraciones',
+    'configuracion',
     'django_extensions',
-    'bootstrap_datepicker_plus',
 
 
 

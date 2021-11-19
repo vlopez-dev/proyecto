@@ -15,8 +15,7 @@ from cliente.models import Cliente
 import paho.mqtt.client as mqttClient
 import json
 from notifypy import Notify
-from django.core.paginator import Paginator
-from bootstrap_datepicker_plus import DateTimePickerInput
+from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 
 
 
@@ -105,17 +104,15 @@ def suscribe_delete(request,ruta):
 def on_message(client, userdata, message):
     print("Received message '" + str(message.payload) + "' on topic '"
          + message.topic + "' with QoS " + str(message.qos))
-    topic=message.topic                                                                                         #print("Mensaje recibido =", str(message.payload.decode("utf-8")))
+    topic=message.topic
     mensaje = float(message.payload.decode("utf-8"))
-    time.sleep(3)                                                                                                #print("Este es el qos" + str(message.qos))
-    print(message.topic)
+    time.sleep(3)
+    print("Recibiendo mensaje"+message.topic)
     varificar_umbral(mensaje,topic)
+
     ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
-    
-                                                                                        #     on_publish
-                                                                                        # obverificartemp = Lectura.objects.latest('lectura_sensor')
-                                                                                        # Sirve cambiar el mensaje de string a integer para hacer comparaciones apenas pase por el bucle
+
 
 # --------------------------------------------------------------------------------
 
@@ -164,25 +161,63 @@ def on_connect(client, userdata, flags, rc):
 
 
 def conexion_broker():
-    Connected = False  # global variable for the state of the connection
+    Connected = False  
 print("Contado al broker")
 broker_address = "inversoft.ddns.net"
-# objeto = Cliente.objects.all()
-# for i in objeto:
-#     broker_address= i.broker_conexion
-# direccion AP broker "10.3.141.1"
+
 port = 1883  # Broker port
 user = "proyecto"  # Connection username
 password = "proyecto"  # Connection password
 client = mqttClient.Client("Python")
 client.username_pw_set(user, password=password) 
-client.on_connect = on_connect  
-client.on_message = on_message  
+client.on_connect = on_connect
+client.on_message = on_message
+
 client.connect(broker_address, port=port) 
 client.loop_start()  # start the loop
 print("ejecute el loop de conexion")
 
-# Falta verificar cuando la conexion es vacia
+    # Falta verificar cuando la conexion es vacia
+
+# --------------------------------------------------------------------------------
+
+# -----------------------------------------------------
+
+
+
+
+
+
+
+
+# --------------Funcion con cambio de tiempo en el guardado con error--------------------------------------
+
+# def conexion_broker():
+#     Connected = True  
+# print("Contado al broker")
+# # broker_address = "inversoft.ddns.net"
+# broker_address=""
+
+
+# objeto = Cliente.objects.all()
+
+# for i in objeto:
+#     broker_address= i.broker_conexion
+# port = 1883  # Broker port
+# user = "proyecto"  # Connection username
+# password = "proyecto"  # Connection password
+# client = mqttClient.Client("Python")
+# client.username_pw_set(user, password=password) 
+# client.on_connect = on_connect
+# client.on_message = on_message
+# if broker_address=="" or None:
+#    pass
+# else:
+#     client.connect(broker_address, port=port) 
+#     client.loop_start()  # start the loop
+#     print("ejecute el loop de conexion")
+
+    # Falta verificar cuando la conexion es vacia
 
 # --------------------------------------------------------------------------------
 
@@ -195,6 +230,7 @@ print("ejecute el loop de conexion")
 
 
 
+# --------------------------------------------------
 
 
 
@@ -207,7 +243,6 @@ def subscribing():
         time.sleep(1)
         ob = Suscribe.objects.all()
         for i in ob:
-                
                 client.subscribe(i.ruta)  #Linea de suscricion original
 sub = threading.Thread(target=subscribing)
 sub.start()
@@ -280,35 +315,42 @@ def listar_suscripciones(request):
 def filtro_fechas(request):
      if request.method=="GET":
         form =LecturasForm()
-        
         return render(request,'suscribe/filtro_fechas.html',{'form':form})
-
-     else: 
-         
+     else:
          form= LecturasForm(request.POST)
          if form.is_valid():
             dia_desde = form.cleaned_data['dia_desde']
             print(dia_desde)
-            
             dia_hasta = form.cleaned_data['dia_hasta']
             print(dia_hasta)
-            lecturas=Lectura.objects.filter(lectura_fecha__range=[dia_desde, dia_hasta])
-            paginator = Paginator(lecturas, 25) # Show 25 contacts per page.
-            page_number = request.GET.get('page')
-            page_obj = paginator.get_page(page_number)
+            nuevofinal = dia_hasta + datetime.timedelta(days=1)
 
-            if lecturas.exists():
-                print("Existe")
-                print(lecturas)
-            else:
-                print("no existe")
-                print(lecturas)
+            lecturas=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
+            page = request.GET.get('page', 1)
+            paginator=Paginator(lecturas,10)
+            try:
+                lectura = paginator.page(page)
+            except PageNotAnInteger:
+                lectura=paginator.page(1)
+            except EmptyPage:
+                lectura = paginator.page(paginator.num_pages)
+            # Tiene algun problema en la poaginacion, verificar
 
-            
-            return render(request, 'suscribe/reporte.html',{'lecturas': page_obj})
+            # paginator = Paginator(lecturas, 25) 
+            # page_number = request.GET.get('page')
+            # page_obj = paginator.get_page(page_number)
+
+            # if lecturas.exists():
+            #     print("Existe")
+            #     print(lecturas)
+            # else:
+            #     print("no existe")
+            #     print(lecturas)
+
+
+            return render(request, 'suscribe/reporte.html',{'lecturas': lectura})
             # Si se filtra solo un dia no muestra resultados verificar. En un principio filtrar de un dia a otro la query viene completa
 
-  
 
 
 # -----------------------Reporte por fechas---------------------------------------------------------
@@ -316,7 +358,7 @@ def filtro_fechas(request):
 
 
 def reportes(request):
-    
+
     return render(request,'suscribe/reportes.html')
 
 
