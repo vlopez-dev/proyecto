@@ -4,7 +4,8 @@ $(document).ready(function(){
 
 
 
-  consultardatos();
+  consultardatostemp();
+  consultardatoshum();
 
 
   setInterval(consultardatos, 4000);
@@ -34,25 +35,48 @@ $(document).ready(function(){
 
 // Funcion para recuperar la temperatura 
 
-function consultardatos() {
+function consultardatostemp() {
     $.ajax({
-       url: "/valores",
+       url: "/valorestemp",
         type: 'GET',
         dataType: 'json',
        contentType: 'application/json; charset=utf-8',
       destroy: true,
-      success: function (data) {
+      success: function (data,data2) {
           
            $("#temperatura").html(data.temperatura);
            $("#ruta").html(data.ruta);
            $("#actuador").html(data.actuador);
-      
-      
+
+
 
             console.log(data)
        }
 
    });
+}
+
+
+
+function consultardatoshum() {
+  $.ajax({
+     url: "/valoreshum",
+      type: 'GET',
+      dataType: 'json',
+     contentType: 'application/json; charset=utf-8',
+    destroy: true,
+    success: function (data,data2) {
+        
+         $("#humedad").html(data.humedad);
+         $("#ruta").html(data.ruta);
+         $("#actuador").html(data.actuador);
+
+
+
+          console.log(data)
+     }
+
+ });
 }
 
 
