@@ -2,8 +2,8 @@
 :root{
   /*colores*/
 
-  --marco:#7868E6;
- 
+  --marco:#C6D57E;
+ --marcoalter:#C6D57E
   --background:#EEEEEE;
   --fuente:#423F3E;
 
@@ -19,30 +19,42 @@
   .card{
     background-color:white;
   }
+
+
 /* 
 
-  .card {
-    backdrop-filter: blur(25px) saturate(200%);
-    -webkit-backdrop-filter: blur(25px) saturate(200%);
-    background-color: rgba(255, 255, 255, 0.14);
-    border-radius: 12px;
-    border: 1px solid rgba(209, 213, 219, 0.3);
+  .container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100vw;
+    outline: 2px solid red;
+    height: 100vh;
+    margin: auto;
+    
+}
+
+
+.card{
+    outline: 2px solid blue;
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    align-items: center;
+    background-color: cadetblue;
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+    
+
+
 } */
 
 
 
 
 
-
-
-
-/* 
-
-  .feather {
-    width: 16px;
-    height: 16px;
-    vertical-align: text-bottom;
-  } */
   
   /*
    * Sidebar

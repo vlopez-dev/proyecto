@@ -8,8 +8,9 @@ urlpatterns = [
     
     path("listar/",views.listar_invernadero,name='listar'),
     
-    path("valores/",views.obtener_datos,name='valores'),
-    
+    path("valorestemp/",views.obtener_datos_temp,name='valorestemp'),
+    path("valoreshum/",views.obtener_datos_hum,name='valoreshum'),
+
 
     
     path('delete/<int:id_invernadero>/',views.invernadero_delete,name='invernadero_delete'),
@@ -17,6 +18,10 @@ urlpatterns = [
 
     
     path("",views.invernadero_home,name='home'),
+    path("rutas/",views.obtener_rutas,name='home'),
+    # path("",views.obtener_rutas,name='home'),
+
+
     # url(r'^$', views.obtener_datos, name = "listar"),
     
 
