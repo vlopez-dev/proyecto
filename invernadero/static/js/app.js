@@ -9,6 +9,10 @@ $(document).ready(function(){
 
 
   setInterval(consultardatostemp, 4000);
+<<<<<<< HEAD
+=======
+  setInterval(consultardatoshum, 4000);
+>>>>>>> test
 
   setInterval(consultardatoshum, 4000);
 
