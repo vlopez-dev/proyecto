@@ -13,3 +13,6 @@ mysqlclient>=2.0.3
 
 #Libreria MQTT
 paho-mqtt>=1.6.1
+
+#Django Extensions
+django-extensions>=3.1.5

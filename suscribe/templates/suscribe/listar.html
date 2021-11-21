@@ -1,19 +1,60 @@
 {% extends 'suscribe/base.html' %}
-
-
-
+{% load crispy_forms_tags %}
+  
 {% block content %}
 
+<table class="table table-borderless">
+  <thead class="border-bottom font-weight-bold">
+      <tr>
+          <td>Ruta</td>
+          <td>Valor activacion</td>
+          <td>Tipo</td>
+          <td>Actuador</td>
+                      
+          <td>
+              <a href="{% url 'sus_agregar' %}" class="btn btn-outline-success">
+                  <i class="fas fa-plus"></i> Add New
+              </a>
+          </td>
+      </tr>
+  </thead>
+  <tbody>
+      {% for i in listar_suscribe  %}
+          <tr>
+                <td>{{i.ruta}}</td>
 
-    <h1>Lista de suscribe</h1>
+              <td>{{i.valor_activo}}</td>
+              <td>{{i.tipo}}</td>
+              <td>{{i.actuador}}</td>
+
+             
+              <td>
+                <td>
+                  <a href="{% url 'suscribe_update' i.ruta %}" class="btn text-secondary px-0">
+                      <i class="far fa-edit fa-lg"></i>
+                  </a>
+            
+                  <form action="{% url 'suscribe_delete' i.ruta %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn">
+                          <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                      </button>
+                  </form>
+              </td>
+          </tr>
+      {% endfor %}
+  </tbody>
+</table>
 
 
-  {% for s in suscribe %}
-    <ul>
-        <li>{{ s.ruta }}</li>
-    </ul>
-  {% endfor %}
-  
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 
     {% endblock content %}

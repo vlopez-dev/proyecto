@@ -6,7 +6,7 @@ class Invernadero(models.Model):
     nombre = models.CharField(max_length=100)
     
     
-    
+
     
     
 

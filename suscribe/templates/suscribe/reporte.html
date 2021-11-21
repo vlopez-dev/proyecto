@@ -1,11 +1,62 @@
-{% extends 'suscribe/base.html' %}
+{% extends 'suscribe/base.html' %} 
+{% block content %}
 
+<h5>Lecturas</h5>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
 
-<h1>Reporte</h1>
+    <tr>
+      <td>Ruta</td>
+      <td>Lectura</td>
+      <td>Fecha de lectura</td>
+    </tr>
+    <tbody>
 
+    {% for i in lecturas  %}
+    <tr>
+      <td>{{i.ruta}}</td>
+      <td>{{i.lectura_sensor}}</td>
+      <td>{{i.lectura_fecha}}</td>
 
-{% for l in lectura %}
-<ul>
-    <li>{{ l.lectura_fecha }}</li>
-</ul>
-{% endfor %}
+    </tr>
+  </thead>
+
+     {% endfor %}
+    </tbody>
+
+    </table>
+
+    {% if lecturas.has_other_pages %}
+
+        <ul class="pagination">
+
+    {% if lecturas.has_previous %}
+
+      <li><a href="?page={{ lecturas.previous_page_number }}">&laquo;</a></li>
+
+    {% else %}
+
+      <li class="disabled"><span>&laquo;</span></li>
+
+    {% endif %}
+
+    {% for i in lecturas.paginator.page_range %}
+      {% if lecturas.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+
+         <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+
+    {% endfor %}
+      {% if lecturas.has_next %}
+         <li><a href="?page={{ lecturas.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+  </div>
+
+{% endblock content %}
