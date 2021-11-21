@@ -11,15 +11,21 @@ $(document).ready(function(){
   setInterval(consultardatostemp, 4000);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 521ed3bc585d15c0999b8d2967b4d78c4cedd387
 =======
   setInterval(consultardatoshum, 4000);
 >>>>>>> test
 
   setInterval(consultardatoshum, 4000);
+<<<<<<< HEAD
 =======
   setInterval(consultardatoshum, 4000);
 
 >>>>>>> test
+=======
+>>>>>>> 521ed3bc585d15c0999b8d2967b4d78c4cedd387
 
 
 

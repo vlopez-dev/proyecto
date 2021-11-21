@@ -18,6 +18,9 @@
   }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 521ed3bc585d15c0999b8d2967b4d78c4cedd387
   .card{
     background-color:white;
   }
@@ -37,8 +40,11 @@
     
 }
 =======
+<<<<<<< HEAD
 =======
 >>>>>>> test
+=======
+>>>>>>> 521ed3bc585d15c0999b8d2967b4d78c4cedd387
   
 .jumbotron-cambios{
   background-color: white;
@@ -133,6 +139,7 @@
 
 
 
+>>>>>>> test
 
 .card{
     outline: 2px solid blue;
@@ -151,9 +158,24 @@
 =======
 
 
+.card{
+    outline: 2px solid blue;
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    align-items: center;
+    background-color: cadetblue;
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+    
 
 
+<<<<<<< HEAD
 >>>>>>> test
+=======
+} */
+>>>>>>> 521ed3bc585d15c0999b8d2967b4d78c4cedd387
 
 
 
