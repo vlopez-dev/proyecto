@@ -27,12 +27,15 @@ def configuracion_agregar(request,id_configuracion=0):
             form = ConfiguracionForm(request.POST,instance= configuracion)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.INFO, 'Agregado correctamente!.')
-
+            # messages.add_message(request, messages.INFO, 'Agregado correctamente!.')
+            
         return redirect('/configuracion/configuracion.html/')
 
 
-
+    
+    
+    
+    
 
 
 def configuraciones(request):
