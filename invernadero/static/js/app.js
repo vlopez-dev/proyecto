@@ -8,7 +8,8 @@ $(document).ready(function(){
   consultardatoshum();
 
 
-  setInterval(consultardatos, 4000);
+  setInterval(consultardatostemp, 4000);
+  setInterval(consultardatoshum, 4000);
 
 
 
