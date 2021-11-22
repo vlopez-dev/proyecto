@@ -5,7 +5,6 @@
 <div class="table-responsive">
   <table class="table">
     <thead>
-
     <tr>
       <td>Ruta</td>
       <td>Lectura</td>
@@ -14,12 +13,12 @@
     <tbody>
 
     {% for i in lecturas  %}
-    <tr>
-      <td>{{i.ruta}}</td>
-      <td>{{i.lectura_sensor}}</td>
-      <td>{{i.lectura_fecha}}</td>
+      <tr>
+        <td>{{i.ruta}}</td>
+        <td>{{i.lectura_sensor}}</td>
+        <td>{{i.lectura_fecha}}</td>
 
-    </tr>
+      </tr>
   </thead>
 
      {% endfor %}
@@ -50,6 +49,7 @@
       {% endif %}
 
     {% endfor %}
+    
       {% if lecturas.has_next %}
          <li><a href="?page={{ lecturas.next_page_number }}">&raquo;</a></li>
     {% else %}

@@ -160,22 +160,22 @@ def on_connect(client, userdata, flags, rc):
 # ---------------------------------Conexion al broker-----------------------------------------------
 
 
-def conexion_broker():
-    Connected = False  
-print("Contado al broker")
-broker_address = "inversoft.ddns.net"
+# def conexion_broker():
+#     Connected = False  
+# print("Contado al broker")
+# broker_address = "inversoft.ddns.net"
 
-port = 1883  # Broker port
-user = "proyecto"  # Connection username
-password = "proyecto"  # Connection password
-client = mqttClient.Client("Python")
-client.username_pw_set(user, password=password) 
-client.on_connect = on_connect
-client.on_message = on_message
+# port = 1883  # Broker port
+# user = "proyecto"  # Connection username
+# password = "proyecto"  # Connection password
+# client = mqttClient.Client("Python")
+# client.username_pw_set(user, password=password) 
+# client.on_connect = on_connect
+# client.on_message = on_message
 
-client.connect(broker_address, port=port) 
-client.loop_start()  # start the loop
-print("ejecute el loop de conexion")
+# client.connect(broker_address, port=port) 
+# client.loop_start()  # start the loop
+# print("ejecute el loop de conexion")
 
     # Falta verificar cuando la conexion es vacia
 
@@ -192,30 +192,30 @@ print("ejecute el loop de conexion")
 
 # --------------Funcion con cambio de tiempo en el guardado con error--------------------------------------
 
-# def conexion_broker():
-#     Connected = True  
-# print("Contado al broker")
-# # broker_address = "inversoft.ddns.net"
-# broker_address=""
+def conexion_broker():
+    Connected = True  
+print("Contado al broker")
+# broker_address = "inversoft.ddns.net"
+broker_address=""
 
 
-# objeto = Cliente.objects.all()
+objeto = Cliente.objects.all()
 
-# for i in objeto:
-#     broker_address= i.broker_conexion
-# port = 1883  # Broker port
-# user = "proyecto"  # Connection username
-# password = "proyecto"  # Connection password
-# client = mqttClient.Client("Python")
-# client.username_pw_set(user, password=password) 
-# client.on_connect = on_connect
-# client.on_message = on_message
-# if broker_address=="" or None:
-#    pass
-# else:
-#     client.connect(broker_address, port=port) 
-#     client.loop_start()  # start the loop
-#     print("ejecute el loop de conexion")
+for i in objeto:
+    broker_address= i.broker_conexion
+port = 1883  # Broker port
+user = "proyecto"  # Connection username
+password = "proyecto"  # Connection password
+client = mqttClient.Client("Python")
+client.username_pw_set(user, password=password) 
+client.on_connect = on_connect
+client.on_message = on_message
+if broker_address=="" or None:
+   pass
+else:
+    client.connect(broker_address, port=port) 
+    client.loop_start()  # start the loop
+    print("ejecute el loop de conexion")
 
     # Falta verificar cuando la conexion es vacia
 
@@ -325,15 +325,17 @@ def filtro_fechas(request):
             print(dia_hasta)
             nuevofinal = dia_hasta + datetime.timedelta(days=1)
 
-            lecturas=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
-            page = request.GET.get('page', 1)
-            paginator=Paginator(lecturas,10)
+            lecturas_list=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
+            pagestr = request.GET.get('page', 1)
+            page=int(pagestr)
+            paginator=Paginator(lecturas_list,15)
+            print(type(paginator))
             try:
-                lectura = paginator.page(page)
+                lecturas = paginator.page(page)
             except PageNotAnInteger:
-                lectura=paginator.page(1)
+                lecturas=paginator.page(1)
             except EmptyPage:
-                lectura = paginator.page(paginator.num_pages)
+                lecturas = paginator.page(paginator.num_pages)
             # Tiene algun problema en la poaginacion, verificar
 
             # paginator = Paginator(lecturas, 25) 
@@ -348,7 +350,7 @@ def filtro_fechas(request):
             #     print(lecturas)
 
 
-            return render(request, 'suscribe/reporte.html',{'lecturas': lectura})
+            return render(request, 'suscribe/reporte.html',{'lecturas': lecturas})
             # Si se filtra solo un dia no muestra resultados verificar. En un principio filtrar de un dia a otro la query viene completa
 
 
