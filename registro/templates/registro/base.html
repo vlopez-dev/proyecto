@@ -41,99 +41,21 @@
 
 
   <body>
-    
-    <header
-    class=" nav-color navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
-      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">  -->
-      <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-          <a class="nav-link px-3" href="#">Sign out</a>
-        </div>
-      </div>
-    </header>
-
-
-
-
-
-
-
-
-
-
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="nav-vertical sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="{% url 'home' %}">
-                  <img src="https://img.icons8.com/dusk/25/000000/dashboard.png"/>
-                  Dashboard 
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'inv_agregar' %}">
-                  <img src="https://img.icons8.com/office/16/000000/home--v1.png"/> 
-                                   Ubicación
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'cli_agregar' %}">
-                  <img src="https://img.icons8.com/fluency/20/000000/wired-network-connection.png"/>
-                         Conexion
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'sus_agregar' %}">
-                  <img src="https://img.icons8.com/color/25/000000/thermometer-automation.png"/>  
-                        Sensores
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'filtro_fechas' %}">
-                  <img src="https://img.icons8.com/external-sbts2018-flat-sbts2018/25/000000/external-report-lean-thinking-sbts2018-flat-sbts2018.png"/>
-                            Reportes
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'configuraciones' %}">
-                  <img src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/25/000000/external-configuration-ux-and-ui-flatart-icons-flat-flatarticons.png"/>
-                                    Configuraciones
-                </a>
-              </li>
-
-              
-            </ul>
-          </div>
-        </nav>
-
-
-
-
-      </div>
-
-        
-
-  <div class="container">
+    <div class="container">
   
-      <div class="col-md-10 offset-md-2 mt-5 text-center">
+      <div class="col-md-8 offset-md-2 mt-5 text-center">
           <div class="jumbotron card">
-          {% block content %}
 
-           
+        {% block content %}
+
 
 
       {% endblock content %}
-          </div>
-        </div>
+
+    </div>
   </div>
 </div>
+
 
 <script src="{% static 'js/jquery-ui-1.13.0.custom/jquery-ui.js' %}"></script>
 
