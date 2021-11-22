@@ -1,4 +1,4 @@
-{% extends 'invernadero/base.html' %}
+{% extends 'invernadero/base_home.html' %}
 
 
 
@@ -11,71 +11,72 @@
 {% for i in suscribe %}
       {% if i.ruta == "/dht/temperatura" %}
 
-
-      <div class="container py-5 h-100 .rotate-vert-center">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-md-10 col-lg-8 col-xl-6">
-
-              <div class=" rotate-vert-center card bg-dark text-white " style="border-radius: 40px;">
-                                        <h5>Temperatura</h5>
-
-                <div class="bg-image" style="border-radius: 35px;">
-                  <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-weather/draw1.png"class="card-img"alt="weather"/>
-                  <div class="mask" style="background-color: rgba(190, 216, 232, .5);"></div>
-
+      <div class=" col-md-6">
+        <div class="card-valores"> <span class="icon"><img src="https://img.icons8.com/color/64/000000/temperature.png"/></span>
+            <div class="title">
+                <p>Temperatura</p>
+            </div>
+            <div id="temperatura"class="temp">+20<sup>&deg;</sup></div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="header">Ubicación</div>
+                    <div class="value">{{i.ruta}}</div>
                 </div>
+<<<<<<< HEAD
                 <div class="card-img-overlay text-dark p-5">
                   <p id="temperatura" class="display-2 my-3" ></p>
                   <p class="mb-2">Ruta:<strong>{{i.ruta}}</strong></p>
                   <h4 class="mb-0"></h4>
                  <h5></h5>
+=======
+                <div class="col-4">
+                    <div class="header">Actuador</div>
+                    <div class="value">{{i.actuador}}</div>
                 </div>
-              </div>
+                <div class="col-4">
+                    <div class="header">Estado</div>
+                    <div class="value">Activo</div>
+>>>>>>> ff311e31b0327e4a42ed1a71eaff59cd85864270
+                </div>
             </div>
-          </div>
         </div>
-
       {% else %}
-
-
-
-      <div class="container py-5 h-100 .rotate-vert-center">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-          
-            <div class="col-md-10 col-lg-8 col-xl-6">
-
-              <div class=" rotate-vert-center card bg-dark text-white " style="border-radius: 40px;">
-                                      <h5>Humedad</h5>
-
-                <div class="bg-image" style="border-radius: 35px;">
-                  <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-weather/draw1.png"class="card-img"alt="weather"/>
-                  <div class="mask" style="background-color: rgba(190, 216, 232, .5);"></div>
+      <div class=" col-md-6">
+        <div class="card-valores"> <span class="icon"><img src="https://img.icons8.com/external-justicon-flat-justicon/64/000000/external-humidity-weather-justicon-flat-justicon.png"/></span>
+            <div class="title">
+                <p>Humedad</p>
+            </div>
+            <div id="humedad" class="temp"></div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="header">Ubicación</div>
+                    <div class="value">{{i.ruta}}</div>
                 </div>
+<<<<<<< HEAD
                 <div class="card-img-overlay text-dark p-5">
                   <p id="humedad" class="display-2 my-3" ></p>
                   <p class="mb-2">Ruta:<strong>{{i.ruta}}</strong></p>
                   <h4 class="mb-0"></h4>
                  <h5>Snowy</h5>
+=======
+                <div class="col-4">
+                    <div class="header">Actuador</div>
+                    <div class="value">{{i.actuador}}</div>
                 </div>
-              </div>
+                <div class="col-4">
+                    <div class="header">Estado</div>
+                    <div class="value">Activo</div>
+>>>>>>> ff311e31b0327e4a42ed1a71eaff59cd85864270
+                </div>
             </div>
-          </div>
         </div>
+    </div>
+
 {% endif %}
 
 
 {% endfor %}
 
-{% comment %} 
-
-<p>Rutas</p>
-
-
-{% for i in suscribe %}
-<p>Rutas</p>
-        <p>{{ i.ruta }}</p>
-
-{% endfor %} {% endcomment %}
 
 
 
