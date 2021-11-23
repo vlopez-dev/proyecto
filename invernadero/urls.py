@@ -17,8 +17,8 @@ urlpatterns = [
     path('<int:id_invernadero>/', views.invernadero_agregar,name='invernadero_update'), # get and post req. for update operation
 
     
-    path("",views.invernadero_home,name='home'),
-    path("rutas/",views.obtener_rutas,name='home'),
+    # path("",views.invernadero_home,name='home'),
+    path("home/",views.obtener_rutas,name='home'),
     # path("",views.obtener_rutas,name='home'),
 
 

@@ -33,8 +33,8 @@ urlpatterns = [
     path('configuraciones/', include("configuracion.urls")),
     
    
-   url( r'^login/$',auth_views.LoginView.as_view(template_name="registro/login.html"), name="login"),
-   url( r'^logout/$',auth_views.LoginView.as_view(template_name="registro/logout.html"), name="logout"),
+   url( r'^$',auth_views.LoginView.as_view(template_name="registro/login.html"), name="login"),
+   url( r'^logout/$',auth_views.LoginView.as_view(template_name="registro/login.html"), name="logout"),
 
 
 
