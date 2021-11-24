@@ -112,7 +112,7 @@ def on_message(client, userdata, message):
 
     ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
-    time.sleep(900)
+    time.sleep(10)
 
 # --------------------------------------------------------------------------------
 
@@ -341,8 +341,7 @@ def listar_suscripciones(request):
 
 
 #             return render(request, 'suscribe/reporte.html',{'lecturas': lecturas_list})
-            # Problemas en la paginacion
-
+#             # Problemas en la paginacion
 
 
 
@@ -350,11 +349,10 @@ def listar_suscripciones(request):
 
 
 def filtro_fechas(request):
-    
-     if request.method=="GET":
+    if request.method=="GET":
         form =LecturasForm()
         return render(request,'suscribe/filtro_fechas.html',{'form':form})
-     else:
+    else:
          form= LecturasForm(request.POST)
          if form.is_valid():
             dia_desde = form.cleaned_data['dia_desde']
@@ -362,28 +360,13 @@ def filtro_fechas(request):
             dia_hasta = form.cleaned_data['dia_hasta']
             print(dia_hasta)
             nuevofinal = dia_hasta + datetime.timedelta(days=1)
+    
+            lecturas_list=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
+            paginator = Paginator(lecturas_list, 25)
 
-            lecturas=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
-            paginator=Paginator(lecturas,15)
-            page_number = request.GET.get('page') 
-            print(page_number)# new
-            page_obj = paginator.get_page(page_number)  # changed
-            print(page_obj)
-
-            
-
-
-            return render(request, 'suscribe/reporte.html',{'page_obj': page_obj})
-            # Problemas en la paginacion
-
-
-
-
-
-
-
-
-
+            page = request.GET.get('page')
+            page_obj = paginator.get_page(page)
+            return render(request, 'filtro_fechas.html', {'page_obj': page_obj})
 
 
 

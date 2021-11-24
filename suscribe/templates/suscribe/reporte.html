@@ -3,91 +3,6 @@
 
 
 
-
-  <div class="row">
-  <div class="col-8 offset-2">
-    <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Ruta</th>
-      <th scope="col">Lectura</th>
-      <th scope="col">Fecha</th>
-    </tr>
-    </thead>
-    <tbody>
-{% for lecturas in page_obj %}
-      <tr>
-        <th scope="row">{{ book.id }}</th>
-        <td>{{ lecturas.ruta }}</td>
-        <td>{{ lecturas.lectura_sensor }}</td>
-        <td>{{ lecturas.lectura_fecha }}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% comment %} 
 <h5>Lecturas</h5>
 <div class="table-responsive">
   <table class="table">
@@ -144,6 +59,6 @@
     {% endif %}
   </ul>
 {% endif %}
-  </div> {% endcomment %}
+  </div>  
 
 {% endblock content %}

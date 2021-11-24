@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     'configuracion',
     'django_extensions',
     'registro',
+    'django_cool_paginator',
+
+    
+
     
 
 
@@ -59,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     
 ]
 
