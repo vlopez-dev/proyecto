@@ -44,7 +44,15 @@ INSTALLED_APPS = [
     'configuracion',
     'django_extensions',
     'registro',
+<<<<<<< HEAD
 
+=======
+    'django_cool_paginator',
+
+    
+
+    
+>>>>>>> c16c1d3c715ff7a57ba3ad416f1281c665e75535
 
 
 
@@ -59,7 +67,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+<<<<<<< HEAD
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+=======
+>>>>>>> c16c1d3c715ff7a57ba3ad416f1281c665e75535
 
     
 ]
