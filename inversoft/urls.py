@@ -20,6 +20,7 @@ from django.conf.urls import url
 from django.urls import path,include
 from suscribe import views as suscribe_views
 from django.contrib.auth import views as auth_views
+import debug_toolbar
 
 
 

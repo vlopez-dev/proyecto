@@ -192,30 +192,30 @@ def on_connect(client, userdata, flags, rc):
 
 # --------------Funcion con cambio de tiempo en el guardado con error--------------------------------------
 
-def conexion_broker():
-    Connected = True  
-print("Contado al broker")
-# broker_address = "inversoft.ddns.net"
-broker_address=""
+# def conexion_broker():
+#     Connected = True  
+# print("Contado al broker")
+# # broker_address = "inversoft.ddns.net"
+# broker_address=""
 
 
-objeto = Cliente.objects.all()
+# objeto = Cliente.objects.all()
 
-for i in objeto:
-    broker_address= i.broker_conexion
-port = 1883  # Broker port
-user = "proyecto"  # Connection username
-password = "proyecto"  # Connection password
-client = mqttClient.Client("Python")
-client.username_pw_set(user, password=password) 
-client.on_connect = on_connect
-client.on_message = on_message
-if broker_address=="" or None:
-   pass
-else:
-    client.connect(broker_address, port=port) 
-    client.loop_start()  # start the loop
-    print("ejecute el loop de conexion")
+# for i in objeto:
+#     broker_address= i.broker_conexion
+# port = 1883  # Broker port
+# user = "proyecto"  # Connection username
+# password = "proyecto"  # Connection password
+# client = mqttClient.Client("Python")
+# client.username_pw_set(user, password=password) 
+# client.on_connect = on_connect
+# client.on_message = on_message
+# if broker_address=="" or None:
+#    pass
+# else:
+#     client.connect(broker_address, port=port) 
+#     client.loop_start()  # start the loop
+#     print("ejecute el loop de conexion")
 
     # Falta verificar cuando la conexion es vacia
 
@@ -326,32 +326,29 @@ def filtro_fechas(request):
             nuevofinal = dia_hasta + datetime.timedelta(days=1)
 
             lecturas_list=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
-            pagestr = request.GET.get('page', 1)
-            page=int(pagestr)
-            paginator=Paginator(lecturas_list,15)
-            print(type(paginator))
+            
+            page = request.GET.get('page', 1)
+            paginator=Paginator(lecturas_list,10)
             try:
                 lecturas = paginator.page(page)
+                
             except PageNotAnInteger:
                 lecturas=paginator.page(1)
+
             except EmptyPage:
                 lecturas = paginator.page(paginator.num_pages)
-            # Tiene algun problema en la poaginacion, verificar
 
-            # paginator = Paginator(lecturas, 25) 
-            # page_number = request.GET.get('page')
-            # page_obj = paginator.get_page(page_number)
-
-            # if lecturas.exists():
-            #     print("Existe")
-            #     print(lecturas)
-            # else:
-            #     print("no existe")
-            #     print(lecturas)
+            
 
 
             return render(request, 'suscribe/reporte.html',{'lecturas': lecturas})
             # Si se filtra solo un dia no muestra resultados verificar. En un principio filtrar de un dia a otro la query viene completa
+
+
+
+
+
+
 
 
 

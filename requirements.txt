@@ -16,3 +16,6 @@ paho-mqtt>=1.6.1
 
 #Django Extensions
 django-extensions>=3.1.5
+
+#Notificaciones
+notify-py>=0.3.3
