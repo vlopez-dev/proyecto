@@ -6,12 +6,6 @@ from cliente.models import Cliente
 
 # Create your models here.
 
-TIPOSENSOR = [
-            ('temperatura', 'Temperatura'),
-
-            ('humedad', 'Humedad'),
-            
-        ]
 
 
 
@@ -28,7 +22,7 @@ class Suscribe(models.Model):
     id_cliente= models.name = models.ForeignKey('cliente.Cliente',on_delete=models.CASCADE)
 
     ruta = models.CharField(primary_key=True ,max_length=50,choices=MODELOSENSOR,default='/dht/temperatura')
-    tipo = models.CharField(max_length=15,choices=TIPOSENSOR,default='temperatura')
+    # tipo = models.CharField(max_length=15,choices=TIPOSENSOR,default='temperatura')
     valor_activo=models.FloatField()
     actuador= models.CharField(max_length=50,null=True)
     valor_actuador= models.BooleanField()
@@ -42,6 +36,8 @@ class Suscribe(models.Model):
 
 
 
+# class Sensormodelo(models.Model):
+    
 
 
 
