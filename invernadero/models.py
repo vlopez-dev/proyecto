@@ -4,11 +4,8 @@ from django.db import models
 class Invernadero(models.Model):
     id_invernadero=models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
-    
-    
 
-    
-    
+
 
     def add(self):
         self.save

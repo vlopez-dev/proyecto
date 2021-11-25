@@ -106,13 +106,12 @@ def on_message(client, userdata, message):
          + message.topic + "' with QoS " + str(message.qos))
     topic=message.topic
     mensaje = float(message.payload.decode("utf-8"))
-    time.sleep(3)
     print("Recibiendo mensaje"+message.topic)
     varificar_umbral(mensaje,topic)
+    time.sleep(15)
 
     ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
-    time.sleep(10)
 
 # --------------------------------------------------------------------------------
 
@@ -246,7 +245,6 @@ def subscribing():
                 client.subscribe(i.ruta)  #Linea de suscricion original
 sub = threading.Thread(target=subscribing)
 sub.start()
-# time.sleep(1)
 
 
 # ---------------------------------------------------------------------------------------------------
