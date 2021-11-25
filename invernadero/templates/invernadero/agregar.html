@@ -9,8 +9,25 @@
         <hr class="my-4" />
         
         <form action=""method="POST"autocomplete="off"class="justify-content-center">
-        <div class="form-group">{% csrf_token %} {{form|crispy}}</div>
+        <div class="row">
+          <div class="col-md-4">
+            
+          </div>
+          <div class="col-md-4">
+            {% csrf_token %} 
+            {{ form.nombre|as_crispy_field }}
+            <small id="passwordHelpInline" class="text-muted">
+              Agregue un nombre para el lugar .
+            </small>
+          </div>
+          <div class="col-md-4">
+            
+          </div>
+        </div>
+        
 
+        
+      
         <button type="submit" class="btn btn-success">Guardar</button>
         <div class="col-md-4">
           <a

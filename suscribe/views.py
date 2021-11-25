@@ -312,47 +312,12 @@ def listar_suscripciones(request):
 
 
 
-# def filtro_fechas(request):
-    
-#      if request.method=="GET":
-#         form =LecturasForm()
-#         return render(request,'suscribe/filtro_fechas.html',{'form':form})
-#      else:
-#          form= LecturasForm(request.POST)
-#          if form.is_valid():
-#             dia_desde = form.cleaned_data['dia_desde']
-#             print(dia_desde)
-#             dia_hasta = form.cleaned_data['dia_hasta']
-#             print(dia_hasta)
-#             nuevofinal = dia_hasta + datetime.timedelta(days=1)
-
-#             lecturas_list=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
-#             paginator=Paginator(lecturas_list,15)
-#             page = request.POST.get('page', 1)
-
-#             print(type(paginator))
-#             try:
-#                 lecturas_list = paginator.page(page)
-#             except PageNotAnInteger:
-#                 lecturas_list=paginator.page(1)
-#             except EmptyPage:
-#                 lecturas_list = paginator.page(paginator.num_pages)
-            
-
-
-#             return render(request, 'suscribe/reporte.html',{'lecturas': lecturas_list})
-#             # Problemas en la paginacion
-
-
-
-
-
-
 def filtro_fechas(request):
-    if request.method=="GET":
+    
+     if request.method=="GET":
         form =LecturasForm()
         return render(request,'suscribe/filtro_fechas.html',{'form':form})
-    else:
+     else:
          form= LecturasForm(request.POST)
          if form.is_valid():
             dia_desde = form.cleaned_data['dia_desde']
@@ -360,13 +325,48 @@ def filtro_fechas(request):
             dia_hasta = form.cleaned_data['dia_hasta']
             print(dia_hasta)
             nuevofinal = dia_hasta + datetime.timedelta(days=1)
-    
-            lecturas_list=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
-            paginator = Paginator(lecturas_list, 25)
 
-            page = request.GET.get('page')
-            page_obj = paginator.get_page(page)
-            return render(request, 'filtro_fechas.html', {'page_obj': page_obj})
+            lecturas_list=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
+            paginator=Paginator(lecturas_list,15)
+            page = request.POST.get('page', 1)
+
+            print(type(paginator))
+            try:
+                lecturas_list = paginator.page(page)
+            except PageNotAnInteger:
+                lecturas_list=paginator.page(1)
+            except EmptyPage:
+                lecturas_list = paginator.page(paginator.num_pages)
+            
+
+
+            return render(request, 'suscribe/reporte.html',{'lecturas': lecturas_list})
+#             # Problemas en la paginacion
+
+
+
+
+
+
+# def filtro_fechas(request):
+#     if request.method=="GET":
+#         form =LecturasForm()
+#         return render(request,'suscribe/filtro_fechas.html',{'form':form})
+#     else:
+#          form= LecturasForm(request.POST)
+#          if form.is_valid():
+#             dia_desde = form.cleaned_data['dia_desde']
+#             print(dia_desde)
+#             dia_hasta = form.cleaned_data['dia_hasta']
+#             print(dia_hasta)
+#             nuevofinal = dia_hasta + datetime.timedelta(days=1)
+    
+#             lecturas_list=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
+#             paginator = Paginator(lecturas_list, 25)
+
+#             page = request.GET.get('page')
+#             page_obj = paginator.get_page(page)
+#             return render(request, 'filtro_fechas.html', {'page_obj': page_obj})
 
 
 

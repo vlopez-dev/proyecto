@@ -1,6 +1,6 @@
 {% extends 'suscribe/base.html' %} 
 {% load crispy_forms_tags %}
-  {% comment %} {{form.mobile|as_crispy_field}} {% endcomment %}
+{{form.mobile|as_crispy_field}}
 
  {% block content %}
         
@@ -10,7 +10,25 @@
 
         <form action=""method="POST"autocomplete="off"class="justify-content-center">
 
-        <div class="form-group">{% csrf_token %} {{form|crispy}}</div>
+        <div class="form-group">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-4">
+
+          </div>
+          <div class="col-md-4">
+            {% comment %} {{ form.dia_desde|as_crispy_field }}
+            {{ form.dia_hasta|as_crispy_field }} {% endcomment %}
+                {{ form|crispy }}
+
+
+
+          </div>
+          <div class="col-md-4">
+            
+          </div>
+        </div>
+        </div>
         <button  type="submit" class="btn btn-success">Listar</button>
 
       </form>
