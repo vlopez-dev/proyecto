@@ -21,7 +21,62 @@
           Listado
           </a>
         </div>
-      </form>
+      </form>  
+
+
+
+{% comment %} 
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+          {{ form.nombre_conexion|as_crispy_field }}
+
+    </div>
+    <div class="form-group col-md-4">
+              {{ form.id_invernadero|as_crispy_field }}
+
+    </div>
+  </div>
+
+  
+  <div class="form-row">
+    <div class="form-group col-md-4">
+          {{ form.broker_conexion|as_crispy_field }}
+
+    </div>
+    
+   
+  </div>
+  
+        <button type="submit" class="btn btn-success">Guardar</button>
+          <div class="col-md-4">
+          <a
+            href="{% url 'listar_cliente' %}"
+            class=" btn-block btn-lg"
+          >
+          <img src="https://img.icons8.com/color-glass/48/000000/list.png"/>
+          Listado
+          </a>
+        </div>
+</form>
+
+
+
+
+ {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
