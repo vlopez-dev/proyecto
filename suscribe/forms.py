@@ -11,7 +11,7 @@ class SuscribeForm(forms.ModelForm):
         fields = 'ruta', 'tipo', 'valor_activo', 'actuador', 'valor_actuador'
 
         labels = {
-            'ruta': 'Ubicacion', 'tipo': 'Tipo de sensor', 'valor_activo': 'Valor para activacion',
+            'ruta': 'Modelo de Sensor', 'tipo': 'Tipo de sensor', 'valor_activo': 'Valor para activacion',
             'actuador': 'Encender', 'valor_actuador': 'On/Off'
 
 
