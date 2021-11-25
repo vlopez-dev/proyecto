@@ -8,21 +8,16 @@ class SuscribeForm(forms.ModelForm):
 
     class Meta:
         model = Suscribe
-        fields = 'ruta', 'tipo', 'valor_activo', 'actuador', 'valor_actuador'
+        fields = 'id_cliente','ruta', 'tipo', 'valor_activo', 'actuador', 'valor_actuador'
 
         labels = {
-            'ruta': 'Modelo de Sensor', 'tipo': 'Tipo de sensor', 'valor_activo': 'Valor para activacion',
+            'id_cliente':'Cliente','ruta': 'Modelo de Sensor', 'tipo': 'Tipo de sensor', 'valor_activo': 'Valor para activacion',
             'actuador': 'Encender', 'valor_actuador': 'On/Off'
 
 
         }
 
-    TIPOSENSOR = [
-        ('orange', 'Oranges'),
-        ('cantaloupe', 'Cantaloupes'),
-        ('mango', 'Mangoes'),
-        ('honeydew', 'Honeydews'),
-    ]
+   
 
 
 class DateInput(forms.DateInput):

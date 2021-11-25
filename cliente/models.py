@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Cliente(models.Model):
+    nombre_conexion= models.CharField(max_length=50)
     id_invernadero= models.name = models.ForeignKey('invernadero.Invernadero',on_delete=models.CASCADE)
     id_cliente = models.AutoField(primary_key=True)
     broker_conexion = models.CharField(max_length=100)
@@ -18,4 +19,4 @@ class Cliente(models.Model):
 
 
     def __str__(self):
-        return self.id_invernadero
+        return self.nombre_conexion

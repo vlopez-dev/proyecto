@@ -1,6 +1,8 @@
 from django import forms
 from django.db import models
 
+from cliente.models import Cliente
+
 
 # Create your models here.
 
@@ -23,6 +25,8 @@ MODELOSENSOR = [
 
 
 class Suscribe(models.Model):
+    id_cliente= models.name = models.ForeignKey('cliente.Cliente',on_delete=models.CASCADE)
+
     ruta = models.CharField(primary_key=True ,max_length=50,choices=MODELOSENSOR,default='/dht/temperatura')
     tipo = models.CharField(max_length=15,choices=TIPOSENSOR,default='temperatura')
     valor_activo=models.FloatField()
@@ -34,7 +38,7 @@ class Suscribe(models.Model):
 
 
     def __str__(self):
-        return self.ruta
+        return self.id_cliente
 
 
 
