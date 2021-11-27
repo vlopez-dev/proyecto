@@ -14,7 +14,7 @@
     </tr>
     <tbody>
 
-    {% for i in lecturas_list  %}
+    {% for i in lecturas  %}
       <tr>
         <td>{{i.ruta}}</td>
         <td>{{i.lectura_sensor}}</td>
@@ -28,11 +28,11 @@
 
     </table>
 
-    {% if lecturas.has_other_pages %}
+    {% if lecturas_list.has_other_pages %}
 
         <ul class="pagination">
 
-    {% if lecturas.has_previous %}
+    {% if lecturas_list.has_previous %}
 
       <li><a href="?page={{ lecturas.previous_page_number }}">&laquo;</a></li>
 
@@ -42,7 +42,7 @@
 
     {% endif %}
 
-    {% for i in lecturas.paginator.page_range %}
+    {% for i in lecturas_list.paginator.page_range %}
       {% if lecturas.number == i %}
           <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
       {% else %}
@@ -52,7 +52,7 @@
 
     {% endfor %}
     
-      {% if lecturas.has_next %}
+      {% if lecturas_list.has_next %}
          <li><a href="?page={{ lecturas.next_page_number }}">&raquo;</a></li>
     {% else %}
       <li class="disabled"><span>&raquo;</span></li>

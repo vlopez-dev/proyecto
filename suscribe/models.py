@@ -31,7 +31,7 @@ class Suscribe(models.Model):
 
 
     def __str__(self):
-        return self.id_cliente
+        return self.ruta
 
 
 
