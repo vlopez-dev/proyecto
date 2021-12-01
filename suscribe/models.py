@@ -10,9 +10,9 @@ from cliente.models import Cliente
 
 
 MODELOSENSOR = [
-            ('/dht/temperatura', 'DHT 11 Temperatura'),
+            ('dht/temperatura', 'DHT 11 Temperatura'),
 
-            ('/dht/humedad', 'DHT 11 Humedad'),
+            ('dht/humedad', 'DHT 11 Humedad'),
             
         ]
 
