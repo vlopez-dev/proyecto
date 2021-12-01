@@ -254,6 +254,7 @@ sub.start()
 # ------------------------------Verificacion de valores de activacion--------------------------------------------------
 
 
+
 def varificar_umbral(lectura,topic):
     ob = Suscribe.objects.all()
     for i in ob:
@@ -268,26 +269,35 @@ def varificar_umbral(lectura,topic):
     if topic==ruta and lectura > umbral and actuador != None:
                     # "19"       "20"
         client.on_publish
+
         print("Valor del actuador antes de enviar acciones" + actuador +str(valoronoff))
         ret= client.publish(actuador,valoronoff)
         print(ret)
-        #enviar_mail()
-        print(" Activando mail y acciones")
+        print(" Activando mail y enviando accion al actuador")
         notification = Notify()
+<<<<<<< HEAD
         notification.title = "Acciones"
         notification.message = "Activando envio de mail y acciones."
+=======
+        notification.title = "Cool Title"
+        notification.message = "Activando envio de mail y enviando accion al actuador."
+>>>>>>> e156a197017dd843c871a13a3d0e6168ba109977
         notification.send()
-
+       
+        enviar_mail()
         pass
 
     else:
         
+
 
         print("No se toman acciones el umbral es correcto")
         notification = Notify()
         notification.title = "Verificación de umbral"
         notification.message = "No se toman acciones el umbral es correcto."
         notification.send()
+
+
 
 
 
@@ -440,8 +450,10 @@ def reportes(request):
 
 
 def enviar_mail():
-
-    msg = MIMEMultipart()
+    run_once = 0
+    while 1:
+        if run_once == 0:
+            msg = MIMEMultipart()
 
     #Mensaje
     message = "Test invernadero"
@@ -470,6 +482,7 @@ def enviar_mail():
     print ("Mensaje enviado a : %s:" % (msg['To']))
 
     print("mail enviado")
+    run_once = 1;
 
     # Se deberia crear otra app que solo envie los mails y asi dar la posibilidad de
     # configurar el mail

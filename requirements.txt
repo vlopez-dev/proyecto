@@ -22,6 +22,9 @@ gunicorn>=20.1.0
 
 #Notificaciones
 notify-py<=1.3.3
+<<<<<<< HEAD
 
 #generador uml
 pydotplus>=2.0.2
+=======
+>>>>>>> e156a197017dd843c871a13a3d0e6168ba109977
