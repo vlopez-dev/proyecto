@@ -31,11 +31,10 @@ class Suscribe(models.Model):
 
 
     def __str__(self):
-        return self.id_cliente
+        return self.ruta
 
 
 
-# class Sensormodelo(models.Model):
     
 
 
@@ -46,4 +45,11 @@ class Lectura(models.Model):
     lectura_fecha= models.DateTimeField(auto_now_add=True)
     
 
+
+def add(self):
+        self.save
+
+
+def __str__(self):
+        return self.ruta
 
