@@ -278,13 +278,16 @@ def varificar_umbral(lectura,topic):
         notification.title = "Cool Title"
         notification.message = "Activando envio de mail y enviando accion al actuador."
         notification.send()
-
-        enviar_mail()
-        pass
-
+        resultado=enviar_mail()
+        print("Resultado envio mail" +str(resultado))
+    elif topic==ruta and lectura < umbral and actuador!=None:
+         if valoronoff=="off":
+             ret=client.publish(actuador,"on")
+             print("Enviando mensaje en on")
+         else:
+             ret=client.publish(actuador,"off")
+             print("enviando mensaje en off")
     else:
-
-
 
         print("No se toman acciones el umbral es correcto")
         notification = Notify()
@@ -371,39 +374,38 @@ def reportes(request):
 
 
 def enviar_mail():
-    run_once = 0
-    while 1:
-        if run_once == 0:
+    
             msg = MIMEMultipart()
 
-    #Mensaje
-    message = "Test invernadero"
-    #Parametros para el envio de mensajes
-    password = "gdi092021"
-    msg['From'] = "gdinverna092021@gmail.com"
-    msg['To'] = "victorl_222@hotmail.com"
-    msg['Subject'] = "Test"
+            #Mensaje
+            message = "Test invernadero"
+            #Parametros para el envio de mensajes
+            password = "gdi092021"
+            msg['From'] = "gdinverna092021@gmail.com"
+            msg['To'] = "victorl_222@hotmail.com"
+            msg['Subject'] = "Test"
 
-    msg.attach(MIMEText(message, 'plain'))
+            msg.attach(MIMEText(message, 'plain'))
 
-    #Creo el servidor
-    server = smtplib.SMTP('smtp.gmail.com: 587')
+            #Creo el servidor
+            server = smtplib.SMTP('smtp.gmail.com: 587')
 
-    server.starttls()
+            server.starttls()
 
-    #Login con las credenciales
-    server.login(msg['From'], password)
+            #Login con las credenciales
+            server.login(msg['From'], password)
 
-    #Envio el mail por medio del servidor
-    server.sendmail(msg['From'], msg['To'], msg.as_string())
+            #Envio el mail por medio del servidor
+            server.sendmail(msg['From'], msg['To'], msg.as_string())
 
-    #Salgo
-    server.quit()
-    # Imprimo un mensaje de enviado
-    print ("Mensaje enviado a : %s:" % (msg['To']))
+            #Salgo
+            server.quit()
+            # Imprimo un mensaje de enviado
+            print ("Mensaje enviado a : %s:" % (msg['To']))
 
-    print("mail enviado")
-    run_once = 1;
+            print("mail enviado")
+            return True
+            
 
     # Se deberia crear otra app que solo envie los mails y asi dar la posibilidad de
     # configurar el mail
