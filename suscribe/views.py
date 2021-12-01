@@ -108,7 +108,7 @@ def on_message(client, userdata, message):
     mensaje = float(message.payload.decode("utf-8"))
     print("Recibiendo mensaje"+message.topic)
     varificar_umbral(mensaje,topic)
-    time.sleep(15)
+    time.sleep(1)
 
     ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
@@ -139,7 +139,6 @@ Connected = False  # Variable golabal de conexion
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Conectado al broker")
-        global Connected
         Connected = True
     else:
         print("Fallo la conexion")
@@ -275,13 +274,14 @@ def varificar_umbral(lectura,topic):
         #enviar_mail()
         print(" Activando mail y acciones")
         notification = Notify()
-        notification.title = "Cool Title"
+        notification.title = "Acciones"
         notification.message = "Activando envio de mail y acciones."
         notification.send()
 
         pass
 
     else:
+        
 
         print("No se toman acciones el umbral es correcto")
         notification = Notify()
@@ -307,6 +307,40 @@ def listar_suscripciones(request):
 
 
 # --------------------------------------------------------------------------------
+
+
+
+# def filtro_fechas(request):
+    
+#      if request.method=="GET":
+#         form =LecturasForm()
+#         return render(request,'suscribe/filtro_fechas.html',{'form':form})
+#      else:
+#          form= LecturasForm(request.POST)
+#          if form.is_valid():
+#             dia_desde = form.cleaned_data['dia_desde']
+#             print(dia_desde)
+#             dia_hasta = form.cleaned_data['dia_hasta']
+#             print(dia_hasta)
+#             nuevofinal = dia_hasta + datetime.timedelta(days=1)
+
+#             lecturas_list=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
+#             paginator=Paginator(lecturas_list,15)
+#             page = request.POST.get('page', 1)
+
+#             print(type(paginator))
+#             try:
+#                 lecturas_list = paginator.page(page)
+#             except PageNotAnInteger:
+#                 lecturas_list=paginator.page(1)
+#             except EmptyPage:
+#                 lecturas_list = paginator.page(paginator.num_pages)
+            
+
+
+#             return render(request, 'suscribe/reporte.html',{'lecturas': lecturas_list})
+#             # Problemas en la paginacion
+
 
 
 
@@ -339,11 +373,6 @@ def filtro_fechas(request):
 
 
             return render(request, 'suscribe/reporte.html',{'lecturas': lecturas_list})
-#             # Problemas en la paginacion
-
-
-
-
 
 
 # def filtro_fechas(request):
