@@ -140,10 +140,6 @@ Connected = False  # Variable golabal de conexion
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Conectado al broker")
-<<<<<<< HEAD
-        # global Connected
-=======
->>>>>>> 9099a0267ae36bd74f7c1547dd725cd00b6a3de0
         Connected = True
     else:
         print("Fallo la conexion")
