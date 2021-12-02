@@ -16,18 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-
 from django.urls import path,include
-from suscribe import views as suscribe_views
+from register import views as register_views
 from django.contrib.auth import views as auth_views
-
-
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("register/", register_views.register_request, name="register"),
     path('', include("invernadero.urls")),
+    path('', include("django.contrib.auth.urls")),
     path('cliente/', include("cliente.urls")),
     path('suscribe/', include("suscribe.urls")),
     path('configuraciones/', include("configuracion.urls")),

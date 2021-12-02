@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'configuracion',
     'django_extensions',
     'registro',
+    'register.apps.RegisterConfig',
 
 
     
