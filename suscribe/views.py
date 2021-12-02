@@ -102,6 +102,7 @@ def suscribe_delete(request,ruta):
 # ------------------------Metodo que recibe el mensaje desde el nodemcu--------------------------------------------------------
 
 def on_message(client, userdata, message):
+    print("estoy en on message")
     print("Received message '" + str(message.payload) + "' on topic '"
          + message.topic + "' with QoS " + str(message.qos))
     topic=message.topic
@@ -139,7 +140,6 @@ Connected = False  # Variable golabal de conexion
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Conectado al broker")
-        global Connected
         Connected = True
     else:
         print("Fallo la conexion")
@@ -159,22 +159,22 @@ def on_connect(client, userdata, flags, rc):
 # ---------------------------------Conexion al broker-----------------------------------------------
 
 
-# def conexion_broker():
-#     Connected = False  
-# print("Contado al broker")
-# broker_address = "inversoft.ddns.net"
+def conexion_broker():
+    Connected = False  
+print("Contado al broker")
+broker_address = "192.168.1.100"
 
-# port = 1883  # Broker port
-# user = "proyecto"  # Connection username
-# password = "proyecto"  # Connection password
-# client = mqttClient.Client("Python")
-# client.username_pw_set(user, password=password) 
-# client.on_connect = on_connect
-# client.on_message = on_message
+port = 1883  # Broker port
+user = "proyecto"  # Connection username
+password = "proyecto"  # Connection password
+client = mqttClient.Client("Python")
+client.username_pw_set(user, password=password) 
+client.on_connect = on_connect
+client.on_message = on_message
 
-# client.connect(broker_address, port=port) 
-# client.loop_start()  # start the loop
-# print("ejecute el loop de conexion")
+client.connect(broker_address, port=port) 
+client.loop_start()  # start the loop
+print("ejecute el loop de conexion")
 
     # Falta verificar cuando la conexion es vacia
 
@@ -191,30 +191,31 @@ def on_connect(client, userdata, flags, rc):
 
 # --------------Funcion con cambio de tiempo en el guardado con error--------------------------------------
 
-def conexion_broker():
-    Connected = True  
-print("Contado al broker")
-# broker_address = "inversoft.ddns.net"
-broker_address=""
+# def conexion_broker():
+#     Connected = True  
+# print("Contado al broker")
+# # broker_address = "inversoft.ddns.net"
+# broker_address=""
 
 
-objeto = Cliente.objects.all()
+# objeto = Cliente.objects.all()
 
-for i in objeto:
-    broker_address= i.broker_conexion
-port = 1883  # Broker port
-user = "proyecto"  # Connection username
-password = "proyecto"  # Connection password
-client = mqttClient.Client("Python")
-client.username_pw_set(user, password=password) 
-client.on_connect = on_connect
-client.on_message = on_message
-if broker_address=="" or None:
-   pass
-else:
-    client.connect(broker_address, port=port) 
-    client.loop_start()  # start the loop
-    print("ejecute el loop de conexion")
+# for i in objeto:
+#     broker_address= i.broker_conexion
+#     print("entre al for conexion")
+# port = 1883  # Broker port
+# user = "proyecto"  # Connection username
+# password = "proyecto"  # Connection password
+# client = mqttClient.Client("Python")
+# client.username_pw_set(user, password=password) 
+# client.on_connect = on_connect
+# client.on_message = on_message
+# if broker_address=="" or None:
+#    pass
+# else:
+#     client.connect(broker_address, port=port) 
+#     client.loop_start()  # start the loop
+#     print("ejecute el loop de conexion")
 
     # Falta verificar cuando la conexion es vacia
 
@@ -239,7 +240,7 @@ else:
 
 def subscribing():
     while Connected != True:  # Wait for connection
-        time.sleep(1)
+        # time.sleep(1)
         ob = Suscribe.objects.all()
         for i in ob:
                 client.subscribe(i.ruta)  #Linea de suscricion original
@@ -253,6 +254,7 @@ sub.start()
 
 
 # ------------------------------Verificacion de valores de activacion--------------------------------------------------
+
 
 
 def varificar_umbral(lectura,topic):
@@ -278,13 +280,15 @@ def varificar_umbral(lectura,topic):
         notification.title = "Cool Title"
         notification.message = "Activando envio de mail y enviando accion al actuador."
         notification.send()
-        run_once = 0
-        while 1:
-            if run_once == 0:
-                enviar_mail()
-                run_once = 1;
-                # pass
-
+        resultado=enviar_mail()
+        print("Resultado envio mail" +str(resultado))
+    elif topic==ruta and lectura < umbral and actuador!=None:
+         if valoronoff=="off":
+             ret=client.publish(actuador,"on")
+             print("Enviando mensaje en on")
+         else:
+             ret=client.publish(actuador,"off")
+             print("enviando mensaje en off")
     else:
 
         print("No se toman acciones el umbral es correcto")
@@ -292,6 +296,8 @@ def varificar_umbral(lectura,topic):
         notification.title = "Verificación de umbral"
         notification.message = "No se toman acciones el umbral es correcto."
         notification.send()
+
+
 
 
 
@@ -335,61 +341,16 @@ def filtro_fechas(request):
             paginator=Paginator(lecturas_list,10)
             try:
                 lecturas = paginator.page(page)
-                
             except PageNotAnInteger:
                 lecturas=paginator.page(1)
-
             except EmptyPage:
                 lecturas = paginator.page(paginator.num_pages)
+            
 
             
 
-
             return render(request, 'suscribe/reporte.html',{'lecturas': lecturas})
-
-
-
-
-
-# def filtro_fechas(request):
-#     if request.method=="GET":
-#         form =LecturasForm()
-#         return render(request,'suscribe/filtro_fechas.html',{'form':form})
-#     else:
-#          form= LecturasForm(request.POST)
-#          if form.is_valid():
-#             dia_desde = form.cleaned_data['dia_desde']
-#             print(dia_desde)
-#             dia_hasta = form.cleaned_data['dia_hasta']
-#             print(dia_hasta)
-#             nuevofinal = dia_hasta + datetime.timedelta(days=1)
-    
-#             lecturas_list=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
-#             paginator = Paginator(lecturas_list, 25)
-
-#             page = request.GET.get('page')
-#             page_obj = paginator.get_page(page)
-#             return render(request, 'suscribe/reporte.html', {'page_obj': page_obj})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            # Problemas en la paginacion
 
 
 
@@ -416,36 +377,38 @@ def reportes(request):
 
 
 def enviar_mail():
+    
+            msg = MIMEMultipart()
 
-    msg = MIMEMultipart()
+            #Mensaje
+            message = "Test invernadero"
+            #Parametros para el envio de mensajes
+            password = "gdi092021"
+            msg['From'] = "gdinverna092021@gmail.com"
+            msg['To'] = "victorl_222@hotmail.com"
+            msg['Subject'] = "Test"
 
-    #Mensaje
-    message = "Test invernadero"
-    #Parametros para el envio de mensajes
-    password = "gdi092021"
-    msg['From'] = "gdinverna092021@gmail.com"
-    msg['To'] = "victorl_222@hotmail.com"
-    msg['Subject'] = "Test"
+            msg.attach(MIMEText(message, 'plain'))
 
-    msg.attach(MIMEText(message, 'plain'))
+            #Creo el servidor
+            server = smtplib.SMTP('smtp.gmail.com: 587')
 
-    #Creo el servidor
-    server = smtplib.SMTP('smtp.gmail.com: 587')
+            server.starttls()
 
-    server.starttls()
+            #Login con las credenciales
+            server.login(msg['From'], password)
 
-    #Login con las credenciales
-    server.login(msg['From'], password)
+            #Envio el mail por medio del servidor
+            server.sendmail(msg['From'], msg['To'], msg.as_string())
 
-    #Envio el mail por medio del servidor
-    server.sendmail(msg['From'], msg['To'], msg.as_string())
+            #Salgo
+            server.quit()
+            # Imprimo un mensaje de enviado
+            print ("Mensaje enviado a : %s:" % (msg['To']))
 
-    #Salgo
-    server.quit()
-    # Imprimo un mensaje de enviado
-    print ("Mensaje enviado a : %s:" % (msg['To']))
-
-    print("mail enviado")
+            print("mail enviado")
+            return True
+            
 
     # Se deberia crear otra app que solo envie los mails y asi dar la posibilidad de
     # configurar el mail

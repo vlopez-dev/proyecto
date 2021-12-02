@@ -10,9 +10,9 @@ from cliente.models import Cliente
 
 
 MODELOSENSOR = [
-            ('/dht/temperatura', 'DHT 11 Temperatura'),
+            ('dht/temperatura', 'DHT 11 Temperatura'),
 
-            ('/dht/humedad', 'DHT 11 Humedad'),
+            ('dht/humedad', 'DHT 11 Humedad'),
             
         ]
 
@@ -35,7 +35,6 @@ class Suscribe(models.Model):
 
 
 
-# class Sensormodelo(models.Model):
     
 
 
@@ -46,4 +45,11 @@ class Lectura(models.Model):
     lectura_fecha= models.DateTimeField(auto_now_add=True)
     
 
+
+def add(self):
+        self.save
+
+
+def __str__(self):
+        return self.ruta
 
