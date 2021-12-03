@@ -22,6 +22,7 @@ from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
+client = mqttClient.Client("Python")
 
     
 
@@ -260,42 +261,36 @@ sub.start()
 def varificar_umbral(lectura,topic):
     ob = Suscribe.objects.all()
     for i in ob:
-        valoronoff=i.valor_actuador
-    if valoronoff == 1:
-            valoronoff="#on"
-    else:
-            valoronoff="#off"
-    ruta = i.ruta
-    actuador = i.actuador
-    umbral = i.valor_activo
-    if topic==ruta and lectura > umbral and actuador != None:
-                    # "19"       "20"
-        client.on_publish
+    
+        ruta = i.ruta
+        actuador = i.actuador
+        umbral = i.valor_activo
+        if topic==ruta and lectura > umbral and actuador != None:
+                        # "19"       "20"
+            
+            client.on_publish
+            ret= client.publish(actuador,"#on")
+            
+            print(ret)
+            print(" Activando mail y enviando accion al actuador")
+            notification = Notify()
+            notification.title = "Cool Title"
+            notification.message = "Activando envio de mail y enviando accion al actuador."
+            notification.send()
+            # resultado=enviar_mail()
+            # print("Resultado envio mail" +str(resultado))
+        elif topic==ruta and lectura < umbral and actuador!=None:
+                client.on_publish
 
-        print("Valor del actuador antes de enviar acciones" + actuador +str(valoronoff))
-        ret= client.publish(actuador,valoronoff)
-        print(ret)
-        print(" Activando mail y enviando accion al actuador")
-        notification = Notify()
-        notification.title = "Cool Title"
-        notification.message = "Activando envio de mail y enviando accion al actuador."
-        notification.send()
-        resultado=enviar_mail()
-        print("Resultado envio mail" +str(resultado))
-    elif topic==ruta and lectura < umbral and actuador!=None:
-         if valoronoff=="off":
-             ret=client.publish(actuador,"on")
-             print("Enviando mensaje en on")
-         else:
-             ret=client.publish(actuador,"off")
-             print("enviando mensaje en off")
-    else:
+                ret=client.publish(actuador,"#off")
+                print("enviando mensaje en off")
+        else:
 
-        print("No se toman acciones el umbral es correcto")
-        notification = Notify()
-        notification.title = "Verificación de umbral"
-        notification.message = "No se toman acciones el umbral es correcto."
-        notification.send()
+            print("No se toman acciones el umbral es correcto")
+            notification = Notify()
+            notification.title = "Verificación de umbral"
+            notification.message = "No se toman acciones el umbral es correcto."
+            notification.send()
 
 
 
