@@ -160,22 +160,22 @@ def on_connect(client, userdata, flags, rc):
 # ---------------------------------Conexion al broker-----------------------------------------------
 
 
-def conexion_broker():
-    Connected = False  
-print("Contado al broker")
-broker_address = "192.168.1.100"
+# def conexion_broker():
+#     Connected = False  
+# print("Contado al broker")
+# broker_address = "192.168.1.100"
 
-port = 1883  # Broker port
-user = "proyecto"  # Connection username
-password = "proyecto"  # Connection password
-client = mqttClient.Client("Python")
-client.username_pw_set(user, password=password) 
-client.on_connect = on_connect
-client.on_message = on_message
+# port = 1883  # Broker port
+# user = "proyecto"  # Connection username
+# password = "proyecto"  # Connection password
+# client = mqttClient.Client("Python")
+# client.username_pw_set(user, password=password) 
+# client.on_connect = on_connect
+# client.on_message = on_message
 
-client.connect(broker_address, port=port) 
-client.loop_start()  # start the loop
-print("ejecute el loop de conexion")
+# client.connect(broker_address, port=port) 
+# client.loop_start()  # start the loop
+# print("ejecute el loop de conexion")
 
     # Falta verificar cuando la conexion es vacia
 
@@ -192,31 +192,31 @@ print("ejecute el loop de conexion")
 
 # --------------Funcion con cambio de tiempo en el guardado con error--------------------------------------
 
-# def conexion_broker():
-#     Connected = True  
-# print("Contado al broker")
-# # broker_address = "inversoft.ddns.net"
-# broker_address=""
+def conexion_broker():
+    Connected = True  
+print("Contado al broker")
+# broker_address = "inversoft.ddns.net"
+broker_address=""
 
 
-# objeto = Cliente.objects.all()
+objeto = Cliente.objects.all()
 
-# for i in objeto:
-#     broker_address= i.broker_conexion
-#     print("entre al for conexion")
-# port = 1883  # Broker port
-# user = "proyecto"  # Connection username
-# password = "proyecto"  # Connection password
-# client = mqttClient.Client("Python")
-# client.username_pw_set(user, password=password) 
-# client.on_connect = on_connect
-# client.on_message = on_message
-# if broker_address=="" or None:
-#    pass
-# else:
-#     client.connect(broker_address, port=port) 
-#     client.loop_start()  # start the loop
-#     print("ejecute el loop de conexion")
+for i in objeto:
+    broker_address= i.broker_conexion
+    print("entre al for conexion")
+port = 1883  # Broker port
+user = "proyecto"  # Connection username
+password = "proyecto"  # Connection password
+client = mqttClient.Client("Python")
+client.username_pw_set(user, password=password) 
+client.on_connect = on_connect
+client.on_message = on_message
+if broker_address=="" or None:
+   pass
+else:
+    client.connect(broker_address, port=port) 
+    client.loop_start()  # start the loop
+    print("ejecute el loop de conexion")
 
     # Falta verificar cuando la conexion es vacia
 
