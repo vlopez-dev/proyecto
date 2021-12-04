@@ -10,9 +10,20 @@ from cliente.models import Cliente
 
 
 MODELOSENSOR = [
-            ('dht/temperatura', 'DHT 11 Temperatura'),
+            ('/dht/temperatura', 'DHT 11 Temperatura'),
 
-            ('dht/humedad', 'DHT 11 Humedad'),
+            ('/dht/humedad', 'DHT 11 Humedad'),
+            
+        ]
+
+
+
+
+
+ACTUADOR = [
+            ('esp/test', 'LED NODEMCU'),
+
+            ('esp/rele', 'RELE 1 CANAL'),
             
         ]
 
@@ -23,7 +34,7 @@ class Suscribe(models.Model):
 
     ruta = models.CharField(primary_key=True ,max_length=50,choices=MODELOSENSOR,default='/dht/temperatura')
     valor_activo=models.FloatField()
-    actuador= models.CharField(max_length=50,null=True)
+    actuador= models.CharField(max_length=50,choices=ACTUADOR,default='esp/test')
     valor_actuador= models.BooleanField()
 
     def add(self):

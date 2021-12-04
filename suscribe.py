@@ -33,7 +33,7 @@ def on_message(client, userdata, message):
   
 Connected = False   #global variable for the state of the connection
   
-broker_address= "192.168.1.100"  #Broker addressls
+broker_address= "inversoft.ddns.net"  #Broker addressls
 #direccion AP broker "10.3.141.1"
 port = 1883                         #Broker port
 user = "proyecto"                    #Connection username
@@ -59,7 +59,7 @@ def on_publish(client,userdata,result):             #create function for callbac
 # client1= mqttClient("control1")                           #create client object
 client.on_publish = on_publish                          #assign function to callback
 # client1.connect(broker,port)                                 #establish connection
-ret= client.publish("esp/test","#on")                   #publish
+ret= client.publish("esp/test","#off")                   #publish
 
 try:
     while True:

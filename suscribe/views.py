@@ -22,6 +22,7 @@ from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
+client = mqttClient.Client("Python")
 
     
 
@@ -159,22 +160,22 @@ def on_connect(client, userdata, flags, rc):
 # ---------------------------------Conexion al broker-----------------------------------------------
 
 
-def conexion_broker():
-    Connected = False  
-print("Contado al broker")
-broker_address = "192.168.1.100"
+# def conexion_broker():
+#     Connected = False  
+# print("Contado al broker")
+# broker_address = "192.168.1.100"
 
-port = 1883  # Broker port
-user = "proyecto"  # Connection username
-password = "proyecto"  # Connection password
-client = mqttClient.Client("Python")
-client.username_pw_set(user, password=password) 
-client.on_connect = on_connect
-client.on_message = on_message
+# port = 1883  # Broker port
+# user = "proyecto"  # Connection username
+# password = "proyecto"  # Connection password
+# client = mqttClient.Client("Python")
+# client.username_pw_set(user, password=password) 
+# client.on_connect = on_connect
+# client.on_message = on_message
 
-client.connect(broker_address, port=port) 
-client.loop_start()  # start the loop
-print("ejecute el loop de conexion")
+# client.connect(broker_address, port=port) 
+# client.loop_start()  # start the loop
+# print("ejecute el loop de conexion")
 
     # Falta verificar cuando la conexion es vacia
 
@@ -191,31 +192,30 @@ print("ejecute el loop de conexion")
 
 # --------------Funcion con cambio de tiempo en el guardado con error--------------------------------------
 
-# def conexion_broker():
-#     Connected = True  
-# print("Contado al broker")
-# # broker_address = "inversoft.ddns.net"
-# broker_address=""
+    Connected = True  
+print("Contado al broker")
+# broker_address = "inversoft.ddns.net"
+broker_address=""
 
 
-# objeto = Cliente.objects.all()
+objeto = Cliente.objects.all()
 
-# for i in objeto:
-#     broker_address= i.broker_conexion
-#     print("entre al for conexion")
-# port = 1883  # Broker port
-# user = "proyecto"  # Connection username
-# password = "proyecto"  # Connection password
-# client = mqttClient.Client("Python")
-# client.username_pw_set(user, password=password) 
-# client.on_connect = on_connect
-# client.on_message = on_message
-# if broker_address=="" or None:
-#    pass
-# else:
-#     client.connect(broker_address, port=port) 
-#     client.loop_start()  # start the loop
-#     print("ejecute el loop de conexion")
+for i in objeto:
+    broker_address= i.broker_conexion
+    print("entre al for conexion")
+port = 1883  # Broker port
+user = "proyecto"  # Connection username
+password = "proyecto"  # Connection password
+client = mqttClient.Client("Python")
+client.username_pw_set(user, password=password) 
+client.on_connect = on_connect
+client.on_message = on_message
+if broker_address=="" or None:
+   pass
+else:
+    client.connect(broker_address, port=port) 
+    client.loop_start()  # start the loop
+    print("ejecute el loop de conexion")
 
     # Falta verificar cuando la conexion es vacia
 
@@ -260,42 +260,36 @@ sub.start()
 def varificar_umbral(lectura,topic):
     ob = Suscribe.objects.all()
     for i in ob:
-        valoronoff=i.valor_actuador
-    if valoronoff == 1:
-            valoronoff="#on"
-    else:
-            valoronoff="#off"
-    ruta = i.ruta
-    actuador = i.actuador
-    umbral = i.valor_activo
-    if topic==ruta and lectura > umbral and actuador != None:
-                    # "19"       "20"
-        client.on_publish
+    
+        ruta = i.ruta
+        actuador = i.actuador
+        umbral = i.valor_activo
+        if topic==ruta and lectura > umbral and actuador != None:
+                        # "19"       "20"
+            
+            client.on_publish
+            ret= client.publish(actuador,"#on")
+            
+            print(ret)
+            print(" Activando mail y enviando accion al actuador")
+            notification = Notify()
+            notification.title = "Cool Title"
+            notification.message = "Activando envio de mail y enviando accion al actuador."
+            notification.send()
+            # resultado=enviar_mail()
+            # print("Resultado envio mail" +str(resultado))
+        elif topic==ruta and lectura < umbral and actuador!=None:
+                client.on_publish
 
-        print("Valor del actuador antes de enviar acciones" + actuador +str(valoronoff))
-        ret= client.publish(actuador,valoronoff)
-        print(ret)
-        print(" Activando mail y enviando accion al actuador")
-        notification = Notify()
-        notification.title = "Cool Title"
-        notification.message = "Activando envio de mail y enviando accion al actuador."
-        notification.send()
-        resultado=enviar_mail()
-        print("Resultado envio mail" +str(resultado))
-    elif topic==ruta and lectura < umbral and actuador!=None:
-         if valoronoff=="off":
-             ret=client.publish(actuador,"on")
-             print("Enviando mensaje en on")
-         else:
-             ret=client.publish(actuador,"off")
-             print("enviando mensaje en off")
-    else:
+                ret=client.publish(actuador,"#off")
+                print("enviando mensaje en off")
+        else:
 
-        print("No se toman acciones el umbral es correcto")
-        notification = Notify()
-        notification.title = "Verificación de umbral"
-        notification.message = "No se toman acciones el umbral es correcto."
-        notification.send()
+            print("No se toman acciones el umbral es correcto")
+            notification = Notify()
+            notification.title = "Verificación de umbral"
+            notification.message = "No se toman acciones el umbral es correcto."
+            notification.send()
 
 
 
