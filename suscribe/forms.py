@@ -25,7 +25,6 @@ class DateInput(forms.DateInput):
 
 
 class LecturasForm(forms.ModelForm):
-    export_to_CSV = forms.BooleanField(required=False)
     dia_desde = forms.DateTimeField(required=False)
     dia_hasta = forms.DateTimeField(required=False)
 

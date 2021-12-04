@@ -4,6 +4,8 @@ from . import views
 
 
 urlpatterns = [
-path("configuraciones",views.configuracion_agregar,name='configuraciones'),
+path("configuraciones_home",views.configuraciones_home,name='configuraciones_home'),
+path("configmail",views.configuracion_agregar,name='configmail'),
+
 
 ]

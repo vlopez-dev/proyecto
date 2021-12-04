@@ -240,7 +240,7 @@ else:
 
 def subscribing():
     while Connected != True:  # Wait for connection
-        # time.sleep(1)
+        time.sleep(1800)
         ob = Suscribe.objects.all()
         for i in ob:
                 client.subscribe(i.ruta)  #Linea de suscricion original
@@ -314,8 +314,9 @@ def listar_suscripciones(request):
 
 
 
+
+
 def filtro_fechas(request):
-    
      if request.method=="GET":
         form =LecturasForm()
         return render(request,'suscribe/filtro_fechas.html',{'form':form})
@@ -329,10 +330,9 @@ def filtro_fechas(request):
             nuevofinal = dia_hasta + datetime.timedelta(days=1)
 
             lecturas_list=Lectura.objects.filter(lectura_fecha__range=[dia_desde, nuevofinal]).order_by('lectura_fecha')
-            paginator=Paginator(lecturas_list,15)
-            page = request.POST.get('page', 1)
-
-            print(type(paginator))
+            
+            page = request.GET.get('page', 1)
+            paginator=Paginator(lecturas_list,10)
             try:
                 lecturas = paginator.page(page)
             except PageNotAnInteger:
@@ -341,6 +341,7 @@ def filtro_fechas(request):
                 lecturas = paginator.page(paginator.num_pages)
             
 
+            
 
             return render(request, 'suscribe/reporte.html',{'lecturas': lecturas})
             # Problemas en la paginacion
