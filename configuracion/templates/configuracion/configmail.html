@@ -1,0 +1,48 @@
+{% extends 'configuracion/base.html' %} 
+{% load crispy_forms_tags %}
+
+
+
+
+
+
+
+ {% block content %}
+
+
+<h1 class="display-4">Configuraciones</h1>
+        <p class="lead font-italic"></p>
+        <hr class="my-4" />
+        
+        <form action=""method="POST"autocomplete="off"class="justify-content-center">
+        <div class="row">
+          <div class="col-md-4">
+
+          </div>
+          <div class="col-md-4">
+
+
+        <div class="form-group">
+        
+        {% csrf_token %}
+          {{ form.email|as_crispy_field }}
+          {{ form.passw|as_crispy_field }}
+          {{ form.mail_cuenta|as_crispy_field }}
+          {{ form.receptor_mail|as_crispy_field }}
+
+
+        </div>
+
+         </div>
+         <div class="col-md-4">
+
+         </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+      
+      </form> 
+
+
+
+{% endblock content %}

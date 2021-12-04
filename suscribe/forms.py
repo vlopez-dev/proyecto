@@ -8,11 +8,11 @@ class SuscribeForm(forms.ModelForm):
 
     class Meta:
         model = Suscribe
-        fields = 'id_cliente','ruta', 'valor_activo', 'actuador', 'valor_actuador'
+        fields = 'id_cliente','ruta', 'valor_activo', 'actuador'
 
         labels = {
             'id_cliente':'Conexion','ruta': 'Modelo de Sensor',  'valor_activo': 'Valor para activacion',
-            'actuador': 'Encender', 'valor_actuador': 'On/Off'
+            'actuador': 'Encender'
 
 
         }
@@ -25,7 +25,6 @@ class DateInput(forms.DateInput):
 
 
 class LecturasForm(forms.ModelForm):
-    export_to_CSV = forms.BooleanField(required=False)
     dia_desde = forms.DateTimeField(required=False)
     dia_hasta = forms.DateTimeField(required=False)
 

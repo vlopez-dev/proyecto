@@ -35,7 +35,7 @@ class Suscribe(models.Model):
     ruta = models.CharField(primary_key=True ,max_length=50,choices=MODELOSENSOR,default='/dht/temperatura')
     valor_activo=models.FloatField()
     actuador= models.CharField(max_length=50,choices=ACTUADOR,default='esp/test')
-    valor_actuador= models.BooleanField()
+    # valor_actuador= models.BooleanField()
 
     def add(self):
         self.save

@@ -18,7 +18,7 @@ def configuracion_agregar(request,id_configuracion=0):
             configuracion = Configuracion.objects.get(pk=id_configuracion)
 
             form = ConfiguracionForm(instance=configuracion)
-        return render(request, 'configuracion/configuraciones.html', {'form': form})
+        return render(request, 'configuracion/configmail.html', {'form': form})
     else:
         if id_configuracion == 0:
             form = ConfiguracionForm(request.POST)
@@ -29,11 +29,13 @@ def configuracion_agregar(request,id_configuracion=0):
             form.save()
             messages.add_message(request, messages.INFO, 'Agregado correctamente!.')
 
-        return redirect('/configuracion/configuracion.html/')
+        return redirect('/configuracion/configmail.html/')
 
 
 
 
 
-def configuraciones(request):
+def configuraciones_home(request):
  return render(request, "configuracion/configuraciones.html")
+
+

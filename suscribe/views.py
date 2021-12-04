@@ -240,7 +240,7 @@ else:
 
 def subscribing():
     while Connected != True:  # Wait for connection
-        # time.sleep(1)
+        time.sleep(1800)
         ob = Suscribe.objects.all()
         for i in ob:
                 client.subscribe(i.ruta)  #Linea de suscricion original
