@@ -242,7 +242,7 @@ else:
 
 def subscribing():
     while Connected != True:  # Wait for connection
-        time.sleep(1)
+        time.sleep(1800)
         ob = Suscribe.objects.all()
         for i in ob:
                 client.subscribe(i.ruta)  #Linea de suscricion original
@@ -260,6 +260,7 @@ sub.start()
 
 
 def varificar_umbral(lectura,topic):
+    
     ob = Suscribe.objects.all()
     for i in ob:
     
@@ -278,13 +279,13 @@ def varificar_umbral(lectura,topic):
             notification.title = "Cool Title"
             notification.message = "Activando envio de mail y enviando accion al actuador."
             notification.send()
-            resultado=enviar_mail()
-            print("Resultado envio mail" +str(resultado))
+            enviar_mail()
         elif topic==ruta and lectura < umbral and actuador!=None:
                 client.on_publish
 
                 ret=client.publish(actuador,"#off")
                 print("enviando mensaje en off")
+
         else:
 
             print("No se toman acciones el umbral es correcto")
@@ -373,19 +374,19 @@ def reportes(request):
 
 
 def enviar_mail():
-    
-            msg = MIMEMultipart()
+        
+        msg = MIMEMultipart()
 
-            #Mensaje
-            message = "Test invernadero"
-            #Parametros para el envio de mensajes
-            ob = Configuracion.objects.all()
-            for i in ob:
-                email_from = i.email_from
-                passw=i.passw_from
-                emial_to = i.email_to
-                server_config = i.server_config
-                
+        #Mensaje
+        message = "Test invernadero"
+        #Parametros para el envio de mensajes
+        ob = Configuracion.objects.all()
+        for i in ob:
+            email_from = i.email_from
+            passw=i.passw_from
+            emial_to = i.email_to
+            server_config = i.server_config
+                    
             password = passw
             msg['From'] = email_from
             msg['To'] = emial_to
@@ -393,7 +394,7 @@ def enviar_mail():
 
             msg.attach(MIMEText(message, 'plain'))
 
-            #Creo el servidor
+                #Creo el servidor
             server = smtplib.SMTP(server_config)
 
             server.starttls()
