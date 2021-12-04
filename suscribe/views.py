@@ -5,6 +5,7 @@ import datetime
 from django.utils.timezone import make_aware
 from urllib.request import Request
 from django.shortcuts import render, redirect
+from configuracion.models import Configuracion
 import suscribe
 from suscribe.models import Lectura, Suscribe
 from django.contrib import messages
@@ -16,6 +17,7 @@ import paho.mqtt.client as mqttClient
 import json
 from notifypy import Notify
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
+from configuracion.models import Configuracion
 
 
 
@@ -240,7 +242,7 @@ else:
 
 def subscribing():
     while Connected != True:  # Wait for connection
-        time.sleep(1800)
+        time.sleep(1)
         ob = Suscribe.objects.all()
         for i in ob:
                 client.subscribe(i.ruta)  #Linea de suscricion original
@@ -276,8 +278,8 @@ def varificar_umbral(lectura,topic):
             notification.title = "Cool Title"
             notification.message = "Activando envio de mail y enviando accion al actuador."
             notification.send()
-            # resultado=enviar_mail()
-            # print("Resultado envio mail" +str(resultado))
+            resultado=enviar_mail()
+            print("Resultado envio mail" +str(resultado))
         elif topic==ruta and lectura < umbral and actuador!=None:
                 client.on_publish
 
@@ -377,15 +379,22 @@ def enviar_mail():
             #Mensaje
             message = "Test invernadero"
             #Parametros para el envio de mensajes
-            password = "gdi092021"
-            msg['From'] = "gdinverna092021@gmail.com"
-            msg['To'] = "victorl_222@hotmail.com"
+            ob = Configuracion.objects.all()
+            for i in ob:
+                email_from = i.email_from
+                passw=i.passw_from
+                emial_to = i.email_to
+                server_config = i.server_config
+                
+            password = passw
+            msg['From'] = email_from
+            msg['To'] = emial_to
             msg['Subject'] = "Test"
 
             msg.attach(MIMEText(message, 'plain'))
 
             #Creo el servidor
-            server = smtplib.SMTP('smtp.gmail.com: 587')
+            server = smtplib.SMTP(server_config)
 
             server.starttls()
 
@@ -404,8 +413,7 @@ def enviar_mail():
             return True
             
 
-    # Se deberia crear otra app que solo envie los mails y asi dar la posibilidad de
-    # configurar el mail
+
 # ----------------------------------------------------------------------------------
 
 

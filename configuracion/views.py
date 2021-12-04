@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from .models import Configuracion
 
 from .forms import ConfiguracionForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -29,7 +30,7 @@ def configuracion_agregar(request,id_configuracion=0):
             form.save()
             messages.add_message(request, messages.INFO, 'Agregado correctamente!.')
 
-        return redirect('/configuracion/configmail.html/')
+        return render(request, 'configuracion/configmail.html', {'form': form})
 
 
 

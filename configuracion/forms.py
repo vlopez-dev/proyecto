@@ -3,15 +3,15 @@ from .models import Configuracion
 
 
 class ConfiguracionForm(forms.ModelForm):
+    passw_from = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={}))
 
     class Meta:
         model = Configuracion
-        fields = '__all__'
+        fields = 'email_from','passw_from', 'email_to', 'server_config'
+
         
-        
-        
-# def __init__(self, *args, **kwargs):
-#         super(ClienteForm, self).__init__(*args, **kwargs)
-#         # self.fields['position'].empty_label = "Select"
-#         self.fields['broker_conexion'].required = True
-#         # self.fields['id_invernadero'].required = False
+        labels = {
+            'email_from':'Cuenta de mail','passw_from': 'Password',  'email_to': 'Email receptor','server_config':'Configuracion mail'
+
+
+        }

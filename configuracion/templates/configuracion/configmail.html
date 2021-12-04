@@ -25,10 +25,10 @@
         <div class="form-group">
         
         {% csrf_token %}
-          {{ form.email|as_crispy_field }}
-          {{ form.passw|as_crispy_field }}
-          {{ form.mail_cuenta|as_crispy_field }}
-          {{ form.receptor_mail|as_crispy_field }}
+          {{ form.email_from|as_crispy_field }}
+          {{ form.passw_from|as_crispy_field }}
+          {{ form.email_to|as_crispy_field }}
+          {{ form.server_config|as_crispy_field }}
 
 
         </div>
