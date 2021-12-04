@@ -1,4 +1,4 @@
-{% extends 'configuracion/base.html' %} 
+{% extends 'configuracion/base_config.html' %} 
 {% load crispy_forms_tags %}
 
 
@@ -8,18 +8,34 @@
 
 
  {% block content %}
+ <a
+ href="{% url 'configmail' %}"
 
  <div class=" col-md-6">
-    <a href="{% url 'configmail' %}" class="btn btn-block btn-lg">
-     
-  <div class="card-valores"> <span class="icon"><img src="https://img.icons8.com/external-bearicons-blue-bearicons/64/000000/external-Mail-social-media-bearicons-blue-bearicons.png"/></span>
+  <div class="card-valores"> <span class="icon"><img src="https://img.icons8.com/fluency/48/000000/download-mail.png"/></span>
       <div class="title">
-          <p>Configuracion mail</p>
+          <p>Configurar e-mail</p>
       </div>
-      <div class="temp"><sup></sup></div>
-     
-       </a>
+      <div class="temp"></sup></div>
+      <div class="row">
+          <div class="col-4">
+              <div class="header"></div>
+              <div class="value"></div>
+          </div>
+          <div class="col-4">
+              <div class="header"></div>
+              <div class="value"></div>
+          </div>
+          <div class="col-4">
+              <div class="header"></div>
+              <div class="value"></div>
+          </div>
+      </div>
   </div>
+ 
+</a>
+
+
 
 
   
