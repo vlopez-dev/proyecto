@@ -192,7 +192,6 @@ def on_connect(client, userdata, flags, rc):
 
 # --------------Funcion con cambio de tiempo en el guardado con error--------------------------------------
 
-def conexion_broker():
     Connected = True  
 print("Contado al broker")
 # broker_address = "inversoft.ddns.net"
