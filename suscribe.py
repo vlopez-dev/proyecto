@@ -51,6 +51,7 @@ while Connected != True:    #Wait for connection
     time.sleep(1)
     
 client.subscribe("esp/test")
+# client.subscribe("esp/rele")
 
   
 def on_publish(client,userdata,result):             #create function for callback
@@ -59,7 +60,8 @@ def on_publish(client,userdata,result):             #create function for callbac
 # client1= mqttClient("control1")                           #create client object
 client.on_publish = on_publish                          #assign function to callback
 # client1.connect(broker,port)                                 #establish connection
-ret= client.publish("esp/test","#off")                   #publish
+ret= client.publish("esp/test",payload="#on",qos=1)                   #publish
+# ret= client.publish("esp/rele","#off")                   #publish
 
 try:
     while True:

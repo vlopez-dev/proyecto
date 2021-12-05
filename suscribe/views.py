@@ -105,7 +105,7 @@ def on_message(client, userdata, message):
     varificar_umbral(mensaje,topic)
     time.sleep(1)
 
-    ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
+    ob = Lectura.objects.create(estado=1,ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
 
 # --------------------------------------------------------------------------------
@@ -203,7 +203,7 @@ else:
 
 def subscribing():
     while Connected != True: 
-        time.sleep(1800)
+        time.sleep(1)
         ob = Suscribe.objects.all()
         for i in ob:
                 client.subscribe(i.ruta)
@@ -235,7 +235,7 @@ def varificar_umbral(lectura,topic):
                         # "19"       "20"
             
             client.on_publish
-            ret= client.publish(actuador,"#on")
+            ret= client.publish(actuador,payload="#on",qos=1)
             
             print(ret)
             print(" Activando mail y enviando accion al actuador")
@@ -247,7 +247,7 @@ def varificar_umbral(lectura,topic):
         elif topic==ruta and lectura < umbral and actuador!=None:
                 client.on_publish
 
-                ret=client.publish(actuador,"#off")
+                ret=client.publish(actuador,payload="#off",qos=1)
                 print("enviando mensaje en off")
 
         else:
