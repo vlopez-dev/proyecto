@@ -10,38 +10,67 @@
  {% block content %}
 
 
-<h1 class="display-4">Configuraciones</h1>
-        <p class="lead font-italic"></p>
-        <hr class="my-4" />
-        
-        <form action=""method="POST"autocomplete="off"class="justify-content-center">
-        <div class="row">
-          <div class="col-md-4">
 
-          </div>
-          <div class="col-md-4">
+ 
+ <h5 class="display-4">Registro de mail</h5>
+ <p class="lead font-italic"></p>
+ <hr class="my-4" />
+ 
+ <form action=""method="POST"autocomplete="off"class="justify-content-center">
+ <div class="row">
+   <div class="col-md-4">
+     
+   </div>
+   <div class="col-md-4">
+     {% csrf_token %} 
+     {{ form.email_from|as_crispy_field }}
+     {{ form.passw_from|as_crispy_field }}
+     {{ form.email_to|as_crispy_field }}
+     {{ form.server_config|as_crispy_field }}
+
+     <small id="passwordHelpInline" class="text-muted">
+       Agregue un nombre para el lugar .
+     </small>
+   </div>
+   <div class="col-md-4">
+     
+   </div>
+ </div>
+ 
+
+ 
+
+ <button type="submit" class="btn btn-success">Guardar</button>
+ <div class="col-md-4">
+   <a
+     href="{% url 'listar_config' %}"
+     class="btn-block btn-sm"
+   >
+   <img src="https://img.icons8.com/color-glass/48/000000/list.png"/>
+    Listado
+   </a>
+ </div>
+</form>
+{% if messages %}
+<ul class="messages">
+{% for message in messages %}
+<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
 
 
-        <div class="form-group">
-        
-        {% csrf_token %}
-          {{ form.email_from|as_crispy_field }}
-          {{ form.passw_from|as_crispy_field }}
-          {{ form.email_to|as_crispy_field }}
-          {{ form.server_config|as_crispy_field }}
 
 
-        </div>
 
-         </div>
-         <div class="col-md-4">
 
-         </div>
-        </div>
 
-        <button type="submit" class="btn btn-success">Guardar</button>
-      
-      </form> 
+
+
+
+
+
+
 
 
 

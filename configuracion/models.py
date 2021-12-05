@@ -21,3 +21,13 @@ class Configuracion(models.Model):
     email_to = models.CharField(max_length=100)
     server_config= models.CharField(max_length=100,choices=SERVER,default='smtp.gmail.com: 587')
     
+    
+    
+    
+
+    def add(self):
+        self.save
+
+
+    def __str__(self):
+        return self.email_from
