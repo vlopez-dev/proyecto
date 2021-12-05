@@ -106,7 +106,7 @@ def suscribe_delete(request,ruta):
 
 def on_message(client, userdata, message):
     print("estoy en on message")
-    print("Received message '" + str(message.payload) + "' on topic '"
+    print("Recibiendo mensaje '" + str(message.payload) + "' on topic '"
          + message.topic + "' with QoS " + str(message.qos))
     topic=message.topic
     mensaje = float(message.payload.decode("utf-8"))
@@ -216,7 +216,7 @@ if broker_address=="" or None:
    pass
 else:
     client.connect(broker_address, port=port) 
-    client.loop_start()  # start the loop
+    client.loop_start()  # loop
     print("ejecute el loop de conexion")
 
     # Falta verificar cuando la conexion es vacia
@@ -241,11 +241,14 @@ else:
 
 
 def subscribing():
-    while Connected != True:  # Wait for connection
-        time.sleep(1)
+    while Connected != True:  
         ob = Suscribe.objects.all()
+        time.sleep(1800)
         for i in ob:
-                client.subscribe(i.ruta)  #Linea de suscricion original
+                client.subscribe(i.ruta)
+                
+                
+                
 sub = threading.Thread(target=subscribing)
 sub.start()
 
