@@ -93,15 +93,6 @@ def suscribe_delete(request,ruta):
 
 
 
-
-
-
-
-
-
-
-
-
 # ------------------------Metodo que recibe el mensaje desde el nodemcu--------------------------------------------------------
 
 def on_message(client, userdata, message):
@@ -118,17 +109,6 @@ def on_message(client, userdata, message):
     ob.save()
 
 # --------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -151,9 +131,6 @@ def on_connect(client, userdata, flags, rc):
 
 
 # --------------------------------------------------------------------------------
-
-
-
 
 
 
@@ -183,16 +160,10 @@ def on_connect(client, userdata, flags, rc):
 
 # --------------------------------------------------------------------------------
 
-# -----------------------------------------------------
 
 
 
-
-
-
-
-
-# --------------Funcion con cambio de tiempo en el guardado con error--------------------------------------
+# --------------Coenxion--------------------------------------
 
     Connected = True  
 print("Contado al broker")
@@ -219,7 +190,6 @@ else:
     client.loop_start()  # loop
     print("ejecute el loop de conexion")
 
-    # Falta verificar cuando la conexion es vacia
 
 # --------------------------------------------------------------------------------
 
@@ -228,22 +198,13 @@ else:
 
 
 
-
-
-
-
-# --------------------------------------------------
-
-
-
-
 # -----------------------------Metodo suscripcion---------------------------------------------------
 
 
 def subscribing():
-    while Connected != True:  
-        ob = Suscribe.objects.all()
+    while Connected != True: 
         time.sleep(1800)
+        ob = Suscribe.objects.all()
         for i in ob:
                 client.subscribe(i.ruta)
                 
@@ -353,11 +314,6 @@ def filtro_fechas(request):
             # Problemas en la paginacion
 
 
-
-
-
-
-
 # -----------------------Reporte por fechas---------------------------------------------------------
 
 
@@ -365,10 +321,6 @@ def filtro_fechas(request):
 def reportes(request):
 
     return render(request,'suscribe/reportes.html')
-
-
-
-# --------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------
 
