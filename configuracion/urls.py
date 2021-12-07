@@ -11,6 +11,7 @@ path('delete/<int:id_configuracion>/',views.configuraciones_delete,name='configu
 path('<int:id_configuracion>/',views.configuracion_agregar,name='config_update'),
 
 path("configuraciones_pi",views.configuraciones_pi,name='configuraciones_pi'),
+path("rasp_ap",views.rasp_ap,name='rasp_ap'),
 
 
 ]

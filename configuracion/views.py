@@ -75,3 +75,7 @@ def configuraciones_delete(request,id_configuracion):
 def configuraciones_pi(request):
  return render(request, "configuracion/config_broker.html")
 
+
+
+def rasp_ap(request):
+    return redirect("https//google.com/")

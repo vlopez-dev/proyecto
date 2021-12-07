@@ -240,7 +240,7 @@ def varificar_umbral(lectura,topic):
             print(ret)
             print(" Activando mail y enviando accion al actuador")
             notification = Notify()
-            notification.title = "Cool Title"
+            notification.title = "Tomando acciones"
             notification.message = "Activando envio de mail y enviando accion al actuador."
             notification.send()
             enviar_mail()
