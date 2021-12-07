@@ -93,20 +93,11 @@ def suscribe_delete(request,ruta):
 
 
 
-
-
-
-
-
-
-
-
-
 # ------------------------Metodo que recibe el mensaje desde el nodemcu--------------------------------------------------------
 
 def on_message(client, userdata, message):
     print("estoy en on message")
-    print("Received message '" + str(message.payload) + "' on topic '"
+    print("Recibiendo mensaje '" + str(message.payload) + "' on topic '"
          + message.topic + "' with QoS " + str(message.qos))
     topic=message.topic
     mensaje = float(message.payload.decode("utf-8"))
@@ -114,21 +105,10 @@ def on_message(client, userdata, message):
     varificar_umbral(mensaje,topic)
     time.sleep(1)
 
-    ob = Lectura.objects.create(ruta_id=message.topic, lectura_sensor=mensaje)
+    ob = Lectura.objects.create(estado=1,ruta_id=message.topic, lectura_sensor=mensaje)
     ob.save()
 
 # --------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -151,9 +131,6 @@ def on_connect(client, userdata, flags, rc):
 
 
 # --------------------------------------------------------------------------------
-
-
-
 
 
 
@@ -183,16 +160,10 @@ def on_connect(client, userdata, flags, rc):
 
 # --------------------------------------------------------------------------------
 
-# -----------------------------------------------------
 
 
 
-
-
-
-
-
-# --------------Funcion con cambio de tiempo en el guardado con error--------------------------------------
+# --------------Coenxion--------------------------------------
 
     Connected = True  
 print("Contado al broker")
@@ -216,10 +187,9 @@ if broker_address=="" or None:
    pass
 else:
     client.connect(broker_address, port=port) 
-    client.loop_start()  # start the loop
+    client.loop_start()  # loop
     print("ejecute el loop de conexion")
 
-    # Falta verificar cuando la conexion es vacia
 
 # --------------------------------------------------------------------------------
 
@@ -228,24 +198,18 @@ else:
 
 
 
-
-
-
-
-# --------------------------------------------------
-
-
-
-
 # -----------------------------Metodo suscripcion---------------------------------------------------
 
 
 def subscribing():
-    while Connected != True:  # Wait for connection
-        time.sleep(1800)
+    while Connected != True: 
+        time.sleep(1)
         ob = Suscribe.objects.all()
         for i in ob:
-                client.subscribe(i.ruta)  #Linea de suscricion original
+                client.subscribe(i.ruta)
+                
+                
+                
 sub = threading.Thread(target=subscribing)
 sub.start()
 
@@ -271,19 +235,19 @@ def varificar_umbral(lectura,topic):
                         # "19"       "20"
             
             client.on_publish
-            ret= client.publish(actuador,"#on")
+            ret= client.publish(actuador,payload="#on",qos=1)
             
             print(ret)
             print(" Activando mail y enviando accion al actuador")
             notification = Notify()
-            notification.title = "Cool Title"
+            notification.title = "Tomando acciones"
             notification.message = "Activando envio de mail y enviando accion al actuador."
             notification.send()
             enviar_mail()
         elif topic==ruta and lectura < umbral and actuador!=None:
                 client.on_publish
 
-                ret=client.publish(actuador,"#off")
+                ret=client.publish(actuador,payload="#off",qos=1)
                 print("enviando mensaje en off")
 
         else:
@@ -350,11 +314,6 @@ def filtro_fechas(request):
             # Problemas en la paginacion
 
 
-
-
-
-
-
 # -----------------------Reporte por fechas---------------------------------------------------------
 
 
@@ -362,10 +321,6 @@ def filtro_fechas(request):
 def reportes(request):
 
     return render(request,'suscribe/reportes.html')
-
-
-
-# --------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------
 

@@ -14,15 +14,12 @@ urlpatterns = [
 
     
     path('delete/<int:id_invernadero>/',views.invernadero_delete,name='invernadero_delete'),
-    path('<int:id_invernadero>/', views.invernadero_agregar,name='invernadero_update'), # get and post req. for update operation
+    path('<int:id_invernadero>/', views.invernadero_agregar,name='invernadero_update'), 
 
     
-    # path("",views.invernadero_home,name='home'),
     path("home/",views.obtener_rutas,name='home'),
-    # path("",views.obtener_rutas,name='home'),
 
 
-    # url(r'^$', views.obtener_datos, name = "listar"),
     
 
 
