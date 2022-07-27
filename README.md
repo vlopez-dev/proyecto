@@ -17,7 +17,7 @@ _Ninguno_
 
 
 ## Construido con 🛠️
-_Construido con html css_
+_Construido con Dajngo y libreria paho-mqtt_
 
 
 ## Licencia 📄
