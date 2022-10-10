@@ -4,7 +4,7 @@ _Proyecto realizado en final Bachillerato de programación
 
 
 ## Comenzando 🚀
-_Proyecto realizado para la administracion de sensores de un invernadero._
+_Proyecto realizado para la administración de sensores de un invernadero._
 _._
 
 
@@ -17,7 +17,7 @@ _Ninguno_
 
 
 ## Construido con 🛠️
-_Construido con Dajngo y libreria paho-mqtt_
+_Construido con Dajngo y librería paho-mqtt_
 
 
 ## Licencia 📄
